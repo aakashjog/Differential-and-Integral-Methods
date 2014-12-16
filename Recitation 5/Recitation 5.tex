@@ -1,0 +1,156 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 5}
+\author{}
+\date{\formatdate{19}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Exercises}
+
+\begin{example}
+	Suppose $f : \mathbb{R} \rightarrow \mathbb{R}$ s.t. $f'(x) \neq 0, \forall x \in \mathbb{R}$. Show that $f(x) = 10$ has atmost one solution.
+\end{example}
+
+\begin{solution}
+	If possible, let $\exists x_1, x_2$, s.t. $x_1 \neq x_2, f(x_1) = f(x_2) = 10$.\\
+	WLG, let $x_1 < x_2$.\\
+	Therefore, by Rolle's Theorem, $\exists x \in (x_1, x_2)$, s.t. $f'(c) = 0$.
+	This contradicts the given condition $f'(x) \neq 0$.\\
+	Therefore, $f(x) = 10$ has atmost one solution.
+\end{solution}
+
+\begin{example}
+	Let $f : (a, b) \rightarrow \mathbb{R}$, s.t. $f'(x)$ and $f''(x)$ exist. Suppose $\exists a < x_1 < x_2 < x_3 < b$, s.t. $f(x_1) = f(x_2) = f(x_3)$. Show that $\exists c$, s.t. $f''(c) = 0$.
+\end{example}
+
+\begin{solution}
+	Applying Rolle's Theorem to $[x_1, x_2]$ and $[x_2, x_3]$, $\exists c_1, c_2$, s.t. $c_1 \in (x_1, x_2), x_2 \in (x_2, x_3)$ and $f'(c_1) = f'(c_2) = 0$.\\
+	Therefore, by Rolle's Theorem, $\exists c \in (c_1, c_2)$, s.t. $f''(c) = 0$.
+\end{solution}
+
+\begin{example}
+	Show that $\forall 0 < a < b < \dfrac{\pi}{2}$
+	\begin{equation*}
+		\dfrac{1}{\cos^2 a} < \dfrac{\tan b - \tan a}{b - a} < \dfrac{1}{\cos^2 b}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	Let 
+	\begin{align*}
+		f(x) &= \tan x \\
+		\therefore f'(x) &= \dfrac{1}{\cos^2 x}
+		\intertext{By LMVT,}
+		\dfrac{\tan b - \tan a}{b - a} &= \dfrac{1}{\cos^2 c}\\
+	\end{align*}
+	\begin{align*}
+		\dfrac{1}{\cos^2 a} &< \dfrac{1}{\cos^2 b} < \dfrac{1}{\cos^2 c} \\
+		\Leftrightarrow \cos^2 a &> \cos^2 b > \cos^2 c
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Show that
+	\begin{equation*}
+		x - \ln x - 2 = 0
+	\end{equation*}
+	has exactly two solutions.
+\end{example}
+
+\begin{solution}
+	Let 
+	\begin{align*}
+		f(x) &= x - \ln x - 2 \\
+		\therefore f'(x) &= 1 - \dfrac{1}{x}
+	\end{align*}
+	\begin{align*}
+	f'(x) = 0 &\Leftrightarrow x = 1 \\
+	f(1) &= -1 \\
+	f(e^{-4}) &= e^{-4} - \ln e^{-4} - 2 \\
+	&= e^{-4} + 4 -2 \\
+	&> 0 \\
+	f(e^4) &= e^4 - 4 -2 \\
+	&> 0 
+	\end{align*}
+	By mean value theorem, $\exists c_1 \in (e^{-4}, 1)$ and $\exists c_2 \in (1, e^{-4})$, s.t. $f(c_1) = f(c_2) = 0$.\\
+	If there are 3 solutions to $f(x) = 0$, then there are 2 solutions to $f'(x) = 0$. This contradicts the fact that $f'(x)$ has exactly 1 solution.\\
+	Therefore, $f(x)$ has exactly 2 solutions.
+\end{solution}
+
+\begin{example}
+	FInd $y'$ where $(x-y)^2 - x - y = -1$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		(x-y)^2 - x - y &= -1 \\
+		\therefore 2(x-y)(1 - y') - 1 - y' &= 0 \\
+		\therefore 2(x-y)(1 - y') + 1 - y' &= 2 \\
+		\therefore (1 - y')(2x - 2y + 1) &= 2 \\
+		\therefore 1 - y' = \dfrac{2}{2x - 2y + 1} \\
+		\therefore y' = 1 - \dfrac{2}{2x - 2y + 1} 
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find $(\arcsin x)'$ for $\arcsin x \in \left[0, \dfrac{\pi}{2}\right]$
+\end{example}
+
+\begin{solution}
+	Let 
+	\begin{align*}
+		f(x) &= \sin x \\
+		\therefore f^{-1}(x) = \arcsin x
+	\end{align*}
+	\begin{align*}
+		(f^{-1}(x))' &= \dfrac{1}{f'(f^{-1}(x))} \\
+		&= \dfrac{1}{\cos(\arcsin x)} \\
+		&= \dfrac{1}{\sqrt{1 - x^2}}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the tangent line to $(x^2 + y^2)^3 = 8 x^2 y^2$ at the point $(-1, 1)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		(x^2 + y^2)^3 &= 8 x^2 y^2 \\
+		\intertext{Differentiating,}
+		3(x^2 + y^2)^2 (2x + 2y y') &= 8 (2x) (y^2) + 8 (x^2) (2y y') \\
+		\therefore 3(x^2 + y^2)^2 (2x + 2y y') &= 16 x y^2 + 16 x^2 y y'
+		\intertext{$x = -1, y = 1$}
+		\therefore 12(-2 + 2y') &= -16 + 16 y' \\
+		\therefore y'(-1) &= 1
+	\end{align*}
+	Therefore the tangent at $(-1, 1)$ is $y = x + 2$.
+\end{solution}
+
+\end{document}
+

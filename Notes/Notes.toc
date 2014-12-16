@@ -1,0 +1,41 @@
+\contentsline {part}{I\hspace {1em}General Information}{3}{part.1}
+\contentsline {section}{\numberline {1}Contact Information}{3}{section.1}
+\contentsline {section}{\numberline {2}Office Hours}{3}{section.2}
+\contentsline {part}{II\hspace {1em}Functions}{4}{part.2}
+\contentsline {section}{\numberline {3}Notation}{4}{section.3}
+\contentsline {section}{\numberline {4}Basic Definitions}{4}{section.4}
+\contentsline {section}{\numberline {5}Inverse of a Function}{5}{section.5}
+\contentsline {section}{\numberline {6}Elementary Operations between Functions}{5}{section.6}
+\contentsline {section}{\numberline {7}Composite Functions}{6}{section.7}
+\contentsline {section}{\numberline {8}Elementary Functions}{6}{section.8}
+\contentsline {subsection}{\numberline {8.1}Polynomial}{6}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Power Function}{6}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Exponential Function}{6}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Logarithmic Function}{7}{subsection.8.4}
+\contentsline {subsection}{\numberline {8.5}Trigonometric Functions}{7}{subsection.8.5}
+\contentsline {subsection}{\numberline {8.6}Inverse Trigonometeric Functions}{7}{subsection.8.6}
+\contentsline {subsection}{\numberline {8.7}Hyperbolic Functions}{7}{subsection.8.7}
+\contentsline {subsubsection}{\numberline {8.7.1}Identities of Hyperbolic Functions}{8}{subsubsection.8.7.1}
+\contentsline {subsection}{\numberline {8.8}Absolute Value}{8}{subsection.8.8}
+\contentsline {subsection}{\numberline {8.9}Floor Function}{8}{subsection.8.9}
+\contentsline {part}{III\hspace {1em}Limits and Continuity}{9}{part.3}
+\contentsline {section}{\numberline {9}A Classification of Discontinuity Points}{9}{section.9}
+\contentsline {section}{\numberline {10}Infinite Limits}{11}{section.10}
+\contentsline {section}{\numberline {11}Known Limits}{11}{section.11}
+\contentsline {section}{\numberline {12}Examples}{11}{section.12}
+\contentsline {part}{IV\hspace {1em}Derivatives}{12}{part.4}
+\contentsline {section}{\numberline {13}Derivative of a Function}{12}{section.13}
+\contentsline {subsection}{\numberline {13.1}Algebraic Definition}{12}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}Geometrical Interpretation}{12}{subsection.13.2}
+\contentsline {subsection}{\numberline {13.3}Notation}{12}{subsection.13.3}
+\contentsline {section}{\numberline {14}Derivative Function}{12}{section.14}
+\contentsline {section}{\numberline {15}The Tangent Line}{12}{section.15}
+\contentsline {section}{\numberline {16}The Normal Line}{12}{section.16}
+\contentsline {subsection}{\numberline {16.1}Proofs of Standard Derivatives}{13}{subsection.16.1}
+\contentsline {subsubsection}{\numberline {16.1.1}$y = f(x) = c$}{13}{subsubsection.16.1.1}
+\contentsline {subsubsection}{\numberline {16.1.2}$y = f(x) = x^n ; n \in \mathbb {N}$}{13}{subsubsection.16.1.2}
+\contentsline {subsubsection}{\numberline {16.1.3}$y = f(x) = x^{-n} ; n \in \mathbb {N}, x \not =0$}{13}{subsubsection.16.1.3}
+\contentsline {subsubsection}{\numberline {16.1.4}$y = f(x) = \qopname \relax o{sin}x$}{14}{subsubsection.16.1.4}
+\contentsline {subsection}{\numberline {16.2}Examples}{15}{subsection.16.2}
+\contentsline {section}{\numberline {17}Lagrange Theorem}{17}{section.17}
+\contentsline {section}{\numberline {18}Theorem}{17}{section.18}

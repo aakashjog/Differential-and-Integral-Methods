@@ -1,0 +1,148 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Lecture 11}
+\author{Aakash Jog}
+\date{\formatdate{30}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Indefinite Integrals}
+
+\begin{definition}[Anti-derivative of a function]
+	A function $F(x)$ is called an anti-derivative of $f(x)$ in the domain $D$, if
+	\begin{equation*}
+	F'(x) = f(x) \quad;\forall x \in D
+	\end{equation*}
+	If $F(x)$ is an anti-derivative of $f(x)$, then $F(x) + c$ is also an anti-derivative of $f(x)$.
+\end{definition}
+
+\begin{definition}[Indefinite integral of a function]
+	Let $F(x)$ be an anti-derivative of $f(x)$. The set of all anti-derivatives of $f(x)$, i.e., $F(x) + c$ is called the indefinite integral of $f(x)$, and is denoted as 
+	\begin{equation*}
+		\int f(x) \dif x = F(x)
+	\end{equation*}
+\end{definition}
+
+\begin{align}
+	\int x^a \dif x &= 
+	\begin{cases}
+		\dfrac{x^{a + 1}}{a + 1} + c\quad; a \neq -1 \\
+		\ln |x| + c \quad; a = -1 \\
+	\end{cases}\\
+	\int \cos x \dif x &= \sin x + c\\
+	\int \sin x \dif x &= -\cos x + c\\
+	\int \dfrac{\dif x}{1 + x^2} &= \arctan x + c\\
+	\int \dfrac{f'(x)}{f(x)} \dif x &= \ln |f(x)| + c
+\end{align}
+
+\subsection{Integration by Parts}
+
+\begin{align*}
+	\int u v' \dif x &= u v - \int u' v \dif x\\
+	\int u \dif v &= u v - \int v \dif u\\
+	\int u v \dif x &= u \int v \dif x - \int u' \left(\int v \dif x\right) \dif x
+\end{align*}
+
+\subsection{Integration of Trigonometric Functions}
+
+\begin{example}
+	\begin{align*}
+		\int \sin(3x) \cos (7x) \dif x &= \dfrac{1}{2} \int (\sin (10x) - \sin (4x)) \dif x\\
+		&= \dfrac{1}{2} \left(- \dfrac{\cos (10x)}{10} + \dfrac{\cos(4x)}{4}\right) + c
+	\end{align*}
+\end{example}
+
+\begin{example}
+	\begin{align*}
+		\int \sin^{2k+1} x \cos^m x \dif x &= \int \sin^2k x \cos^m x \sin x \dif x\\
+		&= \int (1 - \cos^2 x)^k \cos^m x \sin x \dif x
+		\intertext{Let $t = \cos x$. Therefore, $\dif t = -\sin x \dif x$.}
+		\therefore \int (1 - \cos^2 x)^k \cos^m x \sin x \dif x &= \int (1 - t^2)^k t^m \dif t
+	\end{align*}
+\end{example}
+
+\subsection{Special Trigonometric Substitutions}
+\doublespacing
+\rowcolors{1}{white}{white!90!black}
+\begin{tabular}{|c|c|c|}
+	\hline
+	$\sqrt{a^2 - x^2}$ & $x = a \sin \theta \quad; -\dfrac{\pi}{2} \leq \theta \leq \dfrac{\pi}{2}$ & $1 - \sin^2 \theta = \cos^2 \theta$\\
+	\hline
+	$\sqrt{a^2 + x^2}$ & $x = a \tan \theta \quad; -\dfrac{\pi}{2} < \theta < \dfrac{\pi}{2}$ & $1 + \tan^2 \theta = \sec \theta$\\
+	\hline
+	$\sqrt{x^2 - a^2}$ & $x = \sec \theta \quad; 0 \leq \theta \leq \dfrac{\pi}{2}$ & $\sec^2 \theta - 1 = \tan^2 \theta$\\
+	\hline
+\end{tabular}
+\singlespacing
+
+\begin{example}
+	Find
+	\begin{equation*}
+		\int \dfrac{\sqrt{9 - x^2}}{x^2} \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+	\intertext{Let $x = 3 \sin \theta$. Therefore, $\dif x = 3 \cos \theta \dif \theta$}
+	\int \dfrac{\sqrt{9 - x^2}}{x^2} \dif x &= \int \dfrac{\sqrt{9 - 9 \sin^2 \theta}}{9 \sin^2 \theta} 3 \cos \theta \dif \theta\\
+	&= \int \dfrac{\cos^2 \theta}{\sin^2 \theta} \dif \theta\\
+	&= \left(\dfrac{1}{\sin^2 \theta} - 1\right) \dif \theta\\
+	&= -\cot \theta - \theta + c\\
+	&= - \dfrac{9 - x^2}{x} - \arcsin \dfrac{x}{3} + c
+	\end{align*}
+\end{solution}
+
+\section{Integration of Rational Functions}
+
+\begin{definition}[Simple rational function]
+	A rational function $\dfrac{P(x)}{Q(x)}$ is called simple if the degree of the polynomial $P(x)$ is less than the degree of the polynomial $Q(x)$.
+\end{definition}
+
+\begin{remark}
+	If a rational function $\dfrac{P(x)}{Q(x)}$ is not simple, then it can be written as a sum of a polynomial $M(x)$ and a simple rational function $\dfrac{R(x)}{Q(x)}$.
+	\begin{equation*}
+		\dfrac{P(x)}{Q(x)} = M(x) + \dfrac{R(x)}{Q(x)}
+	\end{equation*}
+\end{remark}
+
+\end{document}

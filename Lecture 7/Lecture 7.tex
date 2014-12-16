@@ -1,0 +1,114 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, amssymb, esdiff}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newtheorem{theorem}{Theorem}
+
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition} 
+
+\newtheorem{example}{Example}
+
+%opening
+\title{Lecture 7}
+\author{Aakash Jog}
+\date{\formatdate{18}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Higher Order Derivatives}
+
+Assuming $y= f(x)$ is differentiable, let $g(x) = f'(x)$. If $g(x)$ is differentiable, we say that $f(x)$ is twice differentiable. 
+\begin{equation*}
+	f''(x) = \dod[2]{f}{x} = \dod[2]{y}{x} = D^2 f
+\end{equation*}
+$f''(x)$ is called the second derivative of $f$.\\
+Similarly, the $n^{\text{th}}$ derivative of $f$ is defined as
+\begin{equation*}
+	f^{(n)}(x) = \dod[n]{f}{x} = \dod[n]{y}{x} = D^{(n)} f
+\end{equation*}
+
+\section{Derivative of an Implicit Function}
+
+The function $y = f(x)$ is called implicit if it is given by $F(x,y) = k$, where $k$ is a constant.
+
+\section{Parametric Curves and Their Derivatives}
+
+If $x = f(t)$ and $y = g(t)$ are functions of $t$, then the set of all points $(x, y) = (f(t), g(t))$ is called a \emph{curve} in the plane $\mathbb{R}^2$.\\
+$x = f(t)$ and $y = g(t)$ are \emph{parametric equations} of the curve, and $t$ is called a \emph{parameter}. If $a \leq t \leq b$, then, $(f(a), g(a))$ is called \emph{the beginning} of the curve, and $(g(a), g(b))$ is called \emph{the end} of the curve.
+
+\begin{theorem}
+	If $x = x(t)$ and $y = y(t)$ are differentiable, $x'(t) \neq 0$, and $y$ as a function of $x$ is also differentiable, then, 
+	\begin{equation*}
+		y'(x_0) = \dfrac{y'(t_0)}{x'(t_0)}
+	\end{equation*}
+\end{theorem}
+
+\section{Linearisation and Differential}
+
+\begin{definition}
+	If $y = f(x)$ is differentiable at $x_0$, then the function $L(x) = f(x_0) + f'(x_0)(x-x_0)$, i.e. the tangent at $(x_0, f(x_0))$, is called a \emph{linearisation} of $f(x)$ at $x_0$. The approximation of $f(x) \approx L(x)$ about $x_0$ is a \emph{standard linear approximation} of $f(x)$ at $x_0$. The point $x_0$ is the \emph{centre of the approximation}. 
+\end{definition}
+
+\begin{definition}
+	Assuming $y = f(x)$ is differentiable at $x_0$, $\dif x = \Delta x$ is a \emph{differential of $x$}, $\dif y = \Delta y$ is a \emph{differential of $y$}.
+\end{definition}
+
+%\begin{tikzpicture}
+%	\draw [<->] (-1,0) -- (6,0) node [right] {$x$};
+%	\draw [<->] (0,-1) -- (0,6) node [above] {$y$};
+%	
+%	\draw [domain=1:2] plot (\x, {\x^2});
+%\end{tikzpicture}
+
+\begin{align*}
+	\dif y &\neq \Delta y \\
+	\dif y &\approx \Delta y \text{ (about $x_0$)}
+\end{align*}
+
+\begin{align*}
+	f(x_0 + \Delta x) - f(x_0) &\approx f'(x_0) \Delta x \\
+	\therefore f(x_0 + \Delta x) &\approx f(x_0) + f'(x_0) \Delta x
+\end{align*}
+
+\subsection{Properties}
+
+Assuming that $f(x)$ and $g(x)$ are differentiable, and $c$ is a constant, 
+
+\begin{align*}
+	\dif c &= 0 \dif x = 0 \\
+	\dif (c f(x)) &= c \dif f(x) \\
+	\dif (f \pm g) &= \dif f \pm \dif g \\
+	\dif (fg) &= \dif f \cdot g + f \cdot \dif g \\
+	\dif \left(\dfrac{f}{g}\right) &= \dfrac{\dif f \cdot g - f \cdot \dif g}{g^2} \\
+	\dif f(g(x)) &= f'(g(x)) \dif g
+\end{align*}
+
+\section{Taylor's Formula}
+
+\begin{theorem}
+	Let $f(x)$ be differentiable $(n+1)$ times, where $n \in \mathbb{N} \cup \{0\}$ on an open interval about $a$, and $x$ be an arbitrary point in this interval. Then, there exists a point $c$, which depends on $x$, between $a$ and $x$, s.t.
+	\begin{align*}
+		f(x) &= f(a) + \dfrac{f'(a)}{1!} (x-a) + \dfrac{f''(a)}{2!} (x-a)^2 + \dots + \dfrac{f^{(n)}(a)}{n!} (x-a)^n + R_n (x)
+		\intertext{where}
+		R_n (x) &= \dfrac{f^{(n)}(c)}{(n+1)!} (x-a)^{n+1}
+		\intertext{is called the \emph{Lagrange remainder}}
+	\end{align*}
+\end{theorem}
+
+\end{document}

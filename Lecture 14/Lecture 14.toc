@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Applications of Definite Integrals}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Area under a curve}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Length of a curve}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Volume of solids}{4}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Volume of solids of revolution about $x$-axis}{4}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Volume of solids of revolution about $y$-axis}{5}{subsubsection.1.3.2}

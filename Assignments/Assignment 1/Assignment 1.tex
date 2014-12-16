@@ -1,0 +1,403 @@
+\documentclass[fleqn, a4paper, 10pt]{article}
+\usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage[nodayofweek]{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+
+%opening
+\title{Differential and Integral Methods - Exercise 1}
+\author{Aakash Jog}
+\date{\formatdate{5}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+%\tableofcontents
+
+\section{Find the domain of the following functions}
+
+\subsection{$f(x) = 2 x - 3 \sin x$}
+
+There is no restriction on the values of $x$ in $f(x)$.\\
+\begin{equation*}
+	\boxed{	\therefore D(f) = \mathbb{R}}
+\end{equation*}
+
+\subsection{$f(x) = \dfrac{1}{\sqrt{|x| - x}}$}
+
+For the square root to exist, $|x| - x \geq 0$, and for the fraction to exist, $\sqrt{|x| - x} \neq 0$.
+\begin{align*}
+	&\therefore |x| - x > 0\\
+	&\therefore x \in (-\infty, 0)
+\end{align*}
+\begin{equation*}
+	\boxed{	\therefore D(f) = (-\infty, 0)}
+\end{equation*}
+
+\subsection{$f(x) = \sqrt{\dfrac{x + 3}{|x^2 - 4|}}$}
+
+Conditions on $x$:
+\begin{align}
+	\dfrac{x + 3}{|x^2 - 4|} \geq 0 \label{condition 1}\\ 
+	|x^2 - 4| \neq 0 \label{condition 2}
+\end{align}
+
+\begin{align*}
+	\eqref{condition 1} \Rightarrow x + 3 &\geq 0\\
+	\therefore x &\geq -3 \\
+	\eqref{condition 2} \Rightarrow x^2 &\neq 4 \\
+	\therefore x &\notin \{-2,2\}
+\end{align*}
+
+\begin{equation*}
+	\boxed{\therefore D(f) = [-3, \infty) - \{-2, 2\}}
+\end{equation*}
+
+\subsection{$f(x) = \ln(x+2)$}
+
+Conditions on $x$:
+\begin{align}
+	x + 2 > 0
+\end{align}
+\begin{align*}
+	\therefore x > -2
+\end{align*}
+\begin{equation*}
+	\boxed{\therefore D(f) = (-2, \infty)}
+\end{equation*}
+
+\subsection{$f(x) = \ln(|x+2|)$}
+
+Conditions on $x$:
+\begin{align}
+	|x + 2| > 0
+\end{align}
+\begin{equation*}
+	\therefore x \neq -2
+\end{equation*}
+\begin{equation*}
+	\boxed{\therefore D(f) = \mathbb{R} - \{-2\}}
+\end{equation*}
+
+\subsection{$f(x) = \log_2 (\log_2 x)$}
+
+Conditions on $x$:
+\begin{align}
+	x &> 0\\
+	\log_2 x &> 0
+\end{align}
+\begin{align*}
+	\therefore x &> 1
+\end{align*}
+\begin{equation*}
+	\boxed{\therefore D(f) = (1, \infty)}
+\end{equation*}
+
+\subsection{$\dfrac{1}{1 - \cos x}$}
+
+Conditions on $x$:
+\begin{align}
+	1 - \cos x \neq 0\\
+\end{align}
+\begin{align*}
+	\therefore \cos x \neq 1\\
+	\therefore x \neq 2n\pi ; n \in Z
+\end{align*}
+\begin{equation*}
+	\boxed{\therefore D(f) = \mathbb{R} - \{2n\pi : n \in Z\}}
+\end{equation*}
+
+\subsection{$f(x) = \dfrac{1 + \sin x}{\sqrt{1 - sin^2 x}}$}
+
+\begin{align*}
+	f(x) &= \dfrac{1 + \sin x}{\sqrt{1 - \sin^2 x}}\\
+	&= \dfrac{1 + \sin x}{\sqrt{\cos^2 x}}\\
+	&= \dfrac{1 + \sin x}{\cos x}\\
+\end{align*}
+Therefore, conditions on $x$:
+\begin{align}
+	\cos x \neq 0
+\end{align}
+\begin{align*}
+	\therefore x \neq (2n+1)\dfrac{\pi}{2}
+\end{align*}
+\begin{equation*}
+	\boxed{\therefore x \in \mathbb{R} - \{(2n+1)\dfrac{\pi}{2} : n \in \mathbb{Z}\}}
+\end{equation*}
+
+\subsection{$f(x) = \sqrt{\dfrac{x - 2}{x + 2}} + \sqrt{\dfrac{1 + x}{1 - x}}$}
+
+Conditions on $x$:
+\begin{align}
+	\dfrac{x - 2}{x + 2} \geq 0 \label{sqrt + sqrt : condition 1}\\
+	x + 2 \neq 0 \label{sqrt + sqrt : condition 2}\\
+	\dfrac{1 + x}{1 - x} \geq 0 \label{sqrt + sqrt : condition 3}\\
+	1 - x \neq 0 \label{sqrt + sqrt : condition 4}
+\end{align}
+\begin{align*}
+	\therefore \eqref{sqrt + sqrt : condition 1} \Rightarrow x &\in (\infty, -2] \cup [2, \infty)\\
+	\therefore \eqref{sqrt + sqrt : condition 2} \Rightarrow x &\neq -2\\
+	\therefore \eqref{sqrt + sqrt : condition 1} \Rightarrow x &\in [-1,1]\\
+	\therefore \eqref{sqrt + sqrt : condition 2} \Rightarrow x &\neq 1\\
+\end{align*}
+\begin{equation*}
+	\boxed{D(f) = \{\}}
+\end{equation*}
+
+\subsection{$f(x) = \tan \left( x + \dfrac{\pi}{4} \right) $}
+
+Conditions on $x$:
+\begin{align}
+	x + \dfrac{\pi}{4} \neq (2n+1)\dfrac{\pi}{2} ; n \in \mathbb{Z}
+\end{align}
+\begin{align*}
+	\therefore x \neq (2n+1)\dfrac{\pi}{2} - \dfrac{\pi}{4}; n \in \mathbb{Z}
+\end{align*}
+\begin{equation*}
+	\boxed{\therefore D(f) = \mathbb{R} - \{(2n+1)\dfrac{\pi}{2} - \dfrac{\pi}{4}: n \in \mathbb{Z}\}}
+\end{equation*}
+
+\newpage
+\section{Write which of the following functions are even, odd or neither odd nor even:}
+
+\subsection{$f(x) = x - x^3 +x^5$}
+
+\begin{align*}
+	f(-x) &= (-x) - (-x)^3 + (-x)^5\\
+	&= (-x) - (-x^3) + (-x^5)\\
+	&= -x + x^3 - x^5\\
+	&= -f(x)
+\end{align*} 
+Therefore, $f(x)$ is odd.
+
+\subsection{$f(x) = x^2 - x^3 + x^6$}
+
+\begin{align*}
+	f(-x) &= (-x)^2 - (-x)^3 + (-x)^6\\
+	&= x^2 - (-x^3) + x^6\\
+	&= x^2 + x^3 + x^6
+\end{align*}
+Therefore, $f(x)$ is neither odd nor even.
+
+\subsection{$f(x) = 5^x$}
+
+\begin{align*}
+	f(-x) &= 5^{-x}\\
+	&= \dfrac{1}{5^x}
+\end{align*}
+Therefore, $f(x)$ is neither odd nor even.
+
+\subsection{$f(x) = \sin(\sin x)$}
+
+\begin{align*}
+	f(-x) &= \sin(\sin (-x))\\
+	&= \sin(-\sin x)\\
+	&= - \sin(\sin x)\\
+	&= -f(x)
+\end{align*}
+Therefore, $f(x)$ is odd.
+
+\subsection{$f(x) = \cos(\sin x)$}
+
+\begin{align*}
+	f(-x) &= \cos(\sin (-x))\\
+	&= \cos(-\sin x)\\
+	&= \cos(\sin x)\\
+	&= f(x)
+\end{align*}
+Therefore, $f(x)$ is even.
+
+\subsection{$f(x) = \sin(\cos x)$}
+
+\begin{align*}
+	f(-x) &= \sin(\cos (-x))\\
+	&= \sin(\cos x)\\
+	&= f(x)
+\end{align*}
+Therefore, $f(x)$ is even.
+
+\subsection{$f(x) = x \sin x$}
+
+\begin{align*}
+	f(-x) &= (-x) \sin (-x)\\
+	&= (-x)(-sin x)\\
+	&= x \sin x
+	&= f(x)
+\end{align*}
+Therefore, $f(x)$ is even.
+
+\subsection{$f(x) = \dfrac{1 - x}{1 + x^2}$}
+
+\begin{align*}
+	f(-x) &= \dfrac{1 - (-x)}{1 + (-x)^2}\\
+	&= \dfrac{1 + x}{1 + x^2}
+\end{align*}
+Therefore, $f(x)$ is neither odd nor even.
+
+\newpage
+\section{Find the image of the following functions in the specified domains:}
+
+\subsection{$f(x) = \sin x + 3$ in the interval $\left[\pi, \dfrac{3\pi}{2}\right]$}
+
+The image of $\sin x$ in $\left[ \pi, \dfrac{3\pi}{2}\right] $ is $\left[-1, 0\right]$.\\
+$\therefore$ the image of $f(x)$ is $\left[(-1+3), (0+3)\right]$, i.e. $\left[2,3\right].$
+
+\subsection{$f(x) = -x^2 + 8$ in the interval $(0,7]$}
+
+The image of $x^2$ in $(0, 7]$ is $(0, 49]$.\\
+$\therefore$ the image of $-x^2$ in $(0, 7]$ is $[-49, 0)$.\\
+$\therefore$ the image of $f(x)$ in $(0, 7]$ is $[-41, 8)$.
+
+\section{Let $f(x) = x^3$. Find the function obtained from performing the following actions on $f$:
+}
+
+\subsection{Translation downwards by 3}
+
+\begin{align*}
+	g(x) &= f(x) - 3\\
+	\therefore g(x) &= x^3 - 3
+\end{align*}
+
+\subsection{Right translation by 4}
+
+\begin{align*}
+	g(x) &= f(x-4)\\
+	\therefore g(x) &= (x-4)^3
+\end{align*}
+
+\subsection{Reflection around the $x$-axis.}
+
+\begin{align*}
+	g(x) &= -f(x)\\
+	\therefore g(x) &= -x^3
+\end{align*}
+
+\subsection{Reflection around the $y$-axis.}
+
+\begin{align*}
+	g(x) &= f(-x)\\
+	\therefore g(x) &= (-x)^3 = -x^3
+\end{align*}
+
+\subsection{Left translation by 1}
+
+\begin{align*}
+g(x) &= f(x+1)\\
+\therefore g(x) &= (x+1)^3\\
+\therefore g(x) &= x^3 + 3x^2 + 3x +1
+\end{align*}
+
+\section{Draw the graph of the function $f(x) = x - [x]$, where $[x]$ is the biggest integer smaller or equal to $x$.}
+
+\vspace{3in}
+
+\section{Solve the following inequalities:}
+
+\subsection{$x^2 - 5x + 6 \leq 0$}
+
+\begin{align*}
+	x^2 - 5x + 6 &\leq 0\\
+	\therefore (x-2)(x-3) &\leq 0
+\end{align*}
+\begin{equation*}
+	\therefore x \in [2, 3] 
+\end{equation*}
+
+\subsection{$x^2 - 4x > 21$}
+
+\begin{align*}
+	x^2 - 4x &> 21\\
+	\therefore x^2 -4x - 21 &> 0\\
+	\therefore (x-7)(x+3) &> 0
+\end{align*}
+\begin{equation*}
+	\therefore x \in (-\infty, -3) \cup (7, \infty)
+\end{equation*}
+
+\subsection{$|-x +  3| < 7$}
+
+\begin{align*}
+	|-x + 3| &< 7\\
+	\therefore -7 &< -x + 3 < 7\\
+	\therefore -10 &< -x < 4\\
+	\therefore 10 &> x > -4 
+\end{align*}
+\begin{equation*}
+	\therefore x \in (-4, 10)
+\end{equation*}
+
+\subsection{$|2x - 3| \leq x+3$}
+
+\begin{align*}
+	|2x - 3| &\leq x + 3\\
+	\therefore -x - 3 &\leq 2x - 3 \leq x + 3\\
+	\therefore 0 \leq x \leq 6
+\end{align*}
+
+\subsection{$|x + 1| - |2 - x| \geq 0$}
+
+\begin{align*}
+	|x + 1| &\geq |2 - x|\\
+	\therefore (x + 1)^2 &\geq (2 - x)^2 \\
+	\therefore x^2 +2x + 1 &\geq 4 - 4x + x^2\\
+	\therefore 6x &\geq 3\\
+	\therefore x &\geq \dfrac{1}{2}
+\end{align*}
+\begin{equation*}
+	\therefore x \in \left[\dfrac{1}{2}, \infty\right)
+\end{equation*}
+
+\subsection{$|x - 1| + |x - 2| - |x - 3| \geq x$}
+
+\subsubsection*{Case I: $x > 3$}
+\begin{align*}
+	\therefore (x - 1) + (x - 2) - (x - 3) -x &\geq 0
+\end{align*}
+No contradiction\\
+\begin{equation*}
+	\therefore x \in (3, \infty)
+\end{equation*}
+
+\subsubsection*{Case II: $2 < x \leq 3$}
+
+\begin{align*}
+	(x - 1) + (x - 2) + (x - 3) - x \geq 0\\
+	\therefore x \geq 3
+\end{align*}
+\begin{equation*}
+	\therefore x = 3
+\end{equation*}
+
+\subsection*{Case III: $1 < x \leq 2$}
+
+\begin{align*}
+	(x - 1) - (x - 2) + (x - 3) - x \geq 0\\
+	\therefore -2 \geq 0
+\end{align*}
+$\therefore$ no values of $x$ exist.
+
+\subsubsection*{Case IV: $x \leq 1$}
+
+\begin{align*}
+	-(x - 1) - (x - 2) + (x - 3) - x \geq 0\\
+	\therefore x \leq 0
+\end{align*}
+\begin{equation*}
+	\therefore x \in (-\infty, 0]
+\end{equation*}
+
+\begin{equation*}
+	\boxed{x \in (\infty, 0] \cup [3, \infty)}
+\end{equation*}
+
+\end{document}

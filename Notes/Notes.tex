@@ -1,0 +1,697 @@
+\date{}
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{commath, esdiff} %typesetting differentials
+\usepackage{gensymb}
+\usepackage{hyperref} %hyperlinking
+\usepackage{tikz, pgfplots} %drawing figures
+\usepackage{datetime} % formatting dates
+\usepackage{ulem} %change \emph to underline
+\usepackage{enumerate, enumitem} %numbered list and formatting 
+
+\setcounter{secnumdepth}{4} %numbering \paragraph
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %reset 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+
+
+%opening
+\title{Differential and Integral Methods}
+\author{Aakash Jog}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\part{General Information}
+
+\section{Contact Information}
+\textbf{Dr. Yakov Yakubov} \\
+yakubov@post.tau.ac.il
+
+\section{Office Hours}
+
+Monday\\
+16:15 - 17:15\\
+Room 233, Schreiber Building\\
+Tel: 03-6405357\\
+
+\newpage
+\part{Functions}
+
+\section{Notation}
+
+\begin{align*}
+	\mathbb{N} &= \text{Set of all natural numbers}\\
+	\mathbb{Z} &= \text{Set of all integers}\\
+	\mathbb{Q} &= \left\lbrace \dfrac{m}{n} : m \in \mathbb{Z}, n \in \mathbb{N}\right\rbrace 
+\end{align*}
+
+\section{Basic Definitions}
+
+\begin{definition}[Domain, Range and Variables]
+	Let $D$ and $E$ be two sets of real numbers. A function $f$ from $D$ into $E$ is a well defined law which, to each $x \in D$ corresponds to a unique number $y \in E$. The set $D$ is called the \emph{domain} of $f$ and the set $E$ is called the \emph{range} of $f$. \\
+	Denote $f : D \rightarrow E$ or $y = f(x)$. \\
+	The variable $x$ is called \emph{independent variable} and the variable $y$ is called \emph{dependent variable}. \\
+	The variable $x$ is also called the \emph{origin} of $y$ and $y$ is also called the \emph{image} of $x$. \\
+\end{definition}
+
+\begin{definition}[Image of a function]
+	Given $f : D \rightarrow E$. Then the image of $f$ is a set of all $y \in E$ s.t. $\exists x \in D, y = f(x) : I(f) = \{ y \in E : \exists x \in D, y = f(x)\}$ \\
+\end{definition}
+
+\begin{definition}[Existence domain]
+	The biggest possible domain of a function $f$ is called the \emph{existence domain} of $f$. \\
+\end{definition}
+
+\begin{definition}[Graph of a function]
+	A set of point $\{(x, f(x)) : x \in D\}$ in the plane $\mathbb{R}^2$ is called a \emph{graph} of a function $y = f(x)$. \\
+\end{definition}
+
+\begin{definition}[Even function]
+	If $f(-x) = f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{even function}. \\
+	Each even function is symmeteric about the $y$-axis. \
+\end{definition}
+
+\begin{definition}[Odd function]
+	If $f(-x) = -f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{odd function}. \\
+	Each odd function is symmeteric about the origin. \\
+\end{definition}
+
+\begin{definition}[Periodical function]
+	A function $y = f(x)$ which is defined on $D$ is called \emph{periodical} if $\exists T \neq 0$ which is called a \emph{period} of $f$ s.t. $\forall x \in D \Rightarrow x + T \in D$ and $f(x+T) = f(x)$. \\
+	The smallest such $T > 0$ (if it exists) is called the \emph{minimal period}. \\
+\end{definition}
+
+\begin{definition}[Shifting with respect to $y$-axis]
+	$f(x+a)$ is the graph of $f(x)$, shifted by $a$, in the direction of the $x$-axis, opposite to the sign of $a$. \\
+\end{definition}
+
+\begin{definition}[Shifting with respect to $x$-axis]
+	$f(x) + a$ is the graph of $f(x)$, shifted by $a$, in the direction of the $y$-axis, according to the sign of $a$. \\
+\end{definition}
+
+\begin{definition}[Monotonic function]
+	A function $y = f(x)$ is called \emph{monotonic increasing} (\emph{strongly increasing}) in $D$ if $\forall x_1, x_2 \in D, x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2) (f(x_1) < f(x_2))$. \\
+	A function $y = f(x)$ is called \emph{monotonic decreasing} (\emph{strongly increasing}) in $D$ if $\forall x_1, x_2 \in D, x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2) (f(x_1) > f(x_2))$. 
+\end{definition}
+
+\begin{definition}[One-to-one function]
+	A function $f : D(f) \rightarrow E$ is called \emph{one-to-one} if $\forall y \in I(f) \Rightarrow \exists ! x \in D(f)$ s.t. $y = f(x)$. \\
+	Equivalently, $\forall x_1, x_2 \in D(f)$, if $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$.\\
+\end{definition}
+
+\section{Inverse of a Function}
+
+\begin{definition}[Inverse function]
+	If $f : D(f) \rightarrow I(f)$ is one-to-one and onto. Then, we can define $g : I(f) \rightarrow D(f)$, which is one-to-one and onto, by $g(y) = x$, where $y = f(x)$. Therefore, $g(f(x)) = x$. $g$ is called the \emph{inverse function} of $f$. \\
+	The inverse function is denoted as $g = f^{-1}$(Note: $f^{-1} \neq \dfrac{1}{f}$)
+\end{definition}
+\begin{align}
+	D(f) = I(f^{-1}) \label{Image of inverse}\\
+	I(f) = D(f^{-1}) \label{Domain of inverse}
+\end{align}
+The graphs of a $f$ and $f^{-1}$ are symmeteric about $y=x$.
+
+\section{Elementary Operations between Functions}
+
+\begin{definition}[Addition and subtraction of functions]
+	\begin{align}
+		h(x) &= f(x) \pm g(x) \label{sum of functions}\\
+		D(h) &= D(f) \cap D(g) \label{domain of sum of functions}
+	\end{align}
+\end{definition}
+
+\begin{definition}[Multiplication of a function by a constant]
+	\begin{align}
+		h(x) &= k f(x) \label{product of constant and function}\\
+		D(h) &= D(f)  \label{domain of product of constant and function}
+	\end{align}
+\end{definition}
+
+\begin{definition}[Multiplication of functions]
+	\begin{align}
+		h(x) &= f(x) g(x) \label{product of functions}\\
+		D(h) &= D(f) \cap D(g) \label{domain of product of functions}
+	\end{align}
+\end{definition}
+
+\begin{definition}[Division of functions]
+	\begin{align}
+		h(x) &= \dfrac{f(x)}{g(x)} \label{division of functions}\\
+		D(h) &= \{x \in D(f) \cap D(g) : g(x) \neq 0\} \label{domain of division of functions}
+	\end{align}
+\end{definition}
+
+\section{Composite Functions}
+
+\begin{definition}[Composition of Functions]
+	Let $f : D(f) \rightarrow E$ and $g : D(g) \rightarrow F$ be two functions. A \emph{composition} of $f$ with $g$ is a function $h : D(h) \rightarrow F$ where $h(x) = g(f(x))$. It is denoted as $g \circ f$
+\end{definition}
+\begin{equation}
+	D(h) = \{x \in D(f) : f(x) \in D(g)\} \label{domain of composite functions} 
+\end{equation}
+
+\section{Elementary Functions}
+
+\subsection{Polynomial}
+
+\begin{align}
+	y = f(x) &= a_0 + a_1 x + \dots + a_n x^n ; a_0, \dots, a_n \in \mathbb{R} \label{polynomial} \\
+	D(f) &= \mathbb{R} \label{domain of polynomial}
+\end{align}
+
+\begin{enumerate}
+	\item	If $n = 0, y = f(x) = a_0$ represents a constant function.
+	\item	If $n = 1, y = f(x) = a_0 + a_1 x$ represents a straight line in the $X-Y$ plane.
+	\item	If $n = 2, y = f(x) = a_0 + a_1 x + a_2 x^2$ represents a parabola in the $X-Y$ plane.
+\end{enumerate}
+
+\subsection{Power Function}
+
+\begin{align}
+	y = f(x) = x^a ; a\in R \label{power function} \\
+	D(f) \text{ depends on } a \label{domain of power function}
+\end{align}
+
+\subsection{Exponential Function}
+
+\begin{align}
+	y = f(x) &= a^x ; a > 0, a \neq 1 \label{exponential function} \\
+	D(f) &= \mathbb{R} \label{domain of exponential function} \\
+	I(f) &= (0, \infty) \label{image of exponential function}
+\end{align}
+
+\subsection{Logarithmic Function}
+
+\begin{align}
+	y = f(x) &= \log_{a} {x} \label{logarithmic function} \\
+	D(f) &= (0,\infty) \label{domain of logarithmic function} \\
+	I(f) &= \mathbb{R} \label{image of logarithmic function}
+\end{align}
+
+\subsection{Trigonometric Functions}
+
+\begin{align}
+	y = f(x) &= \sin x \\
+	y = f(x) &= \cos x \\
+	y = f(x) = \tan x &= \dfrac{\sin x}{\cos x} \\
+	y = f(x)  = \cot x &= \dfrac{1}{\tan x} = \dfrac{\cos x}{\sin x} \\
+	y = f(x) = \csc x &= \dfrac{1}{\sin x} \\
+	y = f(x) = \sec x &= \dfrac{1}{\cos x} 
+\end{align}
+
+\subsection{Inverse Trigonometeric Functions}
+
+\begin{align}
+	y = f^{-1}(x) &= \sin^{-1} x = \arcsin x \\
+	D(\arcsin x) &= [-1,1] \\
+	I(\arcsin x) &= [-\dfrac{\pi}{2}, \dfrac{\pi}{2}]
+\end{align}
+
+\begin{align}
+	y = f^{-1}(x) &= \cos^{-1} x = \arccos x \\
+	D(\arccos x) &= [-1,1] \\
+	I(\arccos x) &= [0,\pi]
+\end{align}
+
+\begin{align}
+	y = f^{-1}(x) &= \tan^{-1} x = \arctan x \\
+	D(\arctan x) &= \mathbb{R} \\
+	I(\arctan x) &= [-\dfrac{\pi}{2}, \dfrac{\pi}{2}]
+\end{align}
+
+\subsection{Hyperbolic Functions}
+
+\begin{align}
+	\sinh x &\dot{=} \dfrac{e^x - e^{-x}}{2} \\
+	D(\sinh x) &= \mathbb{R} \\
+	I(\sinh x) &= \mathbb{R}
+\end{align}
+
+\begin{align}
+	\cosh x &\dot{=} \dfrac{e^x + e^{-x}}{2} \\
+	D(\cosh x) &= \mathbb{R} \\
+	I(\cosh x) &= [1, \infty)
+\end{align}
+
+\begin{align}
+	\tanh x &\dot{=} \dfrac{\sinh x}{\cosh x} = \dfrac{e^x - e^{-x}}{e^x + e^{-x}} \\
+	D(\tanh x) &= \mathbb{R} \\
+	I(\tanh x) &= (-1, 1)
+\end{align}
+
+\subsubsection{Identities of Hyperbolic Functions}
+
+\begin{align}
+	\sinh (2x) &= 2 \sinh x \cosh x \\
+	\cosh ^2 x + \sinh ^2 x &= \cosh (2x) \\
+	\cosh ^2 x - \sinh ^2 x &= 1 \\
+	\dfrac{\cosh (2x) - 1}{2} &= \sinh ^2 x \\
+	\dfrac{\cosh (2x) + 1}{2} &= \cosh ^2 x 
+\end{align}
+
+\subsection{Absolute Value}
+
+\begin{align}
+	y = f(x) = 
+	\begin{cases}
+		x ; x > 0 \\
+		0 ; x = 0 \\
+		-x ; x < 0 \\
+	\end{cases}
+\end{align}
+
+\subsection{Floor Function}
+
+\begin{align}
+	y = f(x) = \lfloor x \rfloor = \text{the largest integer less than or equal to }x
+\end{align}
+
+\newpage
+\part{Limits and Continuity}
+
+\begin{definition}[Existence of a limit]
+	If $x \rightarrow a^+$ then $f(x) \rightarrow L_2$, and if $x \rightarrow a^-$ then $f(x) \rightarrow L_1$.\\
+	We say that $\exists \lim\limits_{x \rightarrow a} f(x)$ iff $L_1 = L_2$
+\end{definition}
+
+\begin{definition}[Continuity of a function]
+	If $x \rightarrow a$ then $f(x) \rightarrow L$, we say that $L$ is the \emph{limit} of $f(x)$ at $x = a$.
+	\begin{equation*}
+		\lim\limits_{x \rightarrow a} f(x) = L
+	\end{equation*}
+	We say that $f(x)$ is \emph{continuous} at $x = a$, iff
+	\begin{equation*}
+		\lim\limits_{x \rightarrow a} f(x) = L = f(a)
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Cauchy's definition of a limit of a function]
+	Let $f(x)$ be defined on an open interval about $a$, except possibly at $a$ itself.\\
+	A number $L$ is called the \emph{limit} of $f(x)$ at $a$ if
+	\begin{equation}
+		\forall \epsilon > 0 \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow |f(x) - L| < \epsilon
+	\end{equation}
+\end{definition}
+
+\section{A Classification of Discontinuity Points}
+
+Let $f(x)$ be defined on an open interval about $a$, except possibly at $a$ itself.
+
+\begin{definition}[Removable Discontinuity point]
+	The point $a$ is a \emph{removable discontinuity point} of $f$ if, $\lim\limits_{x \rightarrow a} f(x)$ exists, but either $\lim\limits_{x \rightarrow a} f(x) \neq f(a)$ or $f(a)$ does not exist.
+\end{definition}
+
+%\begin{tikzpicture}
+%	\draw (0,0) to [out=0, in = 180] (5,5);
+%	\draw[green, ultra thick, domain=0:2] plot (\x, {0.025+\x+\x*\x});
+%\end{tikzpicture}
+
+\begin{definition}[Discontinuity of First Kind]
+	The point $a$ is a \emph{discontinuity point of the first kind} if both $\lim\limits_{x \rightarrow a^-} f(x)$ and $\lim\limits_{x \rightarrow a^+} f(x)$ exist, but $\lim\limits_{x \rightarrow a^-} f(x) \neq \lim\limits_{x \rightarrow a^+} f(x)$
+\end{definition}
+
+\begin{definition}[Discontinuity of Second Kind]
+	The point $a$ is a \emph{discontinuity point of the second kind} if atleast one of the two one-sided limits of $f$ does not exist. \\
+	Note that the limits are defined as finite numbers only.
+\end{definition}
+
+\section*{Theorems}
+
+\begin{theorem}[Sandwich Theorem] \label{Sandwich Theorem}
+	Let $f(x), g(x), h(x)$ be defined on an open interval about $a$, except possibly at $a$ itself. Assume that $\forall x \neq a$ from the interval, it is satified that $f(x) \leq g(x) \leq h(x)$ and $\lim\limits_{x \rightarrow a} f(x) = \lim\limits_{x \rightarrow a} h(x) = L$. Then, $\lim\limits_{x \rightarrow a} g(x) = L$.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+	\forall \varepsilon > 0, \exists \delta > 0 : 0 < \left|x - a\right| &< \delta \\
+	therefore \left|g(x) - L\right| &< \varepsilon \\
+	\intertext{i.e.,}
+	L - \varepsilon < g(x) &< L + \varepsilon\\
+	\intertext{Given $\exists \delta_1 > 0 : 0 < \left|x - a\right| < \delta_1$}
+	 f(x) \leq g(x) &\leq h(x)\\
+	\intertext{For this $\varepsilon > 0$,} 
+	\exists \delta_2 > 0 : 0 < \left[x - a\right] &< \delta_2\\
+	\therefore \left|f(x) - L\right| &< \varepsilon \\
+	\intertext{i.e.,} 
+	L - \varepsilon < f(x) &< L + \varepsilon\\
+	\varepsilon > 0, \exists \delta_3 > 0 : 0 < \left[x - a\right] &< \delta_3 \\ \therefore \left|h(x) - L\right| &< \varepsilon \\
+	\intertext{i.e.,} 
+	L - \varepsilon < h(x) &< L + \varepsilon\\
+	\intertext{So, $\forall \varepsilon > 0$,} 
+	\exists \delta = \min\{\delta_1, \delta_2, \delta_3\} > 0 : 0 < \left|x - a\right| &< \delta \\
+	\therefore L-\varepsilon < f(x) \leq g(x) \leq h(x) &< L + \varepsilon
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Theorem 5]
+	If $\lim\limits_{x \rightarrow a} f(x) = 0$ and $g(x)$ is bounded in an open interval about $a$, except possibly at $a$ itself, then, $\lim\limits_{x \rightarrow a}(f(x)g(x)) = 0$.
+\end{theorem}
+
+\begin{proof}
+	We have to prove that
+	\begin{equation*}
+		\forall \varepsilon > 0, \exists \delta > 0 : 0 < \left|x - a\right| < \delta \Rightarrow \left|f(x) g(x) - 0\right| < \varepsilon
+	\end{equation*}
+	Given $\lim\limits_{x \rightarrow a} f(x) = 0$,
+	\begin{equation*}
+		\forall \varepsilon_1 > 0, \exists \delta_1 > 0 : 0 < \left|x - a\right| < \delta_1 \Rightarrow \left|f(x) - 0\right| < \varepsilon_1
+	\end{equation*}
+	As $g(x)$ is bounded, in an open interval about $a$, except possibly at $a$ itself,
+	\begin{equation*}
+		\exists \delta_2 > 0, \exists M > 0 : 0 < \left|x - a\right| < \delta_2 \Rightarrow \left|g(x)\right| \leq M
+	\end{equation*}
+	So, if we choose $\varepsilon = \dfrac{\varepsilon}{M}$, 
+	\begin{equation*}
+		\forall \varepsilon > 0, \exists \delta = \min\{\delta_1, \delta_2\} > 0 : 0 < \left|x - a\right| \delta \Rightarrow \left|f(x) g(x) - 0\right| = |f(x)| |g(x)| < \varepsilon_1 M = \varepsilon
+	\end{equation*}
+\end{proof}
+
+\section{Infinite Limits}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow a} f(x) = +\infty &\Leftrightarrow \forall M > 0, \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow f(x) > M\\
+	\lim\limits_{x \rightarrow a} f(x) = -\infty &\Leftrightarrow \forall M < 0, \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow f(x) < M\\
+	\lim\limits_{x \rightarrow +\infty} f(x) = L &\Leftrightarrow\forall \varepsilon > 0, \exists M > 0 : x > M \Rightarrow |f(x) - L| < \varepsilon\\
+	\lim\limits_{x \rightarrow -\infty} f(x) = L &\Leftrightarrow\forall \varepsilon > 0, \exists M > 0 : x > M \Rightarrow |f(x) - L| < \varepsilon
+\end{align*}
+
+\section{Known Limits}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow +\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{x \rightarrow -\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{\theta \rightarrow 0} \dfrac{\sin \theta}{\theta} &= 1
+\end{align*}
+
+\section{Examples}
+
+\begin{example}
+	Find
+	\begin{equation*}
+		\lim\limits_{x \rightarrow 0} \dfrac{\tan 2x}{x}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{x \rightarrow 0} \dfrac{\tan 2x}{x} &= \lim\limits_{x \rightarrow 0} \dfrac{\frac{\sin 2x}{\cos 2x}}{x}\\
+		&= \lim\limits_{x \rightarrow 0} \dfrac{\sin 2x}{2x} \dfrac{2}{\cos x}\\
+		&=\lim\limits_{x \rightarrow 0}  \dfrac{\sin 2x}{2x} \lim\limits_{x \rightarrow 0} \dfrac{2}{\cos x}\\
+		&= 1 \cdot 2 
+		&= 2
+	\end{align*}
+\end{solution}
+
+\part{Derivatives}
+
+\section{Derivative of a Function}
+
+\subsection{Algebraic Definition}
+
+%\begin{tikzpicture}
+%	\draw (1,1) to [out=15, in=250] (3,4);
+%\end{tikzpicture}
+
+\begin{definition}
+	If there exists
+	\begin{equation*}
+		\lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} = L
+	\end{equation*}
+	then the limit is called the \emph{derivative} of $f$ at $x_0$.
+\end{definition}
+
+\subsection{Geometrical Interpretation}
+
+The slope of $\overleftrightarrow{AB}$ is 
+\begin{equation*}
+	\tan \alpha = \dfrac{\Delta y}{\Delta x}
+\end{equation*}
+When $\Delta x \rightarrow 0$, $\overleftrightarrow{AB}$ tends to a straight line which is called the tangent to $y = f(x)$ at $(x_0, f(x_0))$.\\
+The derivative is the slope of the tangent to $y = f(x)$ at $(x_0, f(x))$.
+
+\subsection{Notation}
+
+\begin{equation*}
+	L = f'(x_0) = \dod{f(x_0)}{x} = \dod{y(x_0)}{x} = D f(x_0)	 
+\end{equation*}
+
+\section{Derivative Function}
+
+If we calculate the derivative of $f(x)$ at any possible $x$ , we get the \emph{derivative function}.
+\begin{equation*}
+	f'(x) = \dod{f}{x} = \dod{y}{x} = D f
+\end{equation*}
+
+\section{The Tangent Line}
+
+\begin{equation*}
+	y - f(x_0) = f'(x_0)(x - x_0)
+\end{equation*}
+
+\section{The Normal Line}
+
+\begin{align*}
+	y - f(x_0) &= - \dfrac{1}{f'(x_0)} (x - x_0) &; f'(x_0) \neq 0\\
+	x &= x_0 &; f'(x_0) = 0
+\end{align*}
+
+\subsection{Proofs of Standard Derivatives}
+  
+\subsubsection{$y = f(x) = c$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{x \rightarrow 0} \dfrac{f(x + \Delta x)}{\Delta x}\\
+	&= \lim\limits_{x \rightarrow 0} \dfrac{c - c}{\Delta x}\\
+	&= 0
+\end{align*}
+
+\subsubsection{$y = f(x) = x^n ; n \in \mathbb{N}$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(x + \Delta x)^n - x^n}{\Delta x}\\
+	a^n - b^n &= (a-b)(a^{n-1} + a^{n-2} b + \dots + a b^{n-2} + b^{n-1})\\
+	\therefore f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta x((x + \Delta x)^{n-1} + (x + \Delta x)^{n-2} x + \dots + (x + \Delta x) x^{n-2} + x^{n-1}}{\Delta x}\\
+	&= \lim\limits_{\Delta x \rightarrow 0} (x + \Delta x)^{n-1} + (x + \Delta x)^{n-2} x + \dots + (x + \Delta x) x^{n-2} + x^{n-1}\\
+	&= x^{n-1} + x \cdot x^{n-2} + \dots + x^{n-2} \cdot x + x^{n-1} \\
+	&= n x^{n-1}
+\end{align*}
+
+\subsubsection{$y = f(x) = x^{-n} ; n \in \mathbb{N}, x \neq 0$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(x + \Delta x)^{-n} - x^{-n}}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\dfrac{1}{(x + \Delta x)^n} - \dfrac{1}{x^n}}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{x^n - (x + \Delta x)^n}{\Delta x (x^n (x + \Delta x)^n)} \\
+	&= \dfrac{-n x^{n-1}}{x^n x^n}
+\end{align*}
+
+\subsubsection{$y = f(x) = \sin x$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\sin(x + \Delta x) - \sin x}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0}\dfrac{2 \sin \dfrac{\Delta x}{2} \cos (x + \dfrac{\Delta x}{2})}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\sin \dfrac{\Delta 	x}{2}}{\dfrac{\Delta x}{2}} \cos \left( x + \dfrac{\Delta x}{2}\right) \\
+	&= \cos x
+\end{align*}
+
+\begin{theorem}
+	Theorem: If $\exists f'(x)$, $\exists g'(x)$ and $c$ is a constant, then, \begin{align*}
+	(c f(x))' &= c f'(x) \\
+	(f(x) \pm g(x))' &= f'(x) \pm g'(x) \\
+	(f(x)g(x))' &= f'(x)g(x) + f(x)g'(x) \\
+	\left(\dfrac{f(x)}{g(x)}\right)' &= \dfrac{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		(f(x)g(x))' &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{f(x + \Delta x) g(x + \Delta x) - f(x) g(x)}{\Delta x} \\
+		&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(f(x + \Delta x) g (x + \Delta x) - f(x) g(x + \Delta x)) + (f(x)g(x + \Delta x) - f(x) g(x))}{\Delta x} \\
+		&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(f(x + \Delta x) - f(x)) g(x + \Delta x)}{\Delta x} + \dfrac{f(x) ((g(x + \Delta x) - g(x))}{\Delta x} \\
+		&= f'(x) g(x) + f(x) g'(x)
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $f$ be defined on an open interval about $x_0$. Then, $f(x)$ is differentiable at $x_0$, iff $\exists A \in \mathbb{R}$ and $\exists \alpha(\Delta x)$, with $\lim\limits_{\Delta x \rightarrow 0} \alpha(\Delta x) = 0$, s.t. $\dfrac{\Delta y}{\Delta x} = A + \alpha(\Delta x) ; A = f'(x_0)$
+\end{theorem}
+
+\begin{theorem}
+	If $y = f(x)$ is differentiable at $x_0$, then, $f(x)$ is continuous at $x_0$.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\exists f'(x_0) \Rightarrow \dfrac{\Delta y}{\Delta x} &= f'(x_0) + \alpha(\Delta x) \\
+		\therefore f(x_0 + \Delta x) - f(x_0) = \Delta y &= \Delta x (f'(x_0) + \alpha(\Delta x) \\
+		\therefore f(x_0 + \Delta x) &= f(x_0) + \Delta x (f'(x_0) + \alpha(\Delta x)) \\
+		\therefore \lim\limits_{\Delta x \rightarrow 0}f(x_0 + \Delta x) &= \lim\limits_{\Delta x \rightarrow 0}f(x_0) + \Delta x (f'(x_0) + \alpha(\Delta x)) \\
+		&= x_0 
+	\end{align*}
+	
+	\begin{remark}
+		The converse of this theorem is not true.
+	\end{remark}
+\end{proof}
+
+\begin{theorem}[Derivative of Inverse Functions]
+	Let $f(x)$ be invertible and continuous in an open interval about $x_0$. If $\exists f'(x_0) \neq 0$, then, the inverse function $x = g(y)$ is differentiable at $y = f(x_0)$ and
+	\begin{equation*}
+		g'(y_0) = \dfrac{1}{f'(x_0)}
+	\end{equation*}
+\end{theorem}
+
+\subsection{Examples}
+
+\begin{example}
+	Find the derivative of 
+	\begin{equation*}
+		y = f(x) = \tan x 
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+	y = f(x) &= \tan x \\
+	\therefore (\tan^{-1})' y &= \dfrac{1}{\tan' x} \\
+	&= \dfrac{1}{\dfrac{1}{\cos^2 x}} \\
+	&= \dfrac{1}{1 + \tan^2 x} \\
+	&= \dfrac{1}{1 + y^2}
+	\end{align*}
+	Similarly,
+	\begin{equation*}
+		(\cot^{-1})' x = - \dfrac{1}{1 + x^2} 
+	\end{equation*}
+\end{solution}
+
+\begin{theorem}[Chain Rule]
+	Let $y = f(u)$ be differentiable at $u_0$, and $u = g(x)$ be differentiable at $x_0$, s.t. $u_o = g(x_0)$. Then, $y = f(g(x))$ is differentiable at $x_0$, and, 
+	\begin{equation*}
+		y'(x_0) = f'(u_0) \cdot g'(x_0)
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		g'(x_0) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta u}{\Delta x} \\
+	\end{align*}
+	Therefore, by Theorem 2, 
+	\begin{align*}
+		\therefore \dfrac{\Delta u}{\Delta x} &= g'(x_0) + \alpha_1(\Delta x) \hfill ; \alpha_1(\Delta x) \rightarrow 0 \text{ if } \Delta x \rightarrow 0 \\
+		\therefore \dfrac{\Delta y}{\Delta u} &= f'(u_0) + \alpha_2(\Delta u) \hfill ; \alpha_1(\Delta u) \rightarrow 0 \text{ if } \Delta u \rightarrow 0
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		\Delta u &= (g'(x_0) + \alpha_1) \Delta x \\
+		\Delta y &= (f'(u_0) + \alpha_2) \Delta u \\
+		\therefore \Delta y &= (f'(u_0) + \alpha_2)(g'(x_0) + \alpha_1) \Delta x \\
+		\therefore \dfrac{\Delta y}{\Delta x} &= (f'(u_0) + \alpha_2) (g'(x_0) + \alpha_1) 
+	\end{align*}
+	\begin{align*}
+		\Delta x \rightarrow 0 &\Rightarrow \Delta u \rightarrow 0 , \alpha_1 \rightarrow 0 \\
+		&\Rightarrow \alpha_2 \rightarrow 0
+	\end{align*}
+	Substituting,
+	\begin{equation*}
+		y'(x_0) = \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0} \left(f'(u_0) + a_2\right) \left(g'(x_0) + \alpha_1\right) = f'(u_0) \cdot g'(x_0)
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}[Fermat Theorem] \label{Fermat Theorem}
+	Let $f(x)$ be defined on an open interval $(a, b)$ and differentiable at $x_0 \in (a,b)$. If $f(x)$ has its extremum at $x_0$, then, $f'(x_0) = 0$
+\end{theorem}
+
+\begin{proof}
+	Assume that $f(x_0)$ is the maximum value of $f(x)$ on $(a, b)$. Then, $\forall \Delta x, f(x_0 + \Delta x) \leq f(x_0)$.
+	
+		\begin{case}
+			$\Delta x > 0$
+			\begin{align*}
+				\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\leq 0 \\
+				\therefore \text{RHD} = \lim\limits_{\Delta x \rightarrow 0^+} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\leq 0
+			\end{align*}
+		\end{case}
+	
+	\begin{case}
+		$\Delta x < 0$
+		\begin{align*}
+			\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\geq 0 \\
+			\therefore \text{LHD} = \lim\limits_{\Delta x \rightarrow 0^-} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\geq 0
+		\end{align*}
+	\end{case}
+	
+	\begin{align*}
+	\exists f'(x_0) \Rightarrow \text{LHD} &= \text{RHD} \\
+	\therefore 0 \leq f'(x_0) &\leq 0 \\
+	\therefore f'(x_0) &= 0
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Rolle's Theorem]
+	Let $f(x)$ be defined on $[a, b]$, s.t. 
+	\begin{enumerate}
+		\item $f$ is continuous on $[a, b]$ \label{Rolle condition 1}
+		\item $f$ is differentiable on $(a, b)$ \label{Rolle condition 2}
+		\item $f(a) = f(b)$ \label{Rolle condition 3}
+	\end{enumerate}
+	Then, $\exists c \in (a, b)$, s.t. $f'(c) = 0$.
+\end{theorem}
+
+\begin{proof}
+	By Weirstrauss Theorem, as $f(x)$ is continuous on $[a, b]$, $f(x)$ has its maximum $M$ and minimum $m$ on $[a, b]$. 
+	
+	\begin{case}
+		$m = M$
+		\begin{align*}
+			f(x) &= \text{constant} \\
+			\therefore f'(x) &= 0 \text{ on } [a, b]
+		\end{align*}
+	\end{case}
+	
+	\begin{case}
+		$m < M$\\
+		Atleast one of $m$ and $M$ must be in $(a, b)$, otherwise $f(a) \neq f(b)$, which contradicts \eqref{Rolle condition 3}.\\
+		Let $M = c \in (a, b)$. Therefore, by \thmref{Fermat Theorem}, $f'(c) = 0$
+	\end{case}
+\end{proof}
+
+% % % % % % % % % % % % % % % % %
+
+\section{Lagrange Theorem}
+
+Let $f(x)$ be defined on $[a, b]$, s.t. 
+\begin{enumerate}
+	\item $f$ is continuous on $[a, b]$
+	\item $f$ is differentiable on $(a, b)$
+\end{enumerate}
+Then, $\exists c \in (a, b)$, s.t. $f'(c) = \dfrac{f(b) - f(a)}{b - a}$
+
+\section{Theorem}
+
+Let $f(x)$ be continuous on $(x_0 - \delta, x_0 + \delta)$ and differentiable on $(x_0 - \delta, x_0) \cup (x_0, x_0 + \delta)$.\\
+If $\lim\limits_{x \rightarrow x_0^+} f'(x) = \lim\limits_{x \rightarrow x_0^-} f'(x) = L$, then, $\exists f'(x_0) = L$.
+
+
+\end{document}

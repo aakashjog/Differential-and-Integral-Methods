@@ -1,0 +1,92 @@
+\documentclass[]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{datetime}
+\usepackage{ulem} % normally replaces italics with underlining in text emphasized by \emph
+
+%opening
+\title{Lecture 1}
+\author{}
+\date{\formatdate{28}{10}{2014}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+\section{General Information}
+
+\textbf{Dr. Yakov Yakubov}
+
+\subsection{Office Hours}
+
+Monday\\
+16:15 - 17:15\\
+Room 233, MathBuilding\\
+Tel: 03-6405357\\
+
+\newpage
+\section{Functions}
+
+\subsection{Notation}
+
+\begin{eqnarray}
+\mathbb{N} &=& \text{Set of all natural numbers}\\
+\mathbb{Z} &=& \text{Set of all integers}\\
+\mathbb{N} &=& \{\dfrac{m}{n} : m \in \mathbb{Z}, n \in \mathbb{N}\}
+\end{eqnarray}
+
+\subsection{Definitions}
+
+\subsubsection{Domain, Range and Variables}
+
+Let $D$ and $E$ be two sets of real numbers. A function $f$ from $D$ into $E$ is a well defined law which, to each $x \in D$ corresponds to a unique number $y \in E$. The set $D$ is called the \emph{domain} of $f$ and the set $E$ is called the \emph{range} of $f$. \\
+Denote $f : D \rightarrow E$ or $y = f(x)$. \\
+The variable $x$ is called \emph{independent variable} and the variable $y$ is called \emph{dependent variable}. \\
+The variable $x$ is also called the \emph{origin} of $y$ and $y$ is also called the \emph{image} of $x$. \\
+
+\subsubsection{Image of a function}
+
+Given $f : D \rightarrow E$. Then the image of $f$ is a set of all $y \in E$ s.t. $\exists x \in D, y = f(x) : I(f) = \{ y \in E : \exists x \in D, y = f(x)\}$ \\
+
+\subsubsection{Existence domain}
+
+The biggest possible domain of a function $f$ is called the \emph{existence domain} of $f$. \\
+
+\subsubsection{Graph}
+
+A set of point $\{(x, f(x)) : x \in D\}$ in the plane $\mathbb{R}^2$ is called a \emph{graph} of a function $y = f(x)$. \\
+
+\subsubsection{Even function}
+
+If $f(-x) = f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{even function}. \\
+Each even function is symmeteric about the $y$-axis. \\
+
+\subsubsection{Odd function}
+
+If $f(-x) = -f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{odd function}. \\
+Each odd function is symmeteric about the origin. \\
+
+\subsubsection{Periodical function}
+
+A function $y = f(x)$ which is defined on $D$ is called \emph{periodical} if $\exists T \neq 0$ which is called a \emph{period} of $f$ s.t. $\forall x \in D \Rightarrow x + T \in D$ and $f(x+T) = f(x)$. \\
+The smallest such $T > 0$ (if it exists) is called the \emph{minimal period}. \\
+
+\subsubsection{Shifting with respect to $y$-axis}
+$f(x+a)$ is the graph of $f(x)$, shifted by $a$, in the direction of the $x$-axis, opposite to the sign of $a$. \\
+
+\subsubsection{Shifting with respect to $x$-axis}
+$f(x) + a$ is the graph of $f(x)$, shifted by $a$, in the direction of the $y$-axis, according to the sign of $a$. \\
+
+\subsubsection{Monotonic function}
+
+A function $y = f(x)$ is called \emph{monotonic increasing} (\emph{strongly increasing}) in $D$ if $\forall x_1, x_2 \in D, x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2) (f(x_1) < f(x_2))$. \\
+A function $y = f(x)$ is called \emph{monotonic decreasing} (\emph{strongly increasing}) in $D$ if $\forall x_1, x_2 \in D, x_1 > x_2 \Rightarrow f(x_1) \geq f(x_2) (f(x_1) > f(x_2))$. \\
+
+\subsubsection{One-to-one function}
+
+A function $f : D(f) \rightarrow E$ is called \emph{one-to-one} if $\forall y \in I(f) \Rightarrow \exists ! x \in D(f)$ s.t. $y = f(x)$. \\
+Equivalently, $\forall x_1, x_2 \in D(f)$, if $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$.\\
+
+\end{document}

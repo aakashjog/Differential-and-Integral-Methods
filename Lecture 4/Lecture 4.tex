@@ -1,0 +1,121 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Lecture 4}
+\author{}
+\date{\formatdate{6}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{A Classification of Discontinuity Points}
+
+Let $f(x)$ be defined on an open interval about $a$, except possibly at $a$ itself.
+
+\subsection{Removable Discontinuity Point}
+
+The point $a$ is a \emph{removable discontinuity point} of $f$ if, $\lim\limits_{x \rightarrow a} f(x)$ exists, but either $\lim\limits_{x \rightarrow a} f(x) \neq f(a)$ or $f(a)$ does not exist.
+
+%\begin{tikzpicture}
+%	\draw (0,0) to [out=0, in = 180] (5,5);
+%	\draw[green, ultra thick, domain=0:2] plot (\x, {0.025+\x+\x*\x});
+%\end{tikzpicture}
+
+\subsection{Discontinuity of First Kind}
+
+The point $a$ is a \emph{discontinuity point of the first kind} if both $\lim\limits_{x \rightarrow a^-} f(x)$ and $\lim\limits_{x \rightarrow a^+} f(x)$ exist, but $\lim\limits_{x \rightarrow a^-} f(x) \neq \lim\limits_{x \rightarrow a^+} f(x)$
+
+\subsection{Discontinuity of Second Kind}
+
+The point $a$ is a \emph{discontinuity point of the second kind} if atleast one of the two one-sided limits of $f$ does not exist. \\
+Note that the limits are defined as finite numbers only.
+
+\section{Sandwich Theorem}
+
+Let $f(x), g(x), h(x)$ be defined on an open interval about $a$, except possibly at $a$ itself. Assume that $\forall x \neq a$ from the interval, it is satified that $f(x) \leq g(x) \leq h(x)$ and $\lim\limits_{x \rightarrow a} f(x) = \lim\limits_{x \rightarrow a} h(x) = L$. Then, $\lim\limits_{x \rightarrow a} g(x) = L$.
+
+\subsection*{Proof}
+
+$\forall \varepsilon > 0, \exists \delta > 0 : 0 < \left|x - a\right| < \delta \Rightarrow \left|g(x) - L\right| < \varepsilon$, i.e., $L - \varepsilon < g(x) < L + \varepsilon$\\
+Given $\exists \delta_1 > 0 : 0 < \left|x - a\right| < \delta_1 \Rightarrow f(x) \leq g(x) \leq h(x)$\\
+For this $\varepsilon > 0, \exists \delta_2 > 0 : 0 < \left[x - a\right] < \delta_2 \Rightarrow \left|f(x) - L\right| < \varepsilon$, i.e., $L - \varepsilon < f(x) < L + \varepsilon$\\
+$\varepsilon > 0, \exists \delta_3 > 0 : 0 < \left[x - a\right] < \delta_3 \Rightarrow \left|h(x) - L\right| < \varepsilon$, i.e., $L - \varepsilon < h(x) < L + \varepsilon$\\
+So, $\forall \varepsilon > 0, \exists \delta = \min{\delta_1, \delta_2, \delta_3} > 0 : 0 < \left|x - a\right| < \delta \Rightarrow L-\varepsilon < f(x) \leq g(x) \leq h(x) < L + \varepsilon$
+
+\section{Theorem 5: If $\lim\limits_{x \rightarrow a} f(x) = 0$ and $g(x)$ is bounded in an open interval about $a$, except possibly at $a$ itself, then, $\lim\limits_{x \rightarrow a}(f(x)g(x)) = 0$.}
+
+\subsection*{Proof}
+
+We have to prove that
+\begin{equation*}
+\forall \varepsilon > 0, \exists \delta > 0 : 0 < \left|x - a\right| < \delta \Rightarrow \left|f(x) g(x) - 0\right| < \varepsilon
+\end{equation*}
+Given $\lim\limits_{x \rightarrow a} f(x) = 0$,
+\begin{equation*}
+	\forall \varepsilon_1 > 0, \exists \delta_1 > 0 : 0 < \left|x - a\right| < \delta_1 \Rightarrow \left|f(x) - 0\right| < \varepsilon_1
+\end{equation*}
+As $g(x)$ is bounded, in an open interval about $a$, except possibly at $a$ itself,
+\begin{equation*}
+	\exists \delta_2 > 0, \exists M > 0 : 0 < \left|x - a\right| < \delta_2 \Rightarrow \left|g(x)\right| \leq M
+\end{equation*}
+So, if we choose $\varepsilon = \dfrac{\varepsilon}{M}$, 
+\begin{equation*}
+	\forall \varepsilon > 0, \exists \delta = \min\{\delta_1, \delta_2\} > 0 : 0 < \left|x - a\right| \delta \Rightarrow \left|f(x) g(x) - 0\right| = |f(x)| |g(x)| < \varepsilon_1 M = \varepsilon
+\end{equation*}
+
+%\begin{tikzpicture}
+%	\draw[domain=0:2] plot[id=x1] function{x*\sin(x)}};
+%%	\draw[domain=10:30, samples=200] plot[id=x1] function{1/x};
+%\end{tikzpicture}
+
+\section{Infinite Limits}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow a} f(x) = +\infty &\Leftrightarrow \forall M > 0, \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow f(x) > M\\
+	\lim\limits_{x \rightarrow a} f(x) = -\infty &\Leftrightarrow \forall M < 0, \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow f(x) < M\\
+	\lim\limits_{x \rightarrow +\infty} f(x) = L &\Leftrightarrow\forall \varepsilon > 0, \exists M > 0 : x > M \Rightarrow |f(x) - L| < \varepsilon\\
+	\lim\limits_{x \rightarrow -\infty} f(x) = L &\Leftrightarrow\forall \varepsilon > 0, \exists M > 0 : x > M \Rightarrow |f(x) - L| < \varepsilon
+\end{align*}
+
+\section{Known Limits}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow +\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{x \rightarrow -\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{\theta \rightarrow 0} \dfrac{\sin \theta}{\theta} &= 1
+\end{align*}
+
+\subsection{Proof of $\lim\limits_{\theta \rightarrow 0} \dfrac{\sin \theta}{\theta} = 1$}
+
+\section{Excercise}
+
+\subsection{$\lim\limits_{x \rightarrow 0} \dfrac{\tan 2x}{x}$}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow 0} \dfrac{\tan 2x}{x} &= \lim\limits_{x \rightarrow 0} \dfrac{\frac{\sin 2x}{\cos 2x}}{x}\\
+	&= \lim\limits_{x \rightarrow 0} \dfrac{\sin 2x}{2x} \dfrac{2}{\cos x}\\
+	&=\lim\limits_{x \rightarrow 0}  \dfrac{\sin 2x}{2x} \lim\limits_{x \rightarrow 0} \dfrac{2}{\cos x}\\
+	&= 1 \cdot 2
+\end{align*}
+
+\subsection{$\lim\limits_{x \rightarrow 0} \dfrac{\cos x - 1}{x}$}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow 0^-} \dfrac{\cos x - 1}{x} &= \lim\limits_{h \rightarrow 0} \dfrac{\cos h - 1}{h}
+\end{align*}
+
+\end{document}

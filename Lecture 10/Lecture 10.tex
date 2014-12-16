@@ -1,0 +1,130 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Lecture 10}
+\author{Aakash Jog}
+\date{\formatdate{25}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Full Investigation of Functions}
+
+\begin{enumerate}
+	\item Domain of definition of $f$
+	\item Points of intersection of $y = f(x)$ with $x$-axis and $y$-axis
+	\item Symmetry and periodicity
+	\item Extrema points
+	\item Monotonicity
+	\item Convexity
+	\item Inflection points
+	\item Asymptotes (vertical and oblique)
+	\item Graph
+\end{enumerate}
+
+\begin{example}
+	Investigate
+	\begin{equation*}
+		y = f(x) =\dfrac{(x-1)^3}{(x+1)^2}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		D(f) &= \mathbb{R} - \{-1\}
+	\end{align*}
+	\begin{align*}
+		y &= 0 &\implies x &= 1\\
+		x &= 0 &\implies y &= -1
+	\end{align*}
+	The function is not periodic.
+	\begin{align*}
+		f(-x) &\neq f(x) \\
+				&\neq -f(x) 
+	\end{align*}
+	Therefore, the function is not symmetric.
+	\begin{align*}
+		f'(x) &= \dfrac{(x-1)^2 (x+5)}{(x+1)^3}
+	\end{align*}
+	Therefore, $x = -5$ is a local maximum point.\\
+	The function is monotonically increasing in $(-\infty, -5) \cup (-1, +\infty)$ and is monotonically decreasing in $(-5, -1)$.
+	\begin{align*}
+		f''(x) &= \dfrac{24(x-1)}{(x+1)^4}
+	\end{align*}
+	Therefore, the function is convex upwards in $(-\infty, -1) \cup (-1, 1)$ and convex downwards in $(1, \infty)$.
+	\begin{align*}
+		\lim\limits_{x \to -1^-} \dfrac{(x-1)^3}{(x+1)^2} &= \dfrac{-8}{+0}\\
+		&= -\infty\\
+		\lim\limits_{x \to -1^+} \dfrac{(x-1)^3}{(x+1)^2} &= \dfrac{-8}{+0}\\
+		&= -\infty
+	\end{align*}
+	Therefore, $x = -1$ is a vertical asymptote of $f(x)$.
+	\begin{align*}
+		a_1 &= \lim\limits_{x \to +\infty} \dfrac{f(x)}{x} &= 1\\
+		b_1 &= \lim\limits_{x \to +\infty} \left(f(x) - a_1 x\right) &= -5\\
+		a_2 &= \lim\limits_{x \to -\infty} \dfrac{f(x)}{x} &= 1\\
+		b_2 &= \lim\limits_{x \to -\infty} \left(f(x) - a_1 x\right) &= -5
+	\end{align*}
+	Therefore, $y = x - 5$ is an oblique asymptote of the function, at $+\infty$ and $-\infty$.
+	
+%	\begin{tikzpicture}
+%		\draw plot ;
+%	\end{tikzpicture}
+\end{solution}
+
+\begin{example}
+	Investigate
+	\begin{equation*}
+		f(x) = 
+		\begin{cases}
+			x^2 \sin x &\quad; x \neq 0\\
+			0 &\quad; x = 0\\
+		\end{cases}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f'(0) &= \lim\limits_{\Delta x \to 0} \dfrac{f(0 + \Delta x) - f(0)}{\Delta x}\\
+		&= \lim\limits_{\Delta x \to 0} \dfrac{(\Delta x)^2 \sin \dfrac{1}{\Delta x}}{\Delta x}\\
+		&= \lim\limits_{\Delta x \to 0} \Delta x \sin \dfrac{1}{\Delta x}\\
+		&= 0
+	\end{align*}
+	Therefore $x = 0$ is a critical point of $f(x)$, but it is not a local extremum point.
+\end{solution}
+
+\end{document}

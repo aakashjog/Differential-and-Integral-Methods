@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}One-to-one Functions (Injective Functions)}{2}
+\contentsline {section}{\numberline {2}Onto Functions}{2}
+\contentsline {section}{\numberline {3}Strictly Monotonically Increasing Functions}{2}
+\contentsline {section}{\numberline {4}Inverse Functions}{2}
+\contentsline {section}{\numberline {5}Check which of the following functions are one-to-one and find their inverses}{2}
+\contentsline {subsection}{\numberline {5.1}$f(x) = e^{e^x}$}{2}
+\contentsline {subsection}{\numberline {5.2}$f(x) = 1 - x^3$}{2}
+\contentsline {subsection}{\numberline {5.3}$f(x) = \genfrac {}{}{}0{x}{1 + x}; x \not =-1$}{3}
+\contentsline {section}{\numberline {6}Composition of Functions}{3}
+\contentsline {section}{\numberline {7}Limits of Functions}{3}
+\contentsline {subsection}{\numberline {7.1}Prove: $\qopname \relax m{lim}\limits _{x \rightarrow 1} (2x + 5) = 7$}{3}
+\contentsline {subsection}{\numberline {7.2}Prove: $\qopname \relax m{lim}\limits _{x \rightarrow 2} \genfrac {}{}{}0{2x + 6}{3x - 1} = 2$}{4}

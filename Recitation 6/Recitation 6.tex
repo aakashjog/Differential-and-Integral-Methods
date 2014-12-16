@@ -1,0 +1,113 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{background}
+
+	\definecolor{notepadrule}{RGB}{217,244,244}
+	
+	\SetBgContents%
+	{   \begin{tikzpicture}[remember picture, overlay]
+		\draw [line width=1pt,color=notepadrule,step=0.5cm] (current page.south west) grid (current page.north east);
+		\end{tikzpicture}
+	}
+	\SetBgScale{1}
+	\SetBgOpacity{1}
+	\SetBgAngle{0}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 6}
+\author{}
+\date{\formatdate{3}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Taylor's Series}
+
+\begin{example}
+	Calculate $\sqrt[3]{29}$ with an accuracy of $10^{-3}$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f(x) &= x^{\sfrac{1}{3}}\\
+		\therefore f'(x) &= \dfrac{1}{3} \cdot x^{-\sfrac{2}{3}}\\
+		\therefore f''(x) &= -\dfrac{1}{3} \cdot \dfrac{2}{3} x^{-\sfrac{5}{3}}\\
+		\therefore f'''(x) &= \dfrac{1}{3} \cdot \dfrac{2}{3} \cdot \dfrac{5}{3} x^{-\sfrac{8}{3}}
+		\vdots\\
+		&= f^{(n)} \dfrac{1 \cdot 2 \cdot 5 \cdot 8 \cdot \dots \cdot (3(n-1) - 1)}{3^n} (-1)^{n + 1} x^{-\frac{3n - 1}{3}}
+	\end{align*}
+	\begin{align*}
+		f(x) &= \sum_{k = 0}^{n} \dfrac{f^{(n)}(x_0)}{{k!}} (x - x_0)^k + R_n (x)\\
+		\therefore \sqrt[3]{29} &= \sum_{k = 0}^{n} \dfrac{f^{(n)}}{k!} (29 - 27)^k + R_n (x)\\
+		R_n (29) &= \dfrac{f^{(n+1)}(c)}{(n+1)!} (29 - 27)^{n + 1} & ;\quad 27 \leq c \leq 29
+	\end{align*}
+	According to the given accuracy, 
+	\begin{align*}
+		|R_n (x)| &< 10^{-3}\\
+		\therefore \dfrac{1 \cdot 2 \cdot 5 \cdot 8 \cdot (3n - 1)}{2^{n + 1}} c^{-\frac{3n + 2}{3}} \dfrac{2^{n + 1}}{(n + 1)!} &< 10^{-3}
+	\end{align*}
+	At $c = 27$, $R_n (x)$ is maximum.
+	\begin{align*}
+		\therefore (R_n (x))_{\text{max}} &= \dfrac{1 \cdot 2 \cdot 5 \cdot 8 \cdot (3n - 1)}{2^{n + 1}} 27^{-\frac{3n + 2}{3}} \dfrac{2^{n + 1}}{(n + 1)!} 
+	\end{align*}
+	For $n = 2$,
+	\begin{align*}
+		(R_n (x))_{\text{max}} &< 10^{-3}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\sqrt[3]{29} \approx \sqrt[3]{27} + \dfrac{1}{3} \cdot 27^{-\sfrac{2}{3}} (29 - 27) - \dfrac{1}{3} \cdot \dfrac{2}{3} \cdot \dfrac{27^{-\sfrac{5}{3} }(29 - 27)^2}{2!}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Calculate $e^x$ with accuracy of $10^{-5}$ for $0 \leq x \leq 1$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		e^x &= \sum_{k = 0}^{n} \dfrac{x^k}{k!} + R_n (x)\\
+		R_n (x) &= \dfrac{e^c}{(n + 1)!} x^{n + 1}
+	\end{align*}
+	According to the given accuracy, 
+	\begin{align*}
+		|R_n (x)| &\leq 10^{-5}
+		\dfrac{e^x}{(n + 1)!} x^{n + 1} &\leq \dfrac{e}{(n + 1)!}\\
+		&< \dfrac{3}{(n + 1)!}
+		&< 10^{-5}
+	\end{align*}
+	Therefore, $n = 10$ satisfies the required accuracy.
+	\begin{align*}
+	\therefore e^x &\approx \sum_{k = 0}^{10} \dfrac{x^k}{k!}
+	\end{align*}
+\end{solution}
+
+
+
+\end{document}
+

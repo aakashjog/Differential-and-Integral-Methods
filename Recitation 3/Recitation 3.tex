@@ -1,0 +1,114 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Recitation 3}
+\author{}
+\date{\formatdate{12}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Arithmetic of Limits}
+
+\subsection{Theorem: If $\lim\limits_{x \rightarrow x_0} f(x) = a$ and $\lim\limits_{x \rightarrow x_0} g(x) = b$ , then, $\lim\limits_{x \rightarrow x_0} (f(x) \pm g(x)) = a \pm b$ , $\lim\limits_{x \rightarrow x_0} (f(x) \cdot g(x)) = a \cdot b$ , $\lim\limits_{x \rightarrow x_0} \dfrac{f(x)}{g(x)} = \dfrac{a}{b}$}
+
+\subsection{Examples}
+
+\subsubsection{Example 1}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow \infty} \dfrac{x^2 - 4x + 2}{x^2 + 4} &= \lim\limits_{x \rightarrow \infty} \dfrac{\dfrac{x^2 - 4x +2}{x^2}}{\dfrac{x^2 + 4}{x^2}} \\
+	&= \lim\limits_{x \rightarrow \infty} \dfrac{1 - \dfrac{4}{x} + \dfrac{2}{x^2}}{1 + \dfrac{4}{x^2}} \\
+	&= \dfrac{1}{1} \\
+	&= 1
+\end{align*}
+
+\subsubsection{Example 2}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow 1} \dfrac{\sqrt[3]{x} - 1}{\sqrt[4]{x} - 1}
+\end{align*}
+Let $x = t^12$
+\begin{align*}
+	\therefore \lim\limits_{x \rightarrow 1} \dfrac{\sqrt[3]{x} - 1}{\sqrt[4]{x} - 1} &= \lim\limits_{t \rightarrow 1} \dfrac{t^4 - 1}{t^3 - 1} \\
+	&= \lim\limits_{t \rightarrow 1} \dfrac{(t-1)(t^3 + t^2 + t + 1)}{(t-1)(t^2 + t + 1)} \\
+	&= \lim\limits_{t \rightarrow 1} \dfrac{t^3 + t^2 + t + 1}{t^2 + t + 1} \\
+	&= \dfrac{4}{3}
+\end{align*}
+
+\subsection{Infinite Arithmetic}
+
+\begin{align*}
+	\dfrac{``\infty"}{``a"} &= 
+	\begin{cases}
+		+ \infty ; a > 0 \\
+		- \infty ; a < 0 \\
+	\end{cases} \\
+	\dfrac{``a"}{``\infty"} &= 0
+\end{align*}
+
+\section{Useful Limits}
+
+If $\lim\limits_{x \rightarrow x_0} g(x) = 0$, 
+\begin{equation*}
+	\lim\limits_{x \rightarrow x_0} (1 + g(x))^{\frac{1}{g(x)}} = e
+\end{equation*}
+
+\begin{align*}	
+	\lim\limits_{x \rightarrow \infty} \left(1 + \dfrac{1}{x}\right)^x &= e \\
+	\lim\limits_{x \rightarrow 0} \left(1 + x\right)^{\frac{1}{x}} &= e \\
+	\lim\limits_{x \rightarrow \infty} \left(1 + \dfrac{a}{x}\right)^x &= e^a \\
+	\lim\limits_{x \rightarrow 0} \dfrac{\sin x}{x} &= 1
+\end{align*}
+
+\section{Sandwich Theorem}
+
+If, in a punctured neighbourhood of $x_0$ we have 
+\begin{equation*}
+	g(x) \leq h(x) \leq f(x)
+\end{equation*} and \begin{equation*}
+\lim\limits_{x \rightarrow x_0} f(x) = \lim\limits_{x \rightarrow x_0} g(x) = l
+\end{equation*}
+then
+\begin{equation*}
+\lim\limits_{x \rightarrow x_0} h(x) = l
+\end{equation*} 
+
+\section{Continuity}
+
+A function $f$ is continuous at $x_0$ if $\lim\limits_{x \rightarrow x_0} f(x) = f(x_0)$.
+
+\subsection{Types of Discontinuity}
+
+Let $f(x)$ be defined in a neighbourhood of $x_0$. 
+
+\subsubsection{Removable Discontinuity}
+
+\begin{equation*}
+	\lim\limits_{x \rightarrow x_0} f(x) \neq f(x_0)
+\end{equation*}
+
+\subsubsection{Discontinuity of First Kind}
+
+\begin{equation*}
+	\lim\limits_{x \rightarrow x_{0^+}} f(x) \neq \lim\limits_{x \rightarrow x_{0^-}} f(x)
+\end{equation*}
+
+\subsubsection{Discontinuity of Second Kind}
+
+Atleast one of the one-sided limits of $f(x)$ at $x_0$ does not exist. Note that the limits are defined as finite numbers only. 
+
+\end{document}
+

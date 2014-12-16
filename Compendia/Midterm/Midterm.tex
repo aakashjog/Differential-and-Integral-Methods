@@ -1,0 +1,203 @@
+\date{}
+\documentclass[fleqn, a5paper, 11pt]{article}
+\usepackage[top=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{commath, esdiff} %typesetting differentials
+\usepackage{gensymb}
+\usepackage{hyperref} %hyperlinking
+\usepackage{tikz, pgfplots} %drawing figures
+\usepackage{datetime} % formatting dates
+\usepackage{ulem} %change \emph to underline
+\usepackage{enumerate, enumitem} %numbered list and formatting 
+
+\setcounter{secnumdepth}{4} %numbering \paragraph
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %reset 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+
+
+%opening
+\title{Differential and Integral Methods: Compendium}
+\author{Aakash Jog}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+%\tableofcontents
+
+\section{Functions}
+
+\begin{definition}[Even function]
+	\begin{equation*}
+		f(-x) = f(x)
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Odd function]
+	\begin{equation*}
+	f(-x) = -f(x)
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Shifting with respect to $y$-axis]
+	$f(x+a)$ is the graph of $f(x)$, shifted by $a$, in the direction of the $x$-axis, opposite to the sign of $a$. \\
+\end{definition}
+
+\begin{definition}[Shifting with respect to $x$-axis]
+	$f(x) + a$ is the graph of $f(x)$, shifted by $a$, in the direction of the $y$-axis, according to the sign of $a$. \\
+\end{definition}
+
+\subsection{Hyperbolic Functions}
+
+\begin{definition}[Hyperbolic functions]
+	\begin{align*}
+		\sinh x &\dot{=} \dfrac{e^x - e^{-x}}{2}
+		& I(\sinh x) &= \mathbb{R}\\
+		\cosh x &\dot{=} \dfrac{e^x + e^{-x}}{2}
+		& I(\cosh x) &= [1, \infty)\\
+		\tanh x &\dot{=} \dfrac{\sinh x}{\cosh x} = \dfrac{e^x - e^{-x}}{e^x + e^{-x}}
+		& I(\tanh x) &= (-1, 1)
+	\end{align*}
+\end{definition}
+
+\subsubsection{Identities of Hyperbolic Functions}
+
+\begin{align*}
+	\sinh (2x) &= 2 \sinh x \cosh x \\
+	\cosh ^2 x + \sinh ^2 x &= \cosh (2x) \\
+	\cosh ^2 x - \sinh ^2 x &= 1 \\
+	\dfrac{\cosh (2x) - 1}{2} &= \sinh ^2 x \\
+	\dfrac{\cosh (2x) + 1}{2} &= \cosh ^2 x 
+\end{align*}
+
+\subsection{Trigonometric Identities}
+
+\begin{align*}
+	1 - \cos x &= 2 \sin^2 \left(\dfrac{x}{2}\right)\\
+	1 + \cos x &= 2 \cos^2 \left(\dfrac{x}{2}\right)
+\end{align*}
+
+%\rotatebox[]{90}
+%{
+%	\begin{tabular}{c c c c c c c}
+%		& $\sin \theta$ & $\cos \theta$ & $\tan \theta$ & $\csc \theta$ & $\sec \theta$ & $\cot \theta$ \\
+%		$\sin \theta$& $\sin \theta$ & $\pm\sqrt{1 - \cos^2 \theta}$ & $\pm\dfrac{\tan \theta}{\sqrt{1 + \tan^2 \theta}}$ & $\dfrac{1}{\csc \theta}$ & $\pm\dfrac{\sqrt{\sec^2 \theta - 1}}{\sec \theta}$ & $\pm\dfrac{1}{\sqrt{1 + \cot^2 \theta}}$ \\
+%		$\cos \theta$ &	$\pm\sqrt{1 - \sin^2\theta}$ & $\cos \theta$ & 	$\pm\dfrac{1}{\sqrt{1 + \tan^2 \theta}}$ & $\pm\dfrac{\sqrt{\csc^2 \theta - 1}}{\csc \theta}$ & $\dfrac{1}{\sec \theta}$ & $\pm\dfrac{\cot \theta}{\sqrt{1 + \cot^2 \theta}}$ \\
+%		$\tan \theta$ & $\pm\dfrac{\sin \theta}{\sqrt{1 - \sin^2 \theta}}$ & 	$\pm\dfrac{\sqrt{1 - \cos^2 \theta}}{\cos \theta}$ & $\tan \theta$ & $\pm\dfrac{1}{\sqrt{\csc^2 \theta - 1}}$ & $\pm\sqrt{\sec^2 \theta - 1}$ & $\dfrac{1}{\cot \theta}$ \\
+%		$\csc \theta$ & $\dfrac{1}{\sin \theta}$ & $\pm\dfrac{1}{\sqrt{1 - \cos^2 \theta}}$ & $\pm\dfrac{\sqrt{1 + \tan^2 \theta}}{\tan \theta}$ & $\csc \theta$ & $\pm\dfrac{\sec \theta}{\sqrt{\sec^2 \theta - 1}}$ & $\pm\sqrt{1 + \cot^2 \theta}$ \\
+%		$\sec \theta$ &	$\pm\dfrac{1}{\sqrt{1 - \sin^2 \theta}}$ & $\dfrac{1}{\cos \theta}$ & $\pm\sqrt{1 + \tan^2 \theta}$ & $\pm\dfrac{\csc \theta}{\sqrt{\csc^2 \theta - 1}}$ & $\sec \theta$ & $\pm\dfrac{\sqrt{1 + \cot^2 \theta}}{\cot \theta}$ \\
+%		$\cot \theta$ &	$\pm\dfrac{\sqrt{1 - \sin^2 \theta}}{\sin \theta}$ & $\pm\dfrac{\cos \theta}{\sqrt{1 - \cos^2 \theta}} $& $\dfrac{1}{\tan \theta}$ & $\pm\sqrt{\csc^2 \theta - 1}$ & $\pm\dfrac{1}{\sqrt{\sec^2 \theta - 1}}$ & $\cot \theta$ \\
+%	\end{tabular}
+%}
+\section{Limits}
+
+\begin{definition}[Cauchy's definition of a limit of a function]
+	\begin{equation*}
+	\forall \epsilon > 0 \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow |f(x) - L| < \epsilon
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Removable discontinuity point]
+	\begin{equation*}
+		\exists \lim\limits_{x \rightarrow a} f(x)$, but either $\lim\limits_{x \rightarrow a} f(x) \neq f(a)$ or $\nexists f(a)
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Discontinuity of first kind]
+	\begin{equation*}
+		\exists \lim\limits_{x \rightarrow a^-} f(x), \exists \lim\limits_{x \rightarrow a^+} f(x)$, but $\lim\limits_{x \rightarrow a^-} f(x) \neq \lim\limits_{x \rightarrow a^+} f(x)
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Discontinuity of second kind]
+	Atleast one of the two one-sided limits of $f$ does not exist. (Limits are defined as finite numbers only.)
+\end{definition}
+
+\begin{theorem}[Sandwich Theorem] \label{Sandwich Theorem}
+	Let $f(x), g(x), h(x)$ be defined on an open interval about $a$, except possibly at $a$ itself. Assume that $\forall x \neq a$ from the interval, it is satisfied that $f(x) \leq g(x) \leq h(x)$ and $\lim\limits_{x \rightarrow a} f(x) = \lim\limits_{x \rightarrow a} h(x) = L$. Then, 
+	\begin{equation*}
+		\lim\limits_{x \rightarrow a} g(x) = L
+	\end{equation*}.
+\end{theorem}
+
+\begin{theorem}
+	If $\lim\limits_{x \rightarrow a} f(x) = 0$ and $g(x)$ is bounded in an open interval about $a$, except possibly at $a$ itself, then, 
+	\begin{equation*}
+		\lim\limits_{x \rightarrow a}(f(x)g(x)) = 0
+	\end{equation*}
+\end{theorem}
+
+\subsection{Useful Limits}
+
+If $\lim\limits_{x \rightarrow x_0} g(x) = 0$, 
+\begin{equation*}
+	\lim\limits_{x \rightarrow x_0} (1 + g(x))^{\frac{1}{g(x)}} = e
+\end{equation*}
+
+\begin{align*}
+	\lim\limits_{x \rightarrow +\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{x \rightarrow -\infty} \left(1 + \dfrac{1}{x}\right) ^x &= e\\
+	\lim\limits_{\theta \rightarrow 0} \dfrac{\sin \theta}{\theta} &= 1
+\end{align*}
+
+\section{Derivatives}
+
+\begin{definition}[Derivative of a function]
+	\begin{equation*}
+		\dod{y}{x} = \lim\limits_{\Delta x \rightarrow 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} = L
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Derivative of inverse functions]
+	\begin{equation*}
+	(f^{-1})'(x) = \dfrac{1}{f'(x)}
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Chain rule]
+	\begin{equation*}
+	f(g(x)) = \dod{f(g(x))}{g(x)} \cdot \dod{g(x)}{x}
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Rolle's Theorem]
+	Let $f(x)$ be defined on $[a, b]$, s.t. 
+	\begin{enumerate}
+		\item $f$ is continuous on $[a, b]$ \label{Rolle condition 1}
+		\item $f$ is differentiable on $(a, b)$ \label{Rolle condition 2}
+		\item $f(a) = f(b)$ \label{Rolle condition 3}
+	\end{enumerate}
+	Then, $\exists c \in (a, b)$, s.t. $f'(c) = 0$.
+\end{theorem}
+
+
+\begin{theorem}
+	Let $f(x)$ be defined on $[a, b]$, s.t. 
+	\begin{enumerate}
+		\item $f$ is continuous on $[a, b]$
+		\item $f$ is differentiable on $(a, b)$
+	\end{enumerate}
+	Then, 
+	\begin{equation*}
+		\exists c \in (a, b)$, s.t. $f'(c) = \dfrac{f(b) - f(a)}{b - a}
+	\end{equation*}
+\end{theorem}
+
+\end{document}

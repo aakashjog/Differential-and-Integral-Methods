@@ -1,0 +1,190 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Lecture 2}
+\author{}
+\date{\formatdate{30}{10}{2014}}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Functions}
+
+\subsection{Continuity}
+
+If $f : D(f) \rightarrow I(f)$ is one-to-one and onto. Then, we can define $g : I(f) \rightarrow D(f)$, which is one-to-one and onto, by $g(y) = x$, where $y = f(x)$. Therefore, $g(f(x)) = x$. $g$ is called the \emph{inverse function} of $f$. \\
+The inverse function is denoted as $g = f^{-1}$(Note: $f^{-1} \neq \dfrac{1}{f}$)
+\begin{align}
+	D(f) = I(f^{-1}) \label{Image of inverse}\\
+	I(f) = D(f^{-1}) \label{Domain of inverse}
+\end{align}
+The graphs of a $f$ and $f^{-1}$ are symmeteric about $y=x$.
+
+\subsection{Elementary Operations between Functions}
+
+\subsubsection{$h = f \pm g$}
+
+\begin{align}
+	h(x) &= f(x) \pm g(x) \label{sum of functions}\\
+	D(h) &= D(f) \cap D(g) \label{domain of sum of functions}
+\end{align}
+
+\subsubsection{$h = kf$}
+
+\begin{align}
+	h(x) &= k f(x) \label{product of constant and function}\\
+	D(h) &= D(f)  \label{domain of product of constant and function}
+\end{align}
+
+\subsubsection{$h = f g$}
+
+\begin{align}
+	h(x) &= f(x) g(x) \label{product of functions}\\
+	D(h) &= D(f) \cap D(g) \label{domain of product of functions}
+\end{align}
+
+\subsubsection{$h = \dfrac{f}{g}$}
+
+\begin{align}
+h(x) &= \dfrac{f(x)}{g(x)} \label{division of functions}\\
+D(h) &= \{x \in D(f) \cap D(g) : g(x) \neq 0\} \label{domain of division of functions}
+\end{align}
+
+\subsection{Composite Functions}
+
+Let $f : D(f) \rightarrow E$ and $g : D(g) \rightarrow F$ be two functions. A \emph{composition} of $f$ with $g$ is a function $h : D(h) \rightarrow F$ where $h(x) = g(f(x))$. It is denoted as $g \circ f$\\
+\begin{equation}
+	D(h) = \{x \in D(f) : f(x) \in D(g)\} \label{domain of composite functions} 
+\end{equation}
+
+\subsection{Elementary Functions}
+
+\subsubsection{Polynomial}
+
+\begin{align}
+	y = f(x) &= a_0 + a_1 x + \dots + a_n x^n ; a_0, \dots, a_n \in \mathbb{R} \label{polynomial} \\
+	D(f) &= \mathbb{R} \label{domain of polynomial}
+\end{align}
+
+\begin{enumerate}
+	\item	If $n = 0, y = f(x) = a_0$ represents a constant function.
+	\item	If $n = 1, y = f(x) = a_0 + a_1 x$ represents a straight line in the $X-Y$ plane.
+	\item	If $n = 2, y = f(x) = a_0 + a_1 x + a_2 x^2$ represents a parabola in the $X-Y$ plane.
+\end{enumerate}
+
+\subsubsection{Power Function}
+
+\begin{align}
+	y = f(x) = x^a ; a\in R \label{power function} \\
+	D(f) \text{ depends on } a \label{domain of power function}
+\end{align}
+
+\subsubsection{Exponential Function}
+
+\begin{align}
+	y = f(x) &= a^x ; a > 0, a \neq 1 \label{exponential function} \\
+	D(f) &= \mathbb{R} \label{domain of exponential function} \\
+	I(f) &= (0, \infty) \label{image of exponential function}
+\end{align}
+
+\subsubsection{Logarithmic Function}
+
+\begin{align}
+	y = f(x) &= \log_{a} {x} \label{logarithmic function} \\
+	D(f) &= (0,\infty) \label{domain of logarithmic function} \\
+	I(f) &= \mathbb{R} \label{image of logarithmic function}
+\end{align}
+
+\subsubsection{Trigonometeric Functions}
+
+\begin{align}
+	y = f(x) &= \sin x \\
+	y = f(x) &= \cos x \\
+	y = f(x) = \tan x &= \dfrac{\sin x}{\cos x} \\
+	y = f(x)  = \cot x &= \dfrac{1}{\tan x} = \dfrac{\cos x}{\sin x} \\
+	y = f(x) = \csc x &= \dfrac{1}{\sin x} \\
+	y = f(x) = \sec x &= \dfrac{1}{\cos x} 
+\end{align}
+
+\subsubsection{Inverse Trigonometeric Functions}
+
+\begin{align}
+	y = f^{-1}(x) &= \sin^{-1} x = \arcsin x \\
+	D(\arcsin x) &= [-1,1] \\
+	I(\arcsin x) &= [-\dfrac{\pi}{2}, \dfrac{\pi}{2}]
+\end{align}
+
+\begin{align}
+	y = f^{-1}(x) &= \cos^{-1} x = \arccos x \\
+	D(\arccos x) &= [-1,1] \\
+	I(\arccos x) &= [0,\pi]
+\end{align}
+
+\begin{align}
+y = f^{-1}(x) &= \tan^{-1} x = \arctan x \\
+D(\arctan x) &= \mathbb{R} \\
+I(\arctan x) &= [-\dfrac{\pi}{2}, \dfrac{\pi}{2}]
+\end{align}
+
+\subsubsection{Hyperbolic Functions}
+
+\begin{align}
+	\sinh x &\dot{=} \dfrac{e^x - e^{-x}}{2} \\
+	D(\sinh x) &= \mathbb{R} \\
+	I(\sinh x) &= \mathbb{R}
+\end{align}
+
+\begin{align}
+	\cosh x &\dot{=} \dfrac{e^x + e^{-x}}{2} \\
+	D(\cosh x) &= \mathbb{R} \\
+	I(\cosh x) &= [1, \infty)
+\end{align}
+
+\begin{align}
+	\tanh x &\dot{=} \dfrac{\sinh x}{\cosh x} = \dfrac{e^x - e^{-x}}{e^x + e^{-x}} \\
+	D(\tanh x) &= \mathbb{R} \\
+	I(\tanh x) &= (-1, 1)
+\end{align}
+
+\paragraph{Identities of Hyperbolic Functions \\}
+
+\begin{align}
+	\sinh (2x) &= 2 \sinh x \cosh x \\
+	\cosh ^2 x + \sinh ^2 x &= \cosh (2x) \\
+	\cosh ^2 x - \sinh ^2 x &= 1 \\
+	\dfrac{\cosh (2x) - 1}{2} &= \sinh ^2 x \\
+	\dfrac{\cosh (2x) + 1}{2} &= \cosh ^2 x 
+\end{align}
+
+\subsubsection{Absolute Value}
+
+\begin{align}
+	y = f(x) = 
+	\begin{cases}
+		x ; x > 0 \\
+		0 ; x = 0 \\
+		-x ; x < 0 \\
+	\end{cases}
+\end{align}
+
+\subsubsection{Floor Function}
+
+\begin{align}
+	y = f(x) = \lfloor x \rfloor = \text{the largest integer less than or equal to }x
+\end{align}
+
+\end{document}

@@ -1,0 +1,46 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Recitation 4}
+\author{}
+\date{\formatdate{14}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+	
+\tableofcontents
+	
+\newpage
+\section{Sandwich Theorem}
+	
+\subsection{Examples}
+
+\subsubsection{$\lim\limits_{x \rightarrow \infty} \dfrac{5x^2 - \sin(3x)}{x^2 + 10}$}
+
+\begin{align*}
+	\dfrac{5x^2 - 1}{x^2 + 10} &\leq \dfrac{5x^2 - \sin(3x)}{x^2 + 10} &\leq \dfrac{5x^2 + 1}{x^2 + 10} \\
+	\therefore \dfrac{5 - \dfrac{1}{x^2}}{1 + \dfrac{10}{x^2}} &\leq \dfrac{5x^2 - \sin(3x)}{x^2 + 10} &\leq \dfrac{5 + \dfrac{1}{x^2}}{1 + \dfrac{10}{x^2}}
+\end{align*}
+\begin{equation*}
+	\therefore \lim\limits_{x \rightarrow \infty} \dfrac{5x^2 - \sin(3x)}{x^2 + 10} = 5
+\end{equation*}
+
+\section{Intermediate Value Theorem}
+
+If $f$ is continuous over $[a, b]$, then, $\forall h$ between $f(a)$ and $f(b), \exists c \in [a, b]$, s.t. $f(c) = h$
+
+\section{Weierstrauss Theorem}
+
+If $f$ is continuous over $[a, b]$, then, $f$ has a maximum and a minimum in $[a, b]$.
+
+\end{document}
+

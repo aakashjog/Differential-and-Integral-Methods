@@ -1,0 +1,190 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Lecture 9}
+\author{Aakash Jog}
+\date{\formatdate{23}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Local Minimum and Maximum}
+
+\begin{definition}
+	Let $f(x)$ be defined on an open interval about $x_0$. We say that $f(x)$ has a local minimum (or local maximum) at $x_0$, if there exists an open interval about $x_0$, s.t. $f(x) \geq f(x_0)$ (or $f(x) \leq f(x_0)$), $\forall x$ in the interval. $x_0$ which is a local minimum or maximum is called a \emph{local extremum}.
+\end{definition}
+
+\begin{definition}
+	Let $f(x)$ be defined on an open interval about $x_0$. We say that $x_0$ is a \emph{critical point} of $f$, if $f'(x_0) = 0$ or $\nexists f'(x_0)$.
+\end{definition}
+
+\begin{theorem}[Fermat Theorem - Necessary Condition for Extrema Existence]\label{Fermat Theorem}
+	If $\exists f'(x_0)$ where $x_0$ is a local extremum, then $f'(x_0) = 0$.
+\end{theorem}
+
+\begin{remark}
+	By \nameref{Fermat Theorem}, any local extremum point is a critical point, but the converse is not true.
+\end{remark}
+
+\begin{theorem}[Sufficient Condition for Extrema Existence] \label{sufficient condition for extrema existence}
+	If $\exists f'(x)$ and $\exists f''(x)$ are continuous on an open interval about $x_0$ and $f'(x_0) = 0$, then, 
+	\begin{enumerate}
+		\item $x_0$ is a local maximum if $f''(x_0) < 0$
+		\item $x_0$ is a local minimum if $f''(x_0) > 0$
+		\item there is no rule if $f''(x_0) = 0$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	If $f''(x_0) < 0$ and $f''(x)$ is continuous on an open interval about $x_0$, then, $f''(x) < 0$ on some interval about $x_0$.
+	\begin{align*}
+		\intertext{By \nameref{Taylor's Formula} with $n=1$}
+		f(x) &= f(x_0) + \dfrac{f'(x_0)}{1!} (x - x_0) + \dfrac{f''(c)}{2!} (x - x_0)^2 \\
+		\intertext{where $c$ is between $x$ and $x_0$.}
+		\therefore f(x) &= f(x_0) + \dfrac{f''(c)}{2} (x - x_0)^2 \\
+		\therefore f(x) - f(x_0) &= \dfrac{f''(c)}{2} (x - x_0)^2 \\
+		\intertext{$f'(c) < 0$ and $(x - x_0)^2 \geq 0$}
+		\therefore f(x) - f(x_0) &\leq 0 \\
+		\therefore f(x) &\leq f(x_0)
+	\end{align*}
+	Similarly for the remaining cases.
+\end{proof}
+
+\begin{theorem}
+	Let $x_0$ be a critical point of $f(x)$ and let $f(x)$ be continuous at $x_0$, and differentiable on an open interval about $x_0$ except possibly at $x_0$ itself. Then 
+	\begin{enumerate}
+		\item If $f'(x)$ changes the sign from negative to positive at $x_0$, then $x_0$ is a local minimum.
+		\item If $f'(x)$ changes the sign from positive to negative at $x_0$, then $x_0$ is a local maximum.
+		\item If $f'(x)$ does not change the sign at $x_0$, then $x_0$ is not a local extremum.
+	\end{enumerate}
+\end{theorem}
+
+\section{Absolute or Global Minimum and Maximum}
+
+\begin{definition}
+	Let $f(x)$ be defined on a domain $D$. $x_0 \in D$ is called an absolute minimum (or maximum) of $f(x)$ on $D$ if $f(x) \geq f(x_0)$ (or $f(x) \leq f(x_0)$), $\forall x \in D$.
+\end{definition}
+
+\begin{theorem}
+	Let $f(x)$ be continuous on $[a, b]$. Then $f(x)$ has atleast one absolute maximum and atleast one absolute minimum in $[a, b]$. If $x_0$ is such a point, then $x_0$ must be a critical point of $f(x)$ or one of $a$ or $b$.
+\end{theorem}
+
+\subsection{Algorithm for Finding Maxima and Minima of a Function}
+
+\begin{enumerate}[label = Step \arabic*]
+	\item Find all critical point of $f(x)$ on the domain, excluding the end points. \label{Step 1}
+	\item Calculate the values of $f(x)$ at the critical points. \label{Step 2}
+	\item Calculate the values of $f(x)$ at the end point of the domain. \label{Step 3}
+	\item Select the maximum and minimum values from \ref{Step 2} and \ref{Step 3}
+\end{enumerate}
+
+\subsection{Examples}
+
+\begin{example}
+	Find maximum and minimum values of
+	\begin{equation*}
+		f(x) = x^{\frac{5}{3}} + 5 x^{\frac{2}{3}}
+	\end{equation*}
+	on $\left[-1, 1\right]$
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f'(x) &= \dfrac{5}{3} x^{\frac{2}{3}} + \dfrac{10}{3} x^{-\frac{1}{3}} \\
+		&= \dfrac{5}{3} \dfrac{x+2}{x^{\frac{1}{3}}} \\
+		f'(x) &= 0 \iff x = -2 \\
+		f'(0) &= \lim\limits_{\Delta x \to 0} \dfrac{f(0 + \Delta x) - f(0)}{\Delta x} \\
+		&= \lim\limits_{\Delta x \to 0} \Delta x ^ {\frac{2}{3}} + \dfrac{5}{\Delta x^{\frac{1}{3}}} \\
+		\therefore \nexists f'(0)
+		\intertext{Therefore, $x = 0$ is a critical point}
+		\therefore f(0) &= 0 \\
+		f(-1) &= 4 \\
+		f(1) &= 6 \\
+		\therefore \min_{[-1,1]} f(x) &= 0 \\
+		\therefore \max_{[-1,1]} f(x) &= 6 
+	\end{align*}
+\end{solution}
+
+\section{Convexity and Inflection Points}
+
+\begin{definition}
+	Let $f(x)$ be differentiable at $x_0$. $f(x)$ is said to be convex upwards (or downwards) at $x_0$, if there exists an open interval about $x_0$ in which the graph of $y = f(x)$ is below (or above) the line tangent to $y = f(x)$ at $(x_0, f(x_0))$, i.e. 	$\exists \delta > 0$, s.t. 
+	\begin{align*}
+		f(x) \leq f(x_0) + f'(x_0)(x-x_0) ; &\forall x \in (x_0 - \delta , x_0 + \delta) \\
+		\Big( \text{ or } f(x) \geq f(x_0) + f'(x_0)(x-x_0) ; &\forall x \in (x_0 - \delta , x_0 + \delta) \Big)
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	Let $f(x)$ be twice differentiable on the interval $(a, b)$.
+	\begin{enumerate}
+		\item If $f''(x) > 0, \forall x \in (a, b)$, then $f(x)$ is convex downwards on $(a,b)$.
+		\item If $f''(x) < 0, \forall x \in (a, b)$, then $f(x)$ is convex upwards on $(a,b)$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	If $f(x)$ is continuous on an open interval about $x_0$ and differentiable at $x_0$ in a wide sense (i.e. the derivative may be infinite), we say that $x_0$ is an \emph{inflection point} of $f(x)$ if there exists an interval $(x_0 - \delta, x_0 + \delta)$, s.t. the function changes its convexity passing through $x_0$.
+\end{definition}
+
+\begin{remark}
+	At an inflection point $x_0$, there is no restriction of the value of $f'(x)$. It may be $0$, a finite number or $\infty$.
+\end{remark}
+
+\begin{theorem}
+	If $x_0$ is an inflection point of $f(x)$ and $\exists f''(x)$ on an open interval about $x_0$ and $f''(x)$ is continuous at $x_0$, then $f''(x_0) = 0$.
+\end{theorem}
+
+\section{Asymptotes}
+
+\begin{definition}
+	Let $f(x)$ be defined on $(a - \delta)$ or $(a, a + \delta)$ or $(a - \delta, a + \delta) - \{a\}$ for $\delta > 0$. If atleast one of $\lim\limits_{x \to a^-} f(x)$ and $\lim\limits_{x \to a^+} f(x)$ is equal to $\pm \infty$, then the straight line $x = a$ is said to be a \emph{vertical asymptote} of $f(x)$.
+\end{definition}
+
+\begin{definition}
+	The straight line $y = ax + b$ is called an oblique asymptote of a function $y = f(x)$ at $+ \infty$ (or $- \infty$), if 
+	\begin{align*}
+		\lim\limits_{x \to + \infty} (f(x) - (ax+b)) &= 0 \\
+		\Big( \text{ or } \lim\limits_{x \to -\infty} (f(x) - (ax+b)) &= 0 \Big)
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	Let $f(x)$ be defined on $(c, +\infty)$. If there exist the limits $a_1 = \lim\limits_{x \to +\infty} \dfrac{f(x)}{x}$ and $b_1 = \lim\limits_{x \to +\infty} (f(x) - a_1 x)$, then the straight line $y = a_1 x + b_1$ is a unique oblique asymptote of $f(x)$ at $+\infty$.\\
+	Let $f(x)$ be defined on $(- \infty, c)$. If there exist the limits $a_2 = \lim\limits_{x \to -\infty} \dfrac{f(x)}{x}$ and $b_2 = \lim\limits_{x \to -\infty} (f(x) - a_2 x)$, then the straight line $y = a_2 x + b_2$ is a unique oblique asymptote of $f(x)$ at $-\infty$.
+\end{theorem}
+
+\end{document}

@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Derivative of a Function}{2}
+\contentsline {subsection}{\numberline {1.1}Definition}{2}
+\contentsline {subsubsection}{\numberline {1.1.1}Geometrical Interpretation}{2}
+\contentsline {subsection}{\numberline {1.2}Notation}{2}
+\contentsline {subsection}{\numberline {1.3}Derivative Function}{2}
+\contentsline {subsection}{\numberline {1.4}The Tangent Line}{2}
+\contentsline {subsection}{\numberline {1.5}The Normal Line}{2}
+\contentsline {subsection}{\numberline {1.6}Proofs of Standard Derivatives}{3}
+\contentsline {subsubsection}{\numberline {1.6.1}$y = f(x) = c$}{3}
+\contentsline {subsubsection}{\numberline {1.6.2}$y = f(x) = x^n ; n \in \mathbb {N}$}{3}
+\contentsline {subsubsection}{\numberline {1.6.3}$y = f(x) = x^{-n} ; n \in \mathbb {N}, x \not =0$}{3}
+\contentsline {subsubsection}{\numberline {1.6.4}$y = f(x) = \qopname \relax o{sin}x$}{4}
+\contentsline {subsection}{\numberline {1.7}Theorem: If $\exists f'(x)$, $\exists g'(x)$ and $c$ is a constant, then, $(c f(x))' = c f'(x)$, $(f(x) \pm g(x))' = f'(x) \pm g'(x)$, $(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)$, $\left (\genfrac {}{}{}0{f(x)}{g(x)}\right )' = \genfrac {}{}{}0{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}$}{4}
+\contentsline {subsection}{\numberline {1.8}Theorem: Let $f$ be defined on an open interval about $x_0$. Then, $f(x)$ is differentiable at $x_0$, iff $\exists A \in \mathbb {R}$ and $\exists \alpha (\Delta x)$, with $\qopname \relax m{lim}\limits _{\Delta x \rightarrow 0} \alpha (\Delta x) = 0$, s.t. $\genfrac {}{}{}0{\Delta y}{\Delta x} = A + \alpha (\Delta x) ; A = f'(x_0)$}{4}
+\contentsline {subsection}{\numberline {1.9}If $y = f(x)$ is differentiable at $x_0$, then, $f(x)$ is continuous at $x_0$.}{4}

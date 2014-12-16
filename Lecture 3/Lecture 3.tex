@@ -1,0 +1,50 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Lecture 3}
+\author{}
+\date{\formatdate{4}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Limits \& Continuity}
+
+\subsection{Continuity}
+
+If $x \rightarrow a$ then $f(x) \rightarrow L$, we say that $L$ is the \emph{limit} of $f(x)$ at $x = a$.
+\begin{equation*}
+	\lim\limits_{x \rightarrow a} f(x) = L
+\end{equation*}
+We say that $f(x)$ is \emph{continuous} at $x = a$, iff \begin{equation*}
+	\lim\limits_{x \rightarrow a} f(x) = L = f(a)
+\end{equation*}
+
+\subsection{Continuity}
+
+If $x \rightarrow a^+$ then $f(x) \rightarrow L_2$, and if $x \rightarrow a^-$ then $f(x) \rightarrow L_1$.\\
+We say that $\exists \lim\limits_{x \rightarrow a} f(x)$ iff $L_1 = L_2$
+
+\subsection{Cauchy's Definition}
+
+Let $f(x)$ be defined on an open interval about $a$, except possibly at $a$ itself.\\
+A number $L$ is called the \emph{limit} of $f(x)$ at $a$ if
+\begin{equation}
+	\forall \epsilon > 0 \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow |f(x) - L| < \epsilon
+\end{equation}
+
+\end{document}

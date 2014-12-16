@@ -1,0 +1,191 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\setlength{\mathindent}{0pt}
+
+%opening
+\title{Recitation 1}
+\author{}
+\date{\formatdate{29}{10}{2014}}
+
+\begin{document}
+
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{General Information}
+
+\textbf{Michael Bromberg}\\
+mic1@post.tau.ca.il\\
+
+\newpage
+\section{Domain of Definition of a Function}
+
+\subsection{Examples}
+
+\subsubsection{Find the domain of definition of the following functions.}
+
+\paragraph{$\ln (1 - \lvert x \rvert) + \dfrac{1}{\sin x}$\\}
+
+For $\ln x$ to be defined, it is necessary that $1 - \lvert x \rvert > 0$ \\
+\begin{equation*}
+	\therefore \lvert x \rvert < 1 \Rightarrow -1 < x < 1 
+\end{equation*}
+For $\dfrac{1}{\sin x}$ to be defined, $\sin x \neq 0$\\
+\begin{equation*}
+	\therefore x \neq k\pi, k \in \mathbb{Z}
+\end{equation*}
+Therefore, the domain of definition is $(-1,1) - \{0\}$
+
+\paragraph{$\sqrt{\dfrac{x+5}{\lvert	x^4 - 16	\rvert}}$\\}
+
+For the square root to be defined, 
+\begin{equation*}
+	\dfrac{x+5}{\lvert	x^4 - 16	\rvert} > 0
+\end{equation*}
+
+For the ratio to be defined, 
+\begin{equation*}
+	x^4 - 16 /\neq 0
+\end{equation*}
+
+Therefore, the domain is $[-5, \infty) - \{-2, 2\}$
+
+\newpage
+\section{Odd and Even Functions}
+
+\subsection{Even function}
+
+If $f(-x) = f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{even function}. \\
+Each even function is symmeteric about the $y$-axis. \\
+
+\subsection{Odd function}
+
+If $f(-x) = -f(x) ; (x, -x \in D)$ then, $f$ is called an \emph{odd function}. \\
+Each odd function is symmeteric about the origin. \\
+
+\subsection{Examples}
+
+\subsubsection{Prove that if $f$ is even and $g$ is odd, then $f \cdot g$ is odd}
+
+Let $x \in D(f) \bigcap D(g)$. Then, $-x \in D(f) \bigcap D(g)$, because $f$ and $g$ are even and odd respectively.\\
+\begin{align*}
+	f(-x) g(-x) = f(x) (-g(x)) = -f(x) g(x)\\
+	\Rightarrow f \cdot g \text{ is odd.}
+\end{align*}
+
+\subsubsection{Check if $f(x) = x^5 + x^3 - x$ is odd or even}
+
+\begin{align*}
+	f(-x) &=& (-x)^5 + (-x)^3 - (-x)\\
+	&=& -x^5 - x^3 +x\\
+	&=& -f(x)
+\end{align*}
+
+Therefore, $f$ is odd.\\
+
+\subsubsection{Check if $f(x) = 2^{x^2 +x}$ is odd, even or neither}
+
+\begin{align*}
+	f(1) = 2^{1^2 + 1} = 4\\
+	f(-1) = 2^{(-1)^2 +1} = 2^0 = 1\\
+\end{align*}
+
+Therefore, $f$ is neither odd nor even.\\
+
+\newpage
+\section{Image and Range of a Function}
+
+\subsection{Examples}
+
+\subsubsection{What is the image of}
+
+\paragraph{$f(x) = \ln x$ in the domain $(0, 4]$\\}
+
+As the function is monotonic, it is easy to observe that the image is $(-\infty, \ln 4]$
+
+\paragraph{$f(x) = \cos x$ in the domain $(0, 4]$\\}
+
+From the graph of the function, it is evident that the image is $[-1,1)$
+
+\newpage
+\section{Graphs}
+
+\subsection{Shifting with respect to the axes}
+$f(x+a)$ is the graph of $f(x)$, shifted by $a$, in the direction of the $x$-axis, opposite to the sign of $a$. \\
+$f(x) + a$ is the graph of $f(x)$, shifted by $a$, in the direction of the $y$-axis, according to the sign of $a$. \\
+
+\subsection{Mirror Images with respect to the axes}
+
+$f(-x)$ is the mirror image of $f(x)$ w.r.t. the $y$-axis.\\
+$-f(x)$ is the mirror image of $f(x)$ w.r.t. the $x$-axis.\\
+
+\newpage
+\section{Monotonic Functions}
+
+\subsection{Examples}
+
+\subsubsection{Are the following functions monotonic?}
+
+\paragraph{$e^{e^x}$\\}
+
+$e^{e^x} = e^{(e^x)}$ is a composition of two monotonically increasing functions. Therefore, it is monotonically increasing.
+
+\paragraph{$x^2 - 1$\\}
+
+The function is not monotonic over $\mathbb{R}$.
+
+\newpage
+\section{Inequalities}
+
+\subsection{Examples}
+
+\subsubsection{Solve the following}
+
+\paragraph{$\lvert x + 6 \rvert < \lvert x - 2 \rvert$\\}
+\subparagraph{Solving by dividing the domain into regions\\}
+The regions are
+\begin{align*}
+	x \leq -6\\
+	-6 < x \leq 2\\
+	2 < x
+\end{align*}
+
+\subparagraph{Solving by squaring both sides}
+
+\begin{align*}
+	\lvert x + 6 \rvert < \lvert x -2 \rvert \\
+	\Leftrightarrow (x+6)^2 < (x-2)^2 \\
+	\Leftrightarrow 12x + 36 < -4x +4 \\
+	\Leftrightarrow 16x < -32 \\
+	\Leftrightarrow x < -2 \\
+\end{align*}
+
+\paragraph{$\dfrac{x-1}{x-3} > \dfrac{x+3}{x+1}$\\}
+
+We multiply both sides by $(x-3)^2$ and $(x+1)^2$, rather than $(x-3)$ and $(x+1)$, to avoid dealing with flipping of the direction of the inequality.\\
+
+\begin{align*}
+	\therefore (x-1)(x-3)(x+1)^2 > (x+3)(x+1)(x-3)^2 \\
+	\Leftrightarrow (x-3)(x+1)\left((x-1)(x+1 - (x+3)(x-3)\right) > 0 \\
+	\Leftrightarrow 8(x-3)(x+1) > 0
+\end{align*}
+
+Therefore the inequality holds iff $x > 3$ or $x < -1$
+
+\section{Periodic Functions}
+
+$f$ is periodic iff $\exists \, T>0$ s.t. $f(x+T) = f(x), \forall x \in D(f)$\\
+The smallest $T$, if it exists, for which the above equality holds true, is called the period of $f$.\\
+Note that if $f$ has period $T$, and $g$ has a period which is a rational multiple of $T$, say $\dfrac{m}{n} T$, then $f$ and $g$ have a mutual period $mT$.
+
+\end{document}

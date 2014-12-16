@@ -1,0 +1,152 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Lecture 6}
+\author{Aakash Jog}
+\date{\formatdate{13}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Theorem: Derivative of Inverse Functions}
+
+Let $f(x)$ be invertible and continuous in an open interval about $x_0$. If $\exists f'(x_0) \neq 0$, then, the inverse function $x = g(y)$ is differentiable at $y = f(x_0)$ and
+\begin{equation*}
+	g'(y_0) = \dfrac{1}{f'(x_0)}
+\end{equation*}
+
+\subsection{Examples}
+
+\subsubsection{Example 1}
+
+\begin{align*}
+	y = f(x) &= \tan x \\
+	\therefore (\tan^{-1})' y &= \dfrac{1}{\tan' x} \\
+	&= \dfrac{1}{\dfrac{1}{\cos^2 x}} \\
+	&= \dfrac{1}{1 + \tan^2 x} \\
+	&= \dfrac{1}{1 + y^2}
+\end{align*}
+Similarly,
+\begin{equation*}
+	(\cot^{-1})' x = - \dfrac{1}{1 + x^2} 
+\end{equation*}
+
+\section{Chain Rule}
+
+Let $y = f(u)$ be differentiable at $u_0$, and $u = g(x)$ be differentiable at $x_0$, s.t. $u_o = g(x_0)$. Then, $y = f(g(x))$ is differentiable at $x_0$, and, 
+\begin{equation*}
+	y'(x_0) = f'(u_0) \cdot g'(x_0)
+\end{equation*}
+
+\subsection{Proof}
+
+\begin{align*}
+	g'(x_0) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta u}{\Delta x} \\
+\end{align*}
+Therefore, by Theorem 2, 
+\begin{align*}
+	\therefore \dfrac{\Delta u}{\Delta x} &= g'(x_0) + \alpha_1(\Delta x) \hfill ; \alpha_1(\Delta x) \rightarrow 0 \text{ if } \Delta x \rightarrow 0 \\
+	\therefore \dfrac{\Delta y}{\Delta u} &= f'(u_0) + \alpha_2(\Delta u) \hfill ; \alpha_1(\Delta u) \rightarrow 0 \text{ if } \Delta u \rightarrow 0
+\end{align*}
+Therefore, 
+\begin{align*}
+	\Delta u &= (g'(x_0) + \alpha_1) \Delta x \\
+	\Delta y &= (f'(u_0) + \alpha_2) \Delta u \\
+	\therefore \Delta y &= (f'(u_0) + \alpha_2)(g'(x_0) + \alpha_1) \Delta x \\
+	\therefore \dfrac{\Delta y}{\Delta x} &= (f'(u_0) + \alpha_2) (g'(x_0) + \alpha_1) 
+\end{align*}
+\begin{align*}
+	\Delta x \rightarrow 0 &\Rightarrow \Delta u \rightarrow 0 , \alpha_1 \rightarrow 0 \\
+	&\Rightarrow \alpha_2 \rightarrow 0
+\end{align*}
+Substituting,
+\begin{equation*}
+	y'(x_0) = \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0} \left(f'(u_0) + a_2\right) \left(g'(x_0) + \alpha_1\right) = f'(u_0) \cdot g'(x_0)
+\end{equation*}
+
+\section{Fermat Theorem} \label{Fermat Theorem}
+
+Let $f(x)$ be defined on an open interval $(a, b)$ and differentiable at $x_0 \in (a,b)$. If $f(x)$ has its extremum at $x_0$, then, $f'(x_0) = 0$
+
+\subsection{Proof}
+
+Assume that $f(x_0)$ is the maximum value of $f(x)$ on $(a, b)$. Then, $\forall \Delta x, f(x_0 + \Delta x) \leq f(x_0)$.
+
+\subsubsection*{Case I: $\Delta x > 0$}
+
+\begin{align*}
+	\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\leq 0 \\
+	\therefore \text{RHD} = \lim\limits_{\Delta x \rightarrow 0^+} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\leq 0
+\end{align*}
+
+\subsubsection*{Case II: $\Delta x < 0$}
+
+\begin{align*}
+\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\geq 0 \\
+\therefore \text{LHD} = \lim\limits_{\Delta x \rightarrow 0^-} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} &\geq 0
+\end{align*}
+
+\subsubsection*{}
+
+\begin{align*}
+	\exists f'(x_0) \Rightarrow \text{LHD} &= \text{RHD} \\
+	\therefore 0 \leq f'(x_0) &\leq 0 \\
+	\therefore f'(x_0) &= 0
+\end{align*}
+
+\section{Rolle Theorem}
+
+Let $f(x)$ be defined on $[a, b]$, s.t. 
+\begin{enumerate}[(1)]
+	\item $f$ is continuous on $[a, b]$ \label{Rolle condition 1}
+	\item $f$ is differentiable on $(a, b)$ \label{Rolle condition 2}
+	\item $f(a) = f(b)$ \label{Rolle condition 3}
+\end{enumerate}
+Then, $\exists c \in (a, b)$, s.t. $f'(c) = 0$.
+
+\subsection{Proof}
+
+By Weirstrauss Theorem, as $f(x)$ is continuous on $[a, b]$, $f(x)$ has its maximum $M$ and minimum $m$ on $[a, b]$. 
+
+\subsubsection*{Case I: $m = M$}
+
+\begin{align*}
+	f(x) &= \text{constant} \\
+	\therefore f'(x) &= 0 \text{ on } [a, b]
+\end{align*}
+
+\subsubsection*{Case II: $m < M$}
+
+Atleast one of $m$ and $M$ must be in $(a, b)$, otherwise $f(a) \neq f(b)$, which contradicts \eqref{Rolle condition 3}.\\
+Let $M = c \in (a, b)$. Therefore, by \thmref{Fermat Theorem}, $f'(c) = 0$
+
+\section{Lagrange Theorem}
+
+Let $f(x)$ be defined on $[a, b]$, s.t. 
+\begin{enumerate}[(1)]
+	\item $f$ is continuous on $[a, b]$
+	\item $f$ is differentiable on $(a, b)$
+\end{enumerate}
+Then, $\exists c \in (a, b)$, s.t. $f'(c) = \dfrac{f(b) - f(a)}{b - a}$
+
+\section{Theorem}
+
+Let $f(x)$ be continuous on $(x_0 - \delta, x_0 + \delta)$ and differentiable on $(x_0 - \delta, x_0) \cup (x_0, x_0 + \delta)$.\\
+If $\lim\limits_{x \rightarrow x_0^+} f'(x) = \lim\limits_{x \rightarrow x_0^-} f'(x) = L$, then, $\exists f'(x_0) = L$.
+
+\end{document}

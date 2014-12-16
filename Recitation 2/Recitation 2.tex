@@ -1,0 +1,131 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\setlength{\mathindent}{0pt}
+
+%opening
+\title{Recitation 2}
+\author{}
+\date{\formatdate{5}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{One-to-one Functions (Injective Functions)}
+
+A function $f : A \rightarrow \mathbb{R}$ is one-to-one if $\forall x, y in A, f(x) = f(y) \Rightarrow x = y$.
+
+\section{Onto Functions}
+
+$f : A \rightarrow B$ is onto $B$ if $\forall y \in B, \exists x \in A$ , s.t. $f(x) = y$.
+
+\section{Strictly Monotonically Increasing Functions}
+
+A function is strictly monotonically increasing if $\forall x, y \in D(f)$ , s.t., $x < y, f(x) < f(y)$.\\
+A strictly monotonically increasing function is always ont-to-one.
+
+\section{Inverse Functions}
+
+If $f : A \rightarrow B$ is one-to-one and onto, we can define a function $f^{-1} : B \rightarrow A$ , s.t. $f^{-1}(f(x)) = x$ and $f(f^{-1}(y)) = y$.\\
+$f^{-1}$ is called the inverse function of $f$.
+
+\section{Check which of the following functions are one-to-one and find their inverses}
+
+\subsection{$f(x) = e^{e^x}$}
+
+$f(x)$ is strictly monotonically increasing. Hence, it is one-to-one.
+\begin{equation*}
+	I(f) = D(f^{-1}) = (0,\infty)
+\end{equation*}
+\begin{align*}
+	y &= e^{e^x}\\
+	\therefore \ln y &= e^x\\
+	\therefore \ln \ln y &= x
+\end{align*}
+\begin{align*}
+	\therefore f^{-1}(x) &= \ln \ln x\\
+	D(f^{-1}) &= (1, \infty)
+\end{align*}
+\subsection{$f(x) = 1 - x^3$}
+
+If $f(x) = f(y)$, 
+\begin{align*}
+	1 - x^3 &= 1 - y^3\\
+	\therefore x^3 &= y^3\\
+	\therefore x = y
+\end{align*}
+Therefore, $f(x)$ is one-to-one over $\mathbb{R}$\\
+\begin{align*}
+	y &= 1 - x^3\\
+	\therefore x^3 &= 1 - y\\
+	\therefore x &= \sqrt[3]{1-y}
+\end{align*}
+\begin{align*}
+	\therefore f^{-1}(x) &= \sqrt[3]{1 - x}\\
+D(f^{-1}) &= \mathbb{R}
+\end{align*}
+\subsection{$f(x) = \dfrac{x}{1 + x}; x \neq -1$}
+
+\begin{align*}
+	y &= \dfrac{x}{1+x}\\
+	\Leftrightarrow y(1 + x) &= x\\
+	\Leftrightarrow y + xy &= x\\
+	\Leftrightarrow x &= \dfrac{y}{1 - y}
+\end{align*}
+\begin{align*}
+	\therefore f^{-1}(x) &= \dfrac{x}{1- x}\\
+	D(f^{-1}) &= \mathbb{R} - \{1\}
+\end{align*}
+
+\section{Composition of Functions}
+
+If $f : A \rightarrow B, g : C \rightarrow D$ and $B \subseteq C$, then we can define the composition $d \circ f : A \rightarrow D$ as $(g \circ f)(x) = g(f(x))$.
+
+\section{Limits of Functions}
+
+Let $f$ be defined in a punctured neighbourhood of $x_0$.\\
+Then the limit of $f$ at $x_0$ is $l$. It is denoted as $\lim\limits_{x \rightarrow x_0} f(x) = l$.\\
+If $ \forall \varepsilon > 0 \exists \delta > 0$ , s.t. if$|x - x_0| > \delta$ then, $|f(x) - l| < \varepsilon$
+
+\subsection{Prove: $\lim\limits_{x \rightarrow 1} (2x + 5) = 7$}
+
+Let $\varepsilon > 0$. We have to find $\delta$ , s.t. if $|x - 1| < \delta$ , then, $|2x + 5 - 7| < \varepsilon$.
+\begin{align*}
+	|2x + 5 - 7| &= |2x - 2|\\
+	&= 2|x - 1|\\
+\end{align*}
+Hence, if we take $d = \dfrac{\varepsilon}{2}$, we have the following.\\
+If $|x - 1| < \delta$, then $|f(x) - 7| = |2x + 5 - 7| = 2|x - 1| < 2 \delta = 2 \dfrac{\varepsilon}{2} = \varepsilon$.\\
+Therefore, $\lim\limits_{x \rightarrow 1} (2x + 5) = 7$
+
+\subsection{Prove: $\lim\limits_{x \rightarrow 2} \dfrac{2x + 6}{3x - 1} = 2$}
+
+We want $\delta$ s.t. \\
+if $|x - 2| < \delta$ then $\left| \dfrac{2x + 6}{3x - 1} - 2 \right| < \varepsilon $
+\begin{align*}
+	\left|\dfrac{2x + 6}{3x - 1}\right| - 2 &= \left|\dfrac{2x + 6 - 2(3x - 1)}{3x -1}\right|\\
+	&= \left|\dfrac{-4x + 8}{3x - 1}\right|\\
+	&= \dfrac{4\left|x - 2\right|}{\left|3x - 1\right|}
+\end{align*}
+We can always take $\delta \leq 1$
+\begin{align*}
+	\therefore \left|\dfrac{2x + 6}{3x - 1}\right| - 2 &< \dfrac{1}{2} 4 \left|x - 2\right| < 2 \delta = \varepsilon
+\end{align*}
+Take $\delta = \min\left(\dfrac{\varepsilon}{2}, 1\right)$.\\
+Then, if $|x - 2| < \delta$, then 
+\begin{equation*}
+	|f(x) - l| = \left|\dfrac{2x + 6}{3x} - 2\right| = \dfrac{4\left|x - 2 \right|}{\left|3x - 1\right|}
+\end{equation*}
+\end{document}
+

@@ -1,0 +1,134 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath, amssymb, esdiff}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%opening
+\title{Lecture 5}
+\author{}
+\date{\formatdate{11}{11}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Derivative of a Function}
+
+\subsection{Definition}
+
+%\begin{tikzpicture}
+%	\draw (1,1) to [out=15, in=250] (3,4);
+%\end{tikzpicture}
+
+If there exists
+\begin{equation*}
+	\lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x} = \lim\limits_{\Delta x \rightarrow 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} = L
+\end{equation*}
+then the limit is called the \emph{derivative} of $f$ at $x_0$.
+
+\subsubsection{Geometrical Interpretation}
+The slope of $\overleftrightarrow{AB}$ is 
+\begin{equation*}
+\tan \alpha = \dfrac{\Delta y}{\Delta x}
+\end{equation*}
+When $\Delta x \rightarrow 0$, $\overleftrightarrow{AB}$ tends to a straight line which is called the tangent to $y = f(x)$ at $(x_0, f(x_0))$.\\
+The derivative is the slope of the tangent to $y = f(x)$ at $(x_0, f(x))$.
+
+\subsection{Notation}
+
+\begin{equation*}
+	L = f'(x_0) = \dod{f(x_0)}{x} = \dod{y(x_0)}{x} = D f(x_0)	 
+\end{equation*}
+
+\subsection{Derivative Function}
+
+If we calculate the derivative of $f(x)$ at any possible $x$ , we get the \emph{derivative function}.
+\begin{equation*}
+	f'(x) = \dod{f}{x} = \dod{y}{x} = D f
+\end{equation*}
+
+\subsection{The Tangent Line}
+
+\begin{equation*}
+	y - f(x_0) = f'(x_0)(x - x_0)
+\end{equation*}
+
+\subsection{The Normal Line}
+
+\begin{align*}
+	y - f(x_0) &= - \dfrac{1}{f'(x_0)} (x - x_0) &; f'(x_0) \neq 0\\
+	x &= x_0 &; f'(x_0) = 0
+\end{align*}
+
+\subsection{Proofs of Standard Derivatives}
+
+\subsubsection{$y = f(x) = c$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{x \rightarrow 0} \dfrac{f(x + \Delta x)}{\Delta x}\\
+	&= \lim\limits_{x \rightarrow 0} \dfrac{c - c}{\Delta x}\\
+	&= 0
+\end{align*}
+
+\subsubsection{$y = f(x) = x^n ; n \in \mathbb{N}$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(x + \Delta x)^n - x^n}{\Delta x}\\
+	a^n - b^n &= (a-b)(a^{n-1} + a^{n-2} b + \dots + a b^{n-2} + b^{n-1})\\
+	\therefore f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta x((x + \Delta x)^{n-1} + (x + \Delta x)^{n-2} x + \dots + (x + \Delta x) x^{n-2} + x^{n-1}}{\Delta x}\\
+	&= \lim\limits_{\Delta x \rightarrow 0} (x + \Delta x)^{n-1} + (x + \Delta x)^{n-2} x + \dots + (x + \Delta x) x^{n-2} + x^{n-1}\\
+	&= x^{n-1} + x \cdot x^{n-2} + \dots + x^{n-2} \cdot x + x^{n-1} \\
+	&= n x^{n-1}
+\end{align*}
+
+\subsubsection{$y = f(x) = x^{-n} ; n \in \mathbb{N}, x \neq 0$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(x + \Delta x)^{-n} - x^{-n}}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\dfrac{1}{(x + \Delta x)^n} - \dfrac{1}{x^n}}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{x^n - (x + \Delta x)^n}{\Delta x (x^n (x + \Delta x)^n)} \\
+	&= \dfrac{-n x^{n-1}}{x^n x^n}
+\end{align*}
+
+\subsubsection{$y = f(x) = \sin x$}
+
+\begin{align*}
+	f'(x) &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\sin(x + \Delta x) - \sin x}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0}\dfrac{2 \sin \dfrac{\Delta x}{2} \cos (x + \dfrac{\Delta x}{2})}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{\sin \dfrac{\Delta x}{2}}{\dfrac{\Delta x}{2}} \cos \left( x + \dfrac{\Delta x}{2}\right) \\
+	&= \cos x
+\end{align*}
+
+\subsection{Theorem: If $\exists f'(x)$, $\exists g'(x)$ and $c$ is a constant, then, $(c f(x))' = c f'(x)$, $(f(x) \pm g(x))' = f'(x) \pm g'(x)$, $(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)$, $\left(\dfrac{f(x)}{g(x)}\right)' = \dfrac{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}$}
+
+\begin{align*}
+	(f(x)g(x))' &= \lim\limits_{\Delta x \rightarrow 0} \dfrac{f(x + \Delta x) g(x + \Delta x) - f(x) g(x)}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(f(x + \Delta x) g (x + \Delta x) - f(x) g(x + \Delta x)) + (f(x)g(x + \Delta x) - f(x) g(x))}{\Delta x} \\
+	&= \lim\limits_{\Delta x \rightarrow 0} \dfrac{(f(x + \Delta x) - f(x)) g(x + \Delta x)}{\Delta x} + \dfrac{f(x) ((g(x + \Delta x) - g(x))}{\Delta x} \\
+	&= f'(x) g(x) + f(x) g'(x)
+\end{align*}
+
+\subsection{Theorem: Let $f$ be defined on an open interval about $x_0$. Then, $f(x)$ is differentiable at $x_0$, iff $\exists A \in \mathbb{R}$ and $\exists \alpha(\Delta x)$, with $\lim\limits_{\Delta x \rightarrow 0} \alpha(\Delta x) = 0$, s.t. $\dfrac{\Delta y}{\Delta x} = A + \alpha(\Delta x) ; A = f'(x_0)$}
+
+\subsection{If $y = f(x)$ is differentiable at $x_0$, then, $f(x)$ is continuous at $x_0$.}
+
+\begin{align*}
+	\exists f'(x_0) \Rightarrow \dfrac{\Delta y}{\Delta x} &= f'(x_0) + \alpha(\Delta x) \\
+	\therefore f(x_0 + \Delta x) - f(x_0) = \Delta y &= \Delta x (f'(x_0) + \alpha(\Delta x) \\
+	\therefore f(x_0 + \Delta x) &= f(x_0) + \Delta x (f'(x_0) + \alpha(\Delta x)) \\
+	\therefore \lim\limits_{\Delta x \rightarrow 0}f(x_0 + \Delta x) &= \lim\limits_{\Delta x \rightarrow 0}f(x_0) + \Delta x (f'(x_0) + \alpha(\Delta x)) \\
+	&= x_0 
+\end{align*}
+The converse of this theorem is not true.
+\end{document}
