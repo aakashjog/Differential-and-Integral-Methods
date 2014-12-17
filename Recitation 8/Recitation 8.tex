@@ -1,0 +1,167 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{graphicx, epstopdf}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 8}
+\author{}
+\date{\formatdate{17}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Indefinite Integrals}
+
+\begin{example}
+	\begin{equation*}
+		\int \dfrac{x + 2}{x (x + 1)^2} \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		\dfrac{x + 2}{x (x + 1)^2} &= \dfrac{A}{x} + \dfrac{B}{x + 1} + \dfrac{C}{(x + 1)^2}\\
+		&= \dfrac{A(x+1)^2 + B(x)(x+1) + C(x)}{x(x+1)^2}\\
+		\therefore x + 2 &= A(x+1)^2 + B(x)(x+1) + C(x)\\
+		\therefore x + 2 &= (A + B) x^2 + (2A + B + C) x + A
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A &= 2\\
+		B &= -2\\
+		C &= -1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int \dfrac{x + 2}{x (x + 1)^2} \dif x &= \int \left( \dfrac{2}{x} - \dfrac{2}{x + 1} - \dfrac{1}{(x + 1)^2} \right) \dif x\\
+		&= 2 \ln |x| - 2 \ln |x + 1| + \dfrac{1}{x + 1} + d
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		\int \dfrac{\cos x}{10 + \sin x} \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		y &= \sin x\\
+		\therefore \dif y &= \cos x \dif x
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int \dfrac{\cos x}{10 + \sin x} \dif x &= \int \dfrac{\dif y}{10 + y}\\
+		&= \ln |10 + y| + c\\
+		&= \ln |10 + \sin x| + c
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		\int \dfrac{\dif x}{\sqrt{x} + \sqrt[3]{x}} \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		x &= t^6\\
+		\therefore \dif x &= 6 t^5 \dif t
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int \dfrac{\dif x}{\sqrt{x} + \sqrt[3]{x}} \dif x &= \int \dfrac{6 t^5}{t^3 + t^2} \dif t\\
+		&= \int \dfrac{(t^3 + t^2)(6t^2 - 6t + 6) - 6t^2}{t^3 + t^2} \dif t\\
+		&= \int 6t^2 - 6t + 6 - \dfrac{6}{t + 1} \dif t\\
+		&= \dfrac{6t^3}{3} - \dfrac{6t^2}{2} + 6t - 6 \ln |t + 1| + c\\
+		&= \dfrac{6\sqrt{x}}{3} - \dfrac{6\sqrt[3]{x}}{2} + 6\sqrt[6]{x} - 6 \ln |\sqrt[6]{x} + 1| + c
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		\int \sin^3 x \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int \sin^3 x \dif x &= \int \sin^2 x \sin x \dif x\\
+		&= \int (1 - \cos^2 x) \sin x \dif x
+	\end{align*}
+	Let
+	\begin{align*}
+		y &= \cos x\\
+		\therefore dif y &= - \sin x \dif x
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int (1 - \cos^2 x) \sin x \dif x &= -\int (1 - y^2) \dif y\\
+		&= -y + \dfrac{y^3}{3} + c\\
+		&= - \cos x + \dfrac{\cos^3 x}{3} + c
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		\int \dfrac{\dif x}{\sqrt{28 - 12x - x^2}}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int \dfrac{\dif x}{\sqrt{28 - 12x - x^2}} &= \int \dfrac{\dif x}{\sqrt{-(x + 6)^2 + 36 + 28}}
+	\end{align*}
+	Let 
+	\begin{align*}
+		t &= x + 6\\
+		\therefore \dif t &= \dif x
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int \dfrac{\dif x}{\sqrt{-(x + 6)^2 + 36 + 28}} &= \int \dfrac{\dif t}{\sqrt{-t^2 + 64}}\\
+		&= \int \dfrac{\dif t}{8\sqrt{-\left( \dfrac{t}{8} \right)^2 + 1}}
+	\end{align*}
+		Let 
+		\begin{align*}
+		y &= \dfrac{t}{8}\\
+		\therefore \dif y &= \dfrac{1}{8} \dif t
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			\int \dfrac{\dif t}{8\sqrt{-\left( \dfrac{t}{8} \right)^2 + 1}} &= \int \dfrac{\dif y}{\sqrt{1 - y^2}}\\
+			&= \arcsin y + c\\
+			&= \arcsin \dfrac{x + 6}{8} + c
+		\end{align*}
+\end{solution}
+
+\end{document}
+
