@@ -1,6 +1,0 @@
-\contentsline {section}{\numberline {1}Higher Order Derivatives}{2}
-\contentsline {section}{\numberline {2}Derivative of an Implicit Function}{2}
-\contentsline {section}{\numberline {3}Parametric Curves and Their Derivatives}{2}
-\contentsline {section}{\numberline {4}Linearisation and Differential}{2}
-\contentsline {subsection}{\numberline {4.1}Properties}{3}
-\contentsline {section}{\numberline {5}Taylor's Formula}{3}
