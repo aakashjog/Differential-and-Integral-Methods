@@ -1,0 +1,263 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 15}
+\author{Aakash Jog}
+\date{\formatdate{18}{12}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Applications of Definite Integrals}
+
+\subsection{Centre of Mass}
+
+\begin{example}
+	Find the centre of mass of a metal rod $[a, b]$ with density $\rho(x)$ and mass $m$.
+\end{example}
+
+\begin{solution}
+	Dividing the rod into $n$ parts, from $x_0 = a$ to $x_n = b$, and assuming that the mass $\Delta m_i$ is concentrated at $c_i$, we have a system of masses $\Delta m_1, \dots, \Delta m_n$.
+	\begin{align*}
+		\therefore x_{\text{COM}} &\approx \dfrac{\sum\limits_{i = 1}^{n} c_i \Delta m_i}{\sum\limits_{i = 1}^{n} \Delta m_i}\\
+		\therefore x_{\text{COM}} &= \lim\limits_{\Delta T \to 0} \dfrac{\sum\limits_{i = 1}^{n} c_i \rho(c_i) \Delta x_i}{\sum\limits_{i = 1}^{n} \rho(c_i) \Delta x_i}\\
+		&= \dfrac{\int\limits_{a}^{b} x \rho(x) \dif x}{\int\limits_{a}^{b}\rho(x) \dif x}
+	\end{align*}
+\end{solution}
+
+\section{Improper Integrals}
+
+\begin{definition}[Improper integral of the first kind]
+	Assume that there exists the integral 
+	\begin{align*}
+	I(t) &= \int\limits_{a}^{t}f(x) \dif x &;\quad t \geq a
+	\end{align*}
+	If $\exists I = \lim\limits_{t \to \infty} I(t)$, then $I$ is called an improper integral of the first kind. The improper integral is said to converge. $I$ is denoted as
+	\begin{equation*}
+		I = \int\limits_{a}^{+\infty} f(x) \dif x = \lim\limits_{t \to +\infty} \int\limits_{a}^{t} f(x) \dif x
+	\end{equation*}
+	Otherwise, the improper integral is said to diverge.\\
+	Similarly for
+	\begin{equation*}
+		I = \int\limits_{-\infty}^{a} f(x) \dif x = \lim\limits_{t \to -\infty} \int\limits_{t}^{a} f(x) \dif x
+	\end{equation*}
+	If both \[\int\limits_{-\infty}^{a} f(x) \dif x\] and \[\int\limits_{a}^{+\infty} f(x) \dif x\] converge, then
+	\begin{equation*}
+		\int\limits_{-\infty}^{+\infty} f(x) \dif x = \int\limits_{-\infty}^{a} f(x) \dif x + \int\limits_{a}^{+\infty} f(x) \dif x
+	\end{equation*}
+\end{definition}
+
+\begin{example}
+	\begin{equation*}
+		\int\limits_{1}^{+\infty} \dfrac{1}{x^2} \dif x
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int\limits_{1}^{+\infty} \dfrac{1}{x^2} \dif x &= \lim\limits_{t \to +\infty} \int\limits_{1}^{t} \dfrac{1}{x^2} \dif x\\
+		&= \lim\limits_{t \to +\infty} \left. \left( -\dfrac{1}{x} \right) \right\rvert_{1}^{t}\\
+		&= \lim\limits_{t \to +\infty} \left( -\dfrac{1}{t} + 1 \right)\\
+		&= 1
+	\end{align*}
+	Hence, the integral converges.
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		\int\limits_{1}^{+\infty}\dfrac{1}{x} \dif x 
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int\limits_{1}^{+\infty}\dfrac{1}{x} \dif x &= \lim\limits_{t \to +\infty} \int\limits_{1}^{t} \dfrac{1}{x} \dif x\\
+		&= \lim\limits_{t \to +\infty} \left. (\ln x) \right\rvert_{1}^{t}\\
+		&= \lim\limits_{t \to +\infty} (\ln t - \ln 1)\\
+		&= +\infty
+	\end{align*}
+	Hence, the integral diverges.
+\end{solution}
+
+\begin{theorem}[Direct comparison test]\label{Direct comparison test}
+	Let $f(x)$ and $g(x)$ be two functions defined on $[a, +\infty)$ and Riemann integrable over $[a, t], \forall t \geq a$. Assume that $\exists b \geq a$, s.t. $f(x) \geq g(x) \geq 0, \forall x \geq b$. Then,
+	\begin{enumerate}
+		\item if $\int\limits_{a}^{+\infty} f(x) \dif x$ converges, then $\int\limits_{a}^{+\infty} g(x) \dif x$ converges.
+		\item if $\int\limits_{a}^{+\infty} g(x) \dif x$ diverges, then $\int\limits_{a}^{+\infty} f(x) \dif x$ diverges.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	Show that \[\int\limits_{0}^{+\infty} e^{-x^2} \dif x\]	converges.
+\end{example}
+
+\begin{solution}
+	If
+	\begin{align*}
+		x &\geq 1\\
+		\implies x^2 &\geq x\\
+		\implies -x^2 &\leq -x
+	\end{align*}
+	Therefore, $\forall x \geq 1$
+	\begin{align*}
+		0 \leq e^{-x^2} \leq e^{-x}
+	\end{align*}
+	\begin{align*}
+		\int\limits_{0}^{+\infty} e^{-x} \dif x &= \lim\limits_{t \to +\infty} \int\limits_{0}^{t} e^{-x} \dif x\\
+		&= \lim\limits_{t \to +\infty} (-e^{-t} + 1)\\
+		&= 1
+	\end{align*}
+	Hence, the integral converges.\\
+	Therefore, by the \nameref{Direct comparison test}, 
+	\[\int\limits_{0}^{+\infty} e^{-x^2} \dif x\] also converges.
+\end{solution}
+
+\begin{example}
+	Show that \[\int\limits_{1}^{+\infty} \dfrac{1 + e^{-x}}{x} \dif x\] diverges.
+\end{example}
+
+\begin{solution}
+	$\forall x \geq 1$,
+	\begin{align*}
+		\dfrac{1 + e^{-x}}{x} \geq \dfrac{1}{x} \geq 0
+	\end{align*}
+	and \[\int\limits_{1}^{+\infty} \dfrac{1}{x} \dif x\] diverges.\\
+	Therefore, by the \nameref{Direct comparison test},	\[\int\limits_{1}^{+\infty} \dfrac{1 + e^{-x}}{x} \dif x\]
+	also diverges.
+\end{solution}
+
+\begin{definition}[Absolute integrability]
+	$f(x)$ is said to be absolutely integrable over $[a, +\infty)$ if the improper integral
+	\[\int\limits_{a}^{+\infty} |f(x)| \dif x\]
+	converges.
+\end{definition}
+
+\begin{theorem}
+	If there exists the definite integral \[\int\limits_{a}^{t} f(x) \dif x, \forall t \geq a\] and $f(x)$ is absolutely integrable over $[a, +\infty)$, then \[\int\limits_{a}^{+\infty} f(x) \dif x\] converges.
+\end{theorem}
+
+\begin{definition}[Improper integral of the second kind]
+	Assume that $f(x)$ is defined and is not bounded on $[a, b)$ and assume that $\forall a \leq t \leq b$, there exists the definite integral
+	\begin{align*}
+		I(t) &= \int\limits_{a}^{t} f(x) \dif x
+	\end{align*}
+	If there exists the limit
+	\begin{align*}
+		I &= \lim\limits_{t \to b^-} I(t)
+	\end{align*}
+	then $I$ is called an improper integral of the second kind of $f(x)$ on $[a, b)$ and is denoted as
+	\begin{equation*}
+		I = \lim\limits_{t \to b^-} \int\limits_{a}^{t} f(x) \dif x = \int\limits_{a}^{b} f(x) \dif x
+	\end{equation*}
+	Similarly if $f(x)$ is not bounded at $a$, 
+	\begin{equation*}
+		\lim\limits_{t \to a^+} \int\limits_{t}^{a} f(x) \dif x = \int\limits_{a}^{b} f(x) \dif x
+	\end{equation*}
+	If $f(x)$ is not bounded at $c$, s.t. $a < c < b$, and \[\exists \int\limits_{a}^{c} f(x) \dif x\] and \[\exists \int\limits_{c}^{b} f(x) \dif x\] then, 
+	\begin{equation*}
+		\exists \int\limits_{a}^{b} f(x) \dif x = \int\limits_{a}^{c} f(x) \dif x + \int\limits_{c}^{b} f(x) \dif x
+	\end{equation*}
+\end{definition}
+
+\begin{example}
+	\begin{equation*}
+		\int\limits_{0}^{3} \dfrac{\dif x}{x - 1}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int\limits_{0}^{1} \dfrac{\dif x}{x - 1} \dif x &= \lim\limits_{t \to 1^-} \int\limits_{0}^{t} \dfrac{\dif x}{x - 1}\\
+		&= \lim\limits_{t \to 1^-} \left. \ln |x - 1| \right\rvert_{0}^{1}\\\\
+		&= \lim\limits_{t \to 1^-} (\ln |t - 1| - \ln 1)\\
+		&= -\infty
+	\end{align*}
+	Therefore, as \[\int\limits_{0}^{1} \dfrac{\dif x}{x - 1}\] diverges, \[\int\limits_{0}^{3} \dfrac{\dif x}{x - 1}\] also diverges.
+\end{solution}
+
+\section{Definite Integral Calculations using Taylor's Formula}
+
+\begin{align*}
+	f(x) &= f(a)\\
+	&\quad + \dfrac{f'(a)}{1!} (x - a)\\
+	&\quad + \dots\\
+	&\quad + \dfrac{f^{(n)}(a)}{n!} (x - a)^n\\
+	&\quad + \dfrac{f^{(n + 1)}(c)}{(n + 1)!} (x - a)^{n + 1}\\
+	\therefore \int\limits_{a}^{b} f(x) \dif x &= f(a) (b - a)\\
+	&\quad + \dfrac{f'(a)}{1!} \dfrac{(b - a)^2}{2}\\
+	&\quad + \dfrac{f''(a)}{2!} \dfrac{(b - a)^3}{3}\\
+	&\quad + \dots\\
+	&\quad + \dfrac{f^{(n)}(a)}{n!} \dfrac{(b - a)^{n + 1}}{n + 1}\\
+	&\quad + \dfrac{1}{(n + 1)!} \int\limits_{a}^{b} f^{(n + 1)}(c) (x - a)^{n + 1} \dif x
+\end{align*}
+
+\begin{equation*}
+	R_n (I) = \dfrac{1}{(n + 1)!} \int\limits_{a}^{b} f^{(n + 1)}(c) (x - a)^{n + 1} \dif x
+\end{equation*}
+is called the integral Lagrange remainder.
+
+\begin{example}
+	Calculate \[\int\limits_{0}^{1} e^{x^2} \dif x\] with accuracy 0.01.
+\end{example}
+
+\begin{solution}
+	For $0 < c < x^2 \leq 1$,
+	\begin{align*}
+		e^{x^2} &= 1 + \dfrac{x^2}{1!} + \dots + \dfrac{x^2n}{n!} + \dfrac{x^{2n + 2}}{(n + 1)!} e^c\\
+		\therefore \int\limits_{0}^{1} e^{x^2} \dif x &= 1 + \dfrac{1}{1!} \cdot \dfrac{1}{3} + \dfrac{1}{2!} \cdot \dfrac{1}{5} + \dots + \dfrac{1}{n!} \cdot \dfrac{1}{2n + 1} \\
+		&\quad + \dfrac{1}{(n + 1)!} \int\limits_{0}^{1} e^c x^{2n + 2} \dif x
+	\end{align*}
+	For $n = 4$,
+	\begin{equation*}
+		|R_n(I)| \leq 0.01
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		\int\limits_{0}^{1} e^{x^2} \dif x &\approx 1 + \dfrac{1}{1!} \cdot \dfrac{1}{3} + \dfrac{1}{2!} \cdot \dfrac{1}{5} + \dfrac{1}{3!} \cdot \dfrac{1}{7} + \dfrac{1}{4!} \cdot \dfrac{1}{9}
+	\end{align*}
+\end{solution}
+
+\end{document}
