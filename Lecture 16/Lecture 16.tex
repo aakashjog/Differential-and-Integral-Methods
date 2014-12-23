@@ -1,0 +1,129 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 16}
+\author{Aakash Jog}
+\date{\formatdate{23}{12}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Functions of Multiple Variables}
+
+\begin{definition}[Function of multiple variables]
+	Let $D$ be a set of points from $\mathbb{R}^2$. A function $f$ of two variables is a law which corresponds to each pair $(x, y) \in D$ a unique real number $z$. It is denoted as $f(x, y) = z$. The set $D$ is called the domain of definition of $f(x, y)$ and a set of all values of $f(x, y)$ is called the image of $f$.
+\end{definition}
+
+\begin{definition}[Graph]
+	If $f$ is a function of two variables with the domain of definition $D$, then the graph of $f$ is the set 
+	\begin{equation*}
+		S = \{(x, y, z) \in \mathbb{R}^3 : z = f(x, y), (x, y) \in D\}
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Limit]
+	Assume that $f(x, y)$ is defined on some open neighbourhood of $(a, b)$, except perhaps at $(a, b)$ itself. A number $L$ is called the limit of $f(x, y)$ at $(a, b)$ if, as $(x, y) \to (a, b)$, $f(x, y) \to L$ over any curve which ends at $(a, b)$.
+	\begin{equation*}
+		\lim\limits_{(x,y) \to (a,b)} f(x,y) = L
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Continuous function]
+	A function $f(x, y)$ is defined in an open neighbourhood of $(a,b)$ is caed continuous at $(a,b)$ if
+	\begin{equation*}
+		\lim\limits_{(x,y) \to (a,b)} f(x,y) = f(a,b)
+	\end{equation*}
+\end{definition}
+
+\begin{remark}
+	If there exist two curves $C_1$ and $C_1$, s.t. 
+	\begin{align*}
+	\lim\limits_{(x,y) \stackrel{C_1}{\to} (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2} &= L_1
+	\lim\limits_{(x,y) \stackrel{C_2}{\to} (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2} &= L_2
+	\end{align*}
+	and $L_1 \neq L_2$, then, $\nexists \lim\limits_{(x,y) \to (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2}$.
+\end{remark}
+
+\begin{example}
+	Does $\lim\limits_{(x,y) \to (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2}$ exist?
+\end{example}
+
+\begin{solution}
+	If $y = 0$, $x \to 0^+$,
+	\begin{align*}
+		\lim\limits_{(x,y) \to (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2} &= \dfrac{x^2}{x^2}\\
+		&= 1
+	\end{align*}
+	If $x = 0$, $y \to 0^+$,
+	\begin{align*}
+	\lim\limits_{(x,y) \to (0,0)} \dfrac{x^2 - y^2}{x^2 + y^2} &= \dfrac{-y^2}{y^2}\\
+	&= -1
+	\end{align*}
+	Hence, the limit does not exist.
+\end{solution}
+
+\section{Partial Derivatives of Functions of Multiple Variables}
+
+\begin{definition}[Partial derivative of $f(x,y)$]
+	The limit
+	\begin{equation*}
+		f_x(a,b) = \lim\limits_{\Delta x \to 0} \dfrac{f(a + \Delta x, b) - f(a, b)}{\Delta x}
+	\end{equation*}
+	if it exists, is called the partial derivative of $f(x, y)$ with respect to $x$ at $(a, b)$. It can be denoted as $f_x$, $f'_x$, $\dpd{f}{x}$ or $D_x f$. Similarly for the partial derivative of $f(x, y)$ with respect to $y$.
+\end{definition}
+
+\subsection{Geometrical Interpretation}
+
+Let $C_1$ be the intersection line of $z = f(x,y)$ and the plane $y = b$. Let $T_1$ be the tangent line to $C_1$, in the plane $y = b$ at $P$. Then, $f_x(a,b)$ is the slope of $T_1$.
+
+\begin{definition}
+	If $\exists f_x(x,y)$ and $\exists f_y(x,y)$ in some open neighbourhood of $(a,b)$ and $f_x(x,y)$ and $f_y(x,y)$ are continuous at $(a,b)$, then the tangent plane to $z = f(x,y)$ at the point $P(a, b, f(a,b))$ is a plane which passes through $P$ and contains the straight lines $T_1$ and $T_2$. It is given by
+	\begin{equation*}
+		z - f(a,b) = f_x(a,b) (x - a) + f_y(a,b) (y - b)
+	\end{equation*}
+\end{definition}
+
+\end{document}
