@@ -1,0 +1,104 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{graphicx, epstopdf}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 9}
+\author{}
+\date{\formatdate{24}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Definite Integrals}
+
+\begin{example}
+	Calculate \[\int\limits_{1}^{e} \dfrac{\dif x}{x \sqrt{1 + ln x}}\]
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		y &= \ln x\\
+		\therefore \dif y &= \dfrac{\dif x}{x}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int\limits_{1}^{e} \dfrac{\dif x}{x \sqrt{1 + ln x}} &= \int\limits_{0}^{1} \dfrac{\dif y}{\sqrt{1 + y}}\\
+		&= \left. 2 \sqrt{1 + y} \right\rvert_{0}^{1}\\
+		&= 2 \sqrt 2 - 2
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the area bounded by $x = 2$, $y = x$, $y = \dfrac{1}{\sqrt{x}}$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		A &= \left( \int\limits_{1}^{2} x - \dfrac{1}{\sqrt{x}} \right) \dif x\\
+		&= \left. \dfrac{x^2}{2} - 2 \sqrt{x} \right\rvert_{1}^{2}\\
+		&= 2 - 2 \sqrt{2} + 2 + \dfrac{1}{2}\\
+		&= \dfrac{7}{2} - 2 \sqrt{2}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the length of the graph of	$f(x) = \ln (-\cos x)$ in $[2, 4]$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		l &= \int\limits_{a}^{b} \sqrt{1 + (f'(x))^2} \dif x\\
+		&= \int\limits_{2}^{4} \sqrt{1 + \dfrac{\sin^2 (x)}{\cos^2 (x)}} \dif x\\
+		&= \int\limits_{2}^{4} \sqrt{\sec^2 x} \dif x\\
+		&= -\int\limits_{2}^{4} \sec x \dif x\\
+		&=  -\left. \ln |\sec x + \tan x| \right\rvert_{2}^{4}\\
+		&= -\ln |\sec 4 + \tan 4| + \ln |\sec 2 + \tan 4|
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the volume of the body obtained from rotation of $y = \sqrt{x}$. in $[0, 1]$ around the $x$-axis, and the $y$-axis.
+\end{example}
+
+\begin{solution}
+	Rotating the graph around the $x$-axis,
+	\begin{align*}
+		V &= \pi \int\limits_{0}^{1} (\sqrt{x})^2 \dif x\\
+		&= \pi \left. \dfrac{x^2}{2} \right\rvert_{0}^{1}\\
+		&= \dfrac{\pi}{2}
+	\end{align*}
+	\begin{align*}
+		V &= \pi \int\limits_{0}^{1} (y^2)^2 \dif y\\
+		&= \pi \left. \dfrac{y^5}{5} \right\rvert_{0}^{1}\\
+		&= \dfrac{\pi}{5}
+	\end{align*}
+\end{solution}
+
+\end{document}
