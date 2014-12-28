@@ -1,0 +1,279 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 17}
+\author{Aakash Jog}
+\date{\formatdate{28}{12}{2014}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Partial Derivatives of Higher Order}
+
+\subsection{Definition}
+
+\begin{definition}[Partial Derivatives of Higher Order]
+	\begin{align*}
+		(f_x)_x &= f_{xx} = \dpd{}{x} \left( \dpd{f}{x} \right) = \dpd[2]{f}{x} = D_{x^2} f\\
+		(f_x)_y &= f_{xy} = \dpd{}{y} \left( \dpd{f}{x} \right) = \dfrac{\partial^2 f}{\partial y \partial x} = D_{xy} f\\
+		(f_y)_x &= f_{yx} = \dpd{}{x} \left( \dpd{f}{y} \right) = \dfrac{\partial^2 f}{\partial x \partial x} = D_{yx} f\\
+		(f_y)_x &= f_{yy} = \dpd{}{y} \left( \dpd{f}{y} \right) = \dpd[2]{f}{y} = D_{y^2} f
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	Let $x = f(x, y)$ be continuous in some open neighbourhood of $(a, b)$. Assuming $\exists f_{xy}(x, y)$ and $\exists f_{yx}(x, y)$ and are continuous in this neighbourhood, $f_{xy}(a, b) = f_{yx}(a, b)$.
+\end{theorem}
+
+\subsection{Differential}
+
+\begin{definition}[Differentials of $f(x, y)$]
+	Consider $z = f(x, y)$. Then,
+	\begin{align*}
+		\dif x &= \Delta x\\
+		\dif y &= \Delta y\\
+		\dif z &= f_x(a, b) \dif x + f_y(a, b) \dif y
+	\end{align*}
+	 are the differentials of $f(x, y)$ at $(a, b)$.
+\end{definition}
+
+\subsection{Differentiability}
+
+\begin{theorem}
+	$f(x, y)$ is differentiable at $(a, b)$ if $\exists \varepsilon_1(\Delta x, \Delta y)$ and $\exists \varepsilon_2(\Delta x, \Delta y)$, with
+	\begin{align*}
+		\lim\limits_{(\Delta x, \Delta y) \to (0, 0)} \varepsilon_1(\Delta x, \Delta y) &= 0\\
+		\lim\limits_{(\Delta x, \Delta y) \to (0, 0)} \varepsilon_2(\Delta x, \Delta y) &= 0
+	\end{align*}
+	such that
+	\begin{equation*}
+		\Delta x = \dif z + \varepsilon_1(\Delta x, \Delta y) \Delta x + \varepsilon_2 (\Delta x, \Delta y) \Delta y
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	If $f(x, y)$ is differentiable at $(a, b)$, then $f(x, y)$ is continuous at $(a, b)$. 
+\end{theorem}
+
+\begin{proof}
+	If $f(x, y)$, then
+	\begin{align*}
+		\Delta z &= f(a + \Delta x, b + \Delta y) - f(a, b)\\
+		\Delta z &= \dif z + \varepsilon_1 \Delta x + \varepsilon_2 \Delta y\\
+		&= f_x(a, b) \Delta x + f_y(a, b) \Delta y + \varepsilon_1 \Delta x + \varepsilon_2 \Delta y\\
+		\therefore f(a + \Delta x, b + \Delta y) &= f(a, b) \\
+		&\quad+ f_x(a, b) \Delta x + f_y(a, b) \Delta y \\
+		&\quad+ \varepsilon \Delta x + \varepsilon_2 \Delta y\\
+	\end{align*}
+	Therefore, taking limits on both sides,
+	\begin{equation*}
+		\lim\limits_{(\Delta x, \Delta y) \to (0, 0)} f(a + \Delta x, b + \Delta y) = f(a, b)
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	If $\exists f_x(x, y)$ and $\exists f_y(x, y)$ in some open neighbourhood of $(a, b)$ and the partial derivatives are continuous at $(a, b)$ then $f(x, y)$ is differentiable at $(a, b)$.
+\end{theorem}
+
+\begin{example}
+	Given
+	\begin{equation*}
+		f(x, y) = 
+		\begin{cases}
+			\dfrac{xy}{x^2 + y^2} &;\quad (x, y) \neq (0,0)\\
+			0 &;\quad (x,y) = (0,0)\\
+		\end{cases}
+	\end{equation*}
+	\begin{enumerate}
+		\item Calculate $f_x(0,0)$ and $f_y(0,0)$.
+		\item Prove: $\nexists \lim\limits_{(x, y) \to (0, 0)} f(x, y)$
+		\item Is the function continuous at $(0, 0)$?
+		\item Is the function differentiable at $(0, 0)$?
+	\end{enumerate}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f_x(0, 0) &= \lim\limits_{\Delta x \to 0} \dfrac{f(0 + \Delta x, 0) - f(0, 0)}{\Delta x}\\
+		&= \lim\limits_{\Delta x \to 0} \dfrac{\dfrac{\Delta x \cdot 0}{(\Delta x)^2 + 0}}{\Delta x}\\
+		&= \lim\limits_{\Delta x \to 0} \dfrac{0}{\Delta x}\\
+		&= 0
+	\end{align*}
+	\begin{align*}
+		f_y(0, 0) &= \lim\limits_{\Delta y \to 0} \dfrac{f(0, 0 + \Delta y) - f(0, 0)}{\Delta y}\\
+		&= \lim\limits_{\Delta y \to 0} \dfrac{0}{\Delta y}\\
+		&= 0
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{(x, y) \stackrel{y = kx}{\to} (0, 0)} f(x, y) &= \lim\limits_{x \to 0} \dfrac{x \cdot kx}{x^2 + (kx)^2}\\
+		&= \lim\limits_{x \to 0} \dfrac{k x^2}{x^2 (1 + k)}\\
+		&= \lim\limits_{x \to 0} \dfrac{k}{1 + k^2} \\
+		&= \dfrac{k}{1 + k^2}
+	\end{align*}
+	As the limit depends on $k$, $\nexists \lim\limits_{(x, y) \to (0, 0)} f(x, y)$.\\
+	Hence, $f(x, y)$ is not continuous at $(a, b)$.\\
+	Hence, $f(x, y)$ is not differentiable at $(a, b)$.
+\end{solution}
+
+\subsection{Chain Rule}
+
+\begin{theorem}
+	Let $z = f(x, y)$ be differentiable and let there exist derivatives of $x = g(t)$ and $y = h(t)$. Then $\exists z'(t)$ and
+	\begin{equation*}
+		z'(t) = z_x \cdot g'(t) + z_y \cdot h'(t)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Let $z = f(x, y)$ be differentiable and $x = g(s, t)$, $y = h(s, t)$. Assuming there exist $g_s$, $g_t$, $h_s$, $h_t$, 
+	\begin{align*}
+		z_s &= z_x \cdot x_s + z_y \cdot y_s\\
+		z_t &= z_x \cdot x_t + z_y \cdot y_t
+	\end{align*}
+\end{theorem}
+
+\begin{example}
+	Given 
+	\begin{align*}
+		z &= e^x \sin y\\
+		x &= s t^2\\
+		y &= s^2 \cos t
+	\end{align*}
+	Find $z_s$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		z_s &= z_x \cdot x_s + z_y \cdot y_s\\
+		&= e^x \sin y \cdot t^2 + e^x \cos y \cdot 2 s \cos t\\
+		&= e^{s t^2} \sin (s^2 \cos t) \cdot t^2 + e^{s t^2} \cos(s^2 \cos t) \cdot 2 s \cos t
+	\end{align*}
+\end{solution}
+
+\subsection{Derivative of an Implicit Function}
+
+\begin{example}
+	Given $F(x, y) = k$ and $y = y(x)$, find $y'(x)$.
+\end{example}
+
+\begin{solution}
+	Differentiating both sides,
+	\begin{align*}
+		F_x x_x + F_y y_x &= 0\\
+		\therefore y_x &= -\dfrac{F_x}{F_y}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Given $F(x, y, z) = k$ and $z = f(x, y)$, find $z_x$ and $z_y$.
+\end{example}
+
+\begin{solution}
+	Differentiating both sides,
+	\begin{align*}
+		F_x x_x + F_y y_x + F_z z_x &= 0\\
+		\therefore z_x &= -\dfrac{F_x}{F_z}
+	\end{align*}
+	Similarly,
+	\begin{align*}
+		z_y &= -\dfrac{F_y}{F_z}
+	\end{align*}
+\end{solution}
+
+\section{Gradient and the Tangent Plane to a Surface.}
+
+\begin{definition}[Gradient of $f(x, y)$]
+	If $\exists f_x(x, y)$ and $\exists f_y(x, y)$ then the vector 
+	\begin{equation*}
+		\nabla f(x, y) = (f_x(x, y), f_y(x, y)) \neq 0
+	\end{equation*}
+	is called the gradient of $f(x, y)$.\\
+	$\nabla f : \mathbb{R}^2 \to \mathbb{R}^2$ is a vector function.
+\end{definition}
+
+\begin{definition}[Gradient of $f(x, y, z)$]
+	Given $f(x, y, z)$,
+	\begin{align*}
+		\nabla f(x, y, z) &= (f_x(x, y, z), f_y(x, y, z), f_z(x, y, z)) \neq 0
+	\end{align*}
+	is called the gradient of $f(x, y, z)$.\\	
+	$\nabla f : \mathbb{R}^3 \to \mathbb{R}^3$ is a vector function.
+\end{definition}
+
+\begin{theorem}
+	If $F(x, y, z)$ is differentiable at some point $P_0 (x_0, y_0, z_0)$ on the surface, then the tangent plane $\alpha$ to the surface at the point can be calculated by the formula
+	\begin{align*}
+		F_x (P_0) (x - x_0) + F_y (P_0) (y - y_0) + F_z (P_0) (z - z_0) &= 0
+	\end{align*}
+\end{theorem}
+
+\begin{example}
+	Find the tangent plane $\alpha$ to the ellipsoid 
+	\begin{equation*}
+		\dfrac{x^2}{4} + y^2 + \dfrac{z^2}{9} = 3
+	\end{equation*}
+	at the point $P_0 (-2, 1, 3)$.
+\end{example}
+
+\section{Extrema of $f(x, y)$}
+
+\begin{definition}[Local maximum of $f(x, y)$]
+	The function $z = f(x, y)$ is said to have a local maximum at $(a, b)$, if there exists an open neighbourhood of $(a, b)$ in which $f(x, y) \leq f(a, b)$
+\end{definition}
+
+\begin{definition}[Local minimum of $f(x, y)$]
+	The function $z = f(x, y)$ is said to have a local minimum at $(a, b)$, if there exists an open neighbourhood of $(a, b)$ in which $f(x, y) \geq f(a, b)$
+\end{definition}
+
+\begin{definition}[Global maximum of $f(x, y)$]
+	The function $z = f(x, y)$ is said to have a global maximum at $(a, b)$, if $f(x, y) \leq f(a, b)$, $\forall (x, y) \in D$. 
+\end{definition}
+
+\begin{definition}[Global minimum of $f(x, y)$]
+	The function $z = f(x, y)$ is said to have a global minimum at $(a, b)$, if $f(x, y) \geq f(a, b)$, $\forall (x, y) \in D$. 
+\end{definition}
+
+\end{document}
