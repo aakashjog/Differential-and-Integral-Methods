@@ -1,0 +1,135 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{graphicx, epstopdf}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 10}
+\author{}
+\date{\formatdate{31}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Improper Integrals}
+
+\begin{example}
+	Does \[\int\limits_{0}^{\infty} e^{-x} \dif x\]  converge?
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{t \to 0} \int\limits_{0}^{t} e^{-x} \dif x &= \lim\limits_{t \to \infty} \left. e^{-x} \right\rvert_{0}^{t}\\
+		&= \lim\limits_{t \to \infty} -e^{-t} + e^0\\
+		&= 1
+	\end{align*}
+	Therefore, the integral converges.
+\end{solution}
+
+\begin{theorem}[First comparison test]
+	Let $f(x)$ and $g(x)$ be two functions defined on $[a, +\infty)$ and Riemann integrable over $[a, t], \forall t \geq a$. Assume that $\exists b \geq a$, s.t. $f(x) \geq g(x) \geq 0, \forall x \geq b$. Then,
+	\begin{enumerate}
+		\item if $\int\limits_{a}^{+\infty} f(x) \dif x$ converges, then $\int\limits_{a}^{+\infty} g(x) \dif x$ converges.
+		\item if $\int\limits_{a}^{+\infty} g(x) \dif x$ diverges, then $\int\limits_{a}^{+\infty} f(x) \dif x$ diverges.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Second comparison test]
+	Assume $f(x) \geq g(x) \geq 0, \forall x \in (a,b)$. Assume that $f$, $g$ are not bounded in a neighbourhood of $b$ but integrable on intervals of the type $[a, t]$ for $a < t < b$. Assume that 
+	\begin{equation*}
+		\lim\limits_{x \to b^-} \dfrac{f(x)}{g(x)} = l > 0
+	\end{equation*}
+	Then, \[\int\limits_{a}^{b} f(x) \dif x\]and \[\int\limits_{a}^{b} g(x) \dif x\] converge or diverge simultaneously.
+\end{theorem}
+
+\begin{example}
+	Does the following integral converge?
+	\[\int\limits_{0}^{1} \dfrac{\arctan (x - 1)}{(x - 1) \sqrt{x + x^3}} \dif x\]
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{x \to 1} \dfrac{\arctan (x - 1)}{(x - 1)} &= \lim\limits_{x \to 1} \dfrac{\dfrac{1}{1 + (x - 1)^2}}{1}\\
+		&= 1
+		\therefore \dfrac{\arctan (x - 1)}{(x - 1) \sqrt{x + x^3}} &= \dfrac{1}{\sqrt{2}}
+	\end{align*}
+	Therefore, the function can be extended to a continuous function at 1 by defining $f(1) = \dfrac{1}{\sqrt{2}}$.\\
+	Therefore, $f$ is Riemann integrable in $[\sfrac{1}{2}, 1]$.
+	\begin{align*}
+		\lim\limits_{x \to 0} \dfrac{\arctan (x - 1)}{(x - 1)} &= \dfrac{\pi}{4}\\
+		\therefore \lim\limits_{x \to 0} \dfrac{\arctan (x - 1)}{(x - 1) \sqrt{x + x^3}} &\leq \dfrac{\pi}{4} \cdot \dfrac{1}{\sqrt{x}}
+	\end{align*}
+	As \[\int\limits_{0}^{1} \dfrac{1}{\sqrt{x}} \dif x\] converges, by the first comparison test, \[\int\limits_{0}^{1} \dfrac{\arctan (x - 1)}{(x - 1) \sqrt{x + x^3}} \dif x\]
+\end{solution}
+
+\begin{example}
+	Check the convergence of \[\int\limits_{0}^{\infty} \dfrac{\sin x}{x^2} \dif x\]
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\left\lvert \dfrac{\sin x}{x^2} \right\rvert &\leq \dfrac{1}{x^2} 
+	\end{align*}
+	Therefore, by first comparison test, \[\left\lvert \dfrac{\sin x}{x^2} \right\rvert\] converges. Therefore, \[\dfrac{\sin x}{x^2}\] also converges.
+\end{solution}
+
+\begin{example}
+	Check the convergence of \[\int\limits_{0}^{\infty} \dfrac{\sin x}{x^{\sfrac{3}{2}} + x^2} \dif x\]
+\end{example}
+
+\begin{solution}
+	For $[0,1]$, $\dfrac{\sin x}{x^{\sfrac{3}{2}} + x^2}$ is non-negative.
+	\begin{align*}
+		\dfrac{\sin x}{x^{\sfrac{3}{2}} + x^2} \leq \dfrac{\sin x}{x^{\sfrac{3}{2}}}
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{x \to 0^+} \dfrac{\dfrac{\sin x}{x^{\sfrac{3}{2}}}}{\dfrac{1}{x^{\sfrac{1}{2}}}} &= \lim\limits_{x \to 0^+} \dfrac{\sin x}{x}\\
+		&= 1
+	\end{align*}
+	Therefore, by the second comparision test, \[\int\limits_{0}^{1} \dfrac{\sin x}{x^{\sfrac{3}{2}} + x^2}\] and \[\int\limits_{0}^{1} \dfrac{\sin x}{x^{\sfrac{1}{2}}}\] converge simultaneously.\\
+	Therefore, by the first comparison test, \[\int\limits_{0}^{1} \dfrac{\sin x}{x^{\sfrac{3}{2}} + x^2}\] converges.
+\end{solution}
+
+\begin{example}
+	For which values of $\alpha$ does the integral \[\int\limits_{1}^{\infty} \left( \sqrt{x + 1} - \sqrt{x} \right)^{\alpha} \dif x\] converge?
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\left( \sqrt{x + 1} - \sqrt{x} \right)^{\alpha} &= \left( \dfrac{x + 1 - x}{\sqrt{x + 1} + \sqrt{x}} \right)^{\alpha}\\
+		&= \left( \dfrac{1}{\sqrt{x + 1} + \sqrt{x}} \right)^{\alpha}
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{x \to \infty} \dfrac{\left( \dfrac{1}{\sqrt{x + 1} + \sqrt{x}} \right)^{\alpha}}{\left( \dfrac{1}{\sqrt{x}} \right)^{\alpha}} &= \lim\limits_{x \to \infty} \left( \dfrac{\sqrt{x}}{\sqrt{x + 1} + \sqrt{x}} \right)^{\alpha}\\
+		&= \left( \dfrac{1}{2} \right)^{\alpha}\\
+		&> 0		
+	\end{align*}
+	Therefore, \[\int\limits_{1}^{\infty} \left( \dfrac{1}{\sqrt{x}} \right)^\alpha \dif x\] and \[\int\limits_{1}^{\infty} \left( \sqrt{x + 1} - \sqrt{x} \right)^{\alpha} \dif x\] converge simultaneously.\\
+	Therefore, \[\int\limits_{1}^{\infty} \left( \sqrt{x + 1} - \sqrt{x} \right)^{\alpha} \dif x\] converges if and only if $\alpha > 2$.
+\end{solution}
+
+\end{document}
