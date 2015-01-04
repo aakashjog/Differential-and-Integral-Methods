@@ -1,0 +1,240 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 19}
+\author{Aakash Jog}
+\date{\formatdate{4}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Lagrange Multipliers}
+
+Assume $f(x,y,z)$ and $g(x,y,z)$ to be differentiable. In order to find maximum and minimum values of $f(x,y,z)$ subject to constraint $g(x,y,z) = k$, find the values of $x$, $y$, $z$ and $\lambda$ which satisfy
+\begin{align*}
+	\nabla f(x,y,z) &= \lambda \nabla g(x,y,z)\\
+	g(x,y,z) &= k
+\end{align*}
+Calculate the values of $f$ at the corresponding points from the above equations. The largest value is the maximum value of $f$ and the smallest values is the minimum values of $f$ subject to the constraints.
+
+\begin{example}
+	A parallelepiped box without a top has to be built using a cardboard with area 12 \si{\square\metre}. Find the box with maximum volume.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		V &= x y z\\
+		S &= 2 x z + 2 y z + x y\\
+		&= 12
+	\end{align*}
+	Let
+	\begin{align*}
+		f(x,y,z) &= x y z\\
+		g(x,y,z) &= 2 x z + 2 y z + x y
+	\end{align*}
+	For finding maximum value,
+	\begin{align*}
+		\nabla f(x,y,z) &= \lambda \nabla g(x,y,z)\\
+		g(x,y,z) &= k
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		f_x &= \lambda g_x\\
+		f_y &= \lambda g_y\\
+		f_z &= \lambda g_z\\
+		g &= k
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		y z &= \lambda (2z + y)\\
+		x z &= \lambda (2 z + x)\\
+		x y &= \lambda (2x + 2y)\\
+		2 x z + 2 y z + x y &= 12
+	\end{align*}
+	Solving,
+	\begin{align*}
+		x &= 2\\
+		y &= 2\\
+		z &= 1\\
+		\therefore V &= 4 \si{\cubic\metre}
+	\end{align*}
+\end{solution}
+
+\section{Double Integrals}
+
+\subsection{Double Integrals on Rectangular Domains}
+
+\begin{definition}[Double integral]
+	Consider $z = f(x,y)$ defined on a rectangle $R = [a,b] \times [c,d]$.\\
+	Let
+	\begin{equation*}
+		a = x_0 < \dots < x_{i-1} < x_i < \dots < x_n = b
+	\end{equation*}
+	\begin{equation*}
+		c = y_0 < \dots < y_{j-1} < y_j < \dots < y_n = d
+	\end{equation*}
+	Let
+	\begin{align*}
+		\Delta x_i &= x_{i-1}\\
+		\Delta y_i &= y_{j-1}\\
+		\Delta T &= \max\{\Delta x_i, \Delta y_j\}
+	\end{align*}
+	Let 
+	\begin{equation*}
+		{P_{ij}}^* = ({x_{ij}}^*, {y_{ij}}^*) \in R_{ij} = [x_{i-1},x_i] \times [y_{j-1},y_j]
+	\end{equation*}
+	Let 
+	\begin{align*}
+		\Delta A_{ij} &= \Delta x_i \Delta y_j
+	\end{align*}
+	be the area of $R_{ij}$.\\
+	Then, $\displaystyle \sum_{j = 1}^{m} \sum_{i = 1}^{n} f({x_{ij}}^*, {y_{ij}}^*) \Delta A_{ij}$ is called the Riemann double integral sum.\\
+	The double integral of $z = f(x,y)$ over the domain of definition $R$ is the limit, if it exists, of the Riemann double integral sum, as $\Delta T \to 0$.
+	\begin{equation*}
+		\iint\limits_{R} f(x,y) \dif A = \lim\limits_{\Delta T \to 0} \sum_{j = 1}^{m} \sum_{i = 1}^{n} f({x_{ij}}^*, {y_{ij}}^*) \Delta A_{ij}
+	\end{equation*}
+	\begin{equation*}
+		\iint\limits_{R} f(x,y) \dif A = \iint\limits_{R} f(x,y) \dif x \dif y = \iint\limits_{R} f(x,y) \dif x \dif y 
+	\end{equation*}
+\end{definition}
+
+\subsection{Iterated Integrals}
+
+\begin{definition}
+	Assume that $z = f(x,y)$ is integrable over $R = [a,b] \times [c,d]$.
+	\begin{tabular}{c c}
+		Iterated Integrals & Analogy in Differential Calculus\\
+		$\displaystyle A(x) = \int\limits_{c}^{d} f(x,y) \dif y$ & $f_y (x,y)$\\
+		$\displaystyle I_1 = \int\limits_{a}^{b} A(x) \dif x$ & $f_{yx} (x,y)$\\
+		$\displaystyle B(y) = \int\limits_{a}^{b} f(x,y) \dif x$ & $f_x (x,y)$\\
+		$\displaystyle I_1 = \int\limits_{c}^{d} B(y) \dif y$ & $f_{xy} (x,y)$\\
+	\end{tabular}
+\end{definition}
+
+\begin{theorem}[Fubini Theorem]
+	If $f(x,y)$ is continuous on $R$, then the double integral and two iterated integrals exist, and they are equal.
+	\begin{equation*}
+		\iint\limits_{R} f(x,y) \dif A = \int\limits_{a}^{b} \int\limits_{c}^{d} f(x,y) \dif y \dif x = \int\limits_{c}^{d} \int\limits_{a}^{b} f(x,y) \dif x \dif y
+	\end{equation*}
+\end{theorem}
+
+\begin{remark}
+	Existence of two iterated integrals does not necessarily guarantee existence of the double integral.
+\end{remark}
+
+\begin{example}
+	Solve 
+	\[\iint\limits_{[1,2] \times [0,3]} y \cos (x + y^2) \dif A\]
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\iint\limits_{[1,2] \times [0,3]} y \cos (x + y^2) \dif A &= \int\limits_{1}^{2} \int\limits_{0}^{3} y \cos (x + y^2) \dif y \dif x\\
+		&= \int\limits_{1}^{2} \left( \left. \dfrac{1}{2} \sin (x + y^2) \right\rvert_{0}^{3} \right) \dif x\\
+		&= \dfrac{1}{2} \int\limits_{1}^{2} \left( \sin(x + 9) - \sin x \right) \dif x\\
+		&= \left. \dfrac{1}{2} \left( -\cos (x + 9) + \cos x \right) \right\rvert_{1}^{2}\\
+		&= \dfrac{1}{2} (-\cos 11 + \cos 2 + \cos 10 - \cos 1)
+	\end{align*}
+\end{solution}
+
+\subsection{Double Integrals on Arbitrary Domains}
+
+\begin{definition}[Double integral on arbitrary domain]
+	Let $D$ be a bounded and closed domain in $\mathbb{R}^2$ and the function $z = f(x,y)$ be defined on $D$. Consider a rectangle $R = [a,b] \times [c,d]$, s.t. $D \subset R$. Define a function $F(x,y)$, s.t.
+	\begin{align*}
+		F(x,y) &= 
+			\begin{cases}
+				f(x,y) &;\quad (x,y) \in D\\
+				0 &;\quad (x,y) \notin D
+			\end{cases}
+	\end{align*}
+	If $F(x,y)$ is integrable over $R$, it is said to be integrable on $D$
+	\begin{align*}
+		\iint\limits_{D} f(x,y) \dif A &= \iint\limits_{R} F(x,y) \dif A
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Domain of the first kind]
+	A domain $D$ is said to be the domain of the first kind if there exist continuous functions $f_1(x)$ and $f_2(x)$, s.t.
+	\begin{align*}
+		D_{I} &= \{(x,y) | a \leq x \leq b, f_1(x) \leq y \leq f_2(x)\}
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y)$ is continuous in $D_{I}$, then
+	\begin{align*}
+		\iint\limits_{R} f(x,y) \dif A &= \int\limits_{a}^{b} \int\limits_{f_1(x)}^{f_2(x)} f(x,y) \dif y \dif x
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\iint\limits_{D_{I}} f(x,y) \dif A &= \iint\limits_{R} F(x,y) \dif A\\
+		&= \int\limits
+		_{a}^{b} \int\limits_{c}^{d} F(x,y) \dif y \dif x\\
+		&= \int\limits_{a}^{b} \left( \int\limits_{c}^{f_1(x)} F \dif y + \int\limits_{f_1(x)}^{f_2(x)} F \dif y + \int\limits_{f_2(x)}^{d} F \dif y \right) \dif x\\
+		&= \int\limits_{a}^{b} \left( \int\limits_{c}^{f_1(x)} 0 \dif y + \int\limits_{f_1(x)}^{f_2(x)} f \dif y + \int\limits_{f_2(x)}^{d} 0 \dif y \right) \dif x\\
+		&= \int\limits_{a}^{b} \int\limits_{f_1(x)}^{f_2(x)} f(x,y) \dif y \dif x
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Domain of the second kind]
+	A domain $D$ is said to be the domain of the second kind if there exist continuous functions $g_1(y)$ and $g_2(y)$, s.t.
+	\begin{align*}
+	D_{II} &= \{(x,y) | c \leq y \leq d, g_1(y) \leq x \leq g_2(y)\}
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y)$ is continuous in $D_{II}$, then
+	\begin{align*}
+		\iint\limits_{R} f(x,y) \dif A &= \int\limits_{c}^{d} \int\limits_{g_1(y)}^{g_2(y)} f(x,y) \dif x \dif y
+	\end{align*}
+\end{theorem}
+
+\end{document}
