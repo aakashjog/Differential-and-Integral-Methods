@@ -1,0 +1,207 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 20}
+\author{Aakash Jog}
+\date{\formatdate{6}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Double Integrals}
+
+\begin{example}
+	Calculate $\displaystyle \iint\limits_{D} \sin (y^2) \dif A$ for $D$ given by the triangle enclosed by $(0,0)$, $(0,1)$, $(1,1)$.
+\end{example}
+
+\begin{solution}
+	The domain $D$ is of the first and second kind.\\
+	\begin{align*}
+		D_{I} &: 0 \leq x \leq 1 \quad\&\quad x \leq y \leq 1\\
+		D_{II} &: 0 \leq y \leq 1 \quad\&\quad 0 \leq x \leq y
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D_{I}} \sin (y^2) \dif A &= \int\limits_{0}^{1} \int\limits_{x}^{1} \sin (y^2) \dif y \dif x
+	\end{align*}
+	This form is unsolvable.
+	\begin{align*}
+		\iint\limits_{D_{II}} \sin (y^2) \dif A &= \int\limits_{0}^{1} \int\limits_{0}^{y} \sin (y^2) \dif x \dif y\\
+		&= \int\limits_{0}^{1} \left. \sin (y^2) x \right\rvert_{x = 0}^{x = y} \dif y\\
+		&= \int\limits_{0}^{1} y \sin (y^2) \dif y\\
+		&= \left. -\dfrac{1}{2} \cos (y^2) \right\rvert_{0}^{1}\\
+		&= -\dfrac{1}{2} \cos 1 + \dfrac{1}{2}
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	If $D$ is not a domain of both kinds, but $D = D_{I} \cup D_{II}$, s.t. the area of $D_{I} \cap D_{II}$ is zero, then
+	\begin{equation*}
+		\iint\limits_{D} f(x,y) \dif A = \iint\limits_{D_{I}} f(x,y) \dif A + \iint\limits_{D_{II}} f(x,y) \dif A
+	\end{equation*}
+\end{theorem}
+
+\subsection{Applications}
+
+\begin{enumerate}
+	\item If $f_x(x,y)$ and $f_y(x,y)$ are continuous in $D$, then the area of the surface $\sigma : z = f(x,y)$ above $D$ is equal to 
+		\begin{equation*}
+			S(\Sigma) = \iint\limits_{D} \sqrt{1 + \left( f_x(x,y) \right)^2 + \left( f_y(x,y) \right)^2} \dif A
+		\end{equation*}
+	\item If $\rho(x,y)$ is the density function of a thin body,
+		\begin{align*}
+			m &= \iint\limits_{D} \rho(x,y) \dif A
+		\end{align*}
+		\begin{align*}
+			(x_{\text{COM}}, y_{\text{COM}}) &= \left( \dfrac{M_y}{m}, \dfrac{M_x}{m} \right)\\
+			\intertext{where}
+			M_x &= \iint\limits_{D} y \rho(x,y) \dif A\\
+			M_y &= \iint\limits_{D} x \rho(x,y) \dif A\\
+		\end{align*}
+\end{enumerate}
+
+\section{Triple Integrals}
+
+\subsection{Triple Integrals on Parallelepiped Domains}
+
+\begin{definition}[Triple integral on parallelepiped domain]
+	Consider a parallelepiped
+	\begin{align*}
+		B &= \{(x,y,z) | a \leq x \leq b, c \leq y \leq d, e \leq z \leq g\}
+	\end{align*}
+	Consider a partition $T$
+	\begin{gather*}
+		a = x_0 < x_1 < \dots < x_{n - 1} < x_n = b\\
+		c = y_0 < y_1 < \dots < y_{n - 1} < y_n = d\\
+		e = z_0 < z_1 < \dots < z_{n - 1} < z_n = g
+	\end{gather*}
+	Consider a parallelepiped
+	\begin{equation*}
+		B_{ijk} = [x_{i-1}, x_i] \times [y_{j-1}, y-j] \times [z_{k-1}, z_k]
+	\end{equation*}
+	Let 
+	\begin{equation*}
+		{P_{ijk}}^* = \left( {x_{ijk}}^*, {y_{ijk}}^*, {z_{ijk}}^* \right)
+	\end{equation*}
+	be a point in $B_{ijk}$.
+	Let 
+	\begin{align*}
+		\Delta x_i &= x_i - x_{i-1}\\
+		\Delta y_j &= y_j - y_{j-1}\\
+		\Delta z_k &= z_k - z_{k-1}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\Delta V_{ijk} &= \Delta x_i \cdot \Delta y_j \cdot \Delta z_k
+	\end{align*}
+	Let
+	\begin{equation*}
+		\Delta T = \max\{\Delta x_i, \Delta y_j, \Delta z_k\}
+	\end{equation*}
+	$\displaystyle \sum_{i = 1}^{n} \sum_{j = 1}^{m} \sum_{k = 1}^{l} f({x_{ijk}}^*, {y_{ijk}}^*, {z_{ijk}}^*) \Delta V_{ijk}$ is called a Riemann triple integral sum.\\
+	The double integral of $f(x,y,z)$ over the domain of definition $B$ is the limit, if it exists, of the Riemann double integral sum, as $\Delta T \to 0$.
+	\begin{equation*}
+	\iiint\limits_{B} f(x,y,z) \dif V = \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} \sum_{j = 1}^{m} \sum_{k = 1}^{l} f({x_{ijk}}^*, {y_{ijk}}^*, {z_{ijk}}^*) \Delta V_{ijk}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Fubini Theorem]
+	If $f(x,y,z)$ is continuous on $B = [a,b] \times [c,d] \times [e,g]$, then the triple integral and six iterated integrals exist, and they are equal.
+	\begin{equation*}
+		\iiint\limits_{B} f(x,y,z) \dif V = \int\limits_{a}^{b} \int\limits_{c}^{d} \int\limits_{e}^{g} f(x,y,z) \dif z \dif y \dif x = \dots
+	\end{equation*}
+\end{theorem}
+
+\begin{example}
+	Calculate \[\iiint\limits_{[0,1] \times [-1,2] \times [1,3]} z^2 \sin (x + y) \dif V\]
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\iiint\limits_{[0,1] \times [-1,2] \times [1,3]} z^2 \sin (x + y) \dif V &= \int\limits_{0}^{1} \int\limits_{-1}^{2} \int\limits_{1}^{3} z^2 \sin (x + y) \dif z \dif y \dif x\\
+		&= \int\limits_{0}^{1} \int\limits_{-1}^{2} \left. \dfrac{z^3}{3} \sin (x + y) \right\rvert_{z = 0}^{z = 3} \dif y \dif x\\
+		&= \dfrac{26}{3} \int\limits_{0}^{1} \int\limits_{-1}^{2} \sin (x + y) \dif y \dif x\\
+		&= \dfrac{26}{3} \int\limits_{0}^{1} \left. -\cos (x + y) \right\rvert_{y = -1}^{y = 2} \dif x\\
+		&= \dfrac{26}{3} \int\limits_{0}^{1} \left( -\cos (x + 2) + \cos (x - 1) \right) \dif x\\
+		&= \dfrac{26}{3} \left. \left( -\sin (x + 2) + \sin (x - 1) \right) \right\rvert_{0}^{1}\\
+		&= \dfrac{26}{3} \left( -\sin 3 + 0 - \left( -\sin 2 + \sin (-1) \right) \right)\\
+		&= \dfrac{26}{3} \left( -\sin 3 + \sin 2 + \sin 1 \right)
+	\end{align*}
+\end{solution}
+
+\subsection{Triple Integrals on Arbitrary Domains}
+
+\begin{definition}[Triple integral on arbitrary domain]
+	Let $E$ be an arbitrary solid which is bounded and closed in $\mathbb{R}^3$ and $f(x,y,z)$ be defined on $E$. Consider a parallelepiped $B$, s.t. $E \subset B$ and construct the function $F(x,y,z)$, s.t.
+	\begin{equation*}
+		F(x,y,x) = 
+			\begin{cases}
+				f(x,y,z) &;\quad (x,y,z) \in E\\
+				f(x,y,z) &;\quad 0 \notin E\\
+			\end{cases}
+	\end{equation*}
+	If $\displaystyle \exists \iiint\limits_{B} F(x,y,z) \dif V$, then $\displaystyle \exists \iiint\limits_{E} f(x,y,z) \dif V$, and
+	\begin{equation*}
+	\iiint\limits_{E} f(x,y,z) \dif V = \iiint\limits_{B} F(x,y,z) \dif V
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Solid of the first kind]
+	A solid $E$ in $\mathbb{R}^3$ is called a solid of the first kind if there exist continuous functions $\varphi_1(x,y)$ and $\varphi_2(x,y)$, s.t.
+	\begin{equation*}
+		E_{I} = \{(x,y,z) | (x,y) \in D, \varphi_1(x,y) \leq z \leq \varphi_2(x,y)\}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y,z)$ is continuous on $E$,
+	\begin{equation*}
+		\iiint\limits_{E_{I}} f(x,y,z) \dif V = \iint\limits_{D} \left( \int\limits_{\varphi_1(x,y)}^{\varphi_2(x,y)} f(x,y,z) \dif x \right) \dif A
+	\end{equation*}
+\end{theorem}
+
+\end{document}
