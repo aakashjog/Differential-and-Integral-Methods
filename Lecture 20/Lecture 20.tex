@@ -193,14 +193,14 @@
 \begin{definition}[Solid of the first kind]
 	A solid $E$ in $\mathbb{R}^3$ is called a solid of the first kind if there exist continuous functions $\varphi_1(x,y)$ and $\varphi_2(x,y)$, s.t.
 	\begin{equation*}
-		E_{I} = \{(x,y,z) | (x,y) \in D, \varphi_1(x,y) \leq z \leq \varphi_2(x,y)\}
+		E_{\textnormal{I}} = \{(x,y,z) | (x,y) \in D, \varphi_1(x,y) \leq z \leq \varphi_2(x,y)\}
 	\end{equation*}
 \end{definition}
 
 \begin{theorem}
-	If $f(x,y,z)$ is continuous on $E$,
+	If $f(x,y,z)$ is continuous on $E_{\textnormal{I}}$,
 	\begin{equation*}
-		\iiint\limits_{E_{I}} f(x,y,z) \dif V = \iint\limits_{D} \left( \int\limits_{\varphi_1(x,y)}^{\varphi_2(x,y)} f(x,y,z) \dif x \right) \dif A
+		\iiint\limits_{E_{\textnormal{I}}} f(x,y,z) \dif V = \iint\limits_{D} \left( \int\limits_{\varphi_1(x,y)}^{\varphi_2(x,y)} f(x,y,z) \dif x \right) \dif A
 	\end{equation*}
 \end{theorem}
 
