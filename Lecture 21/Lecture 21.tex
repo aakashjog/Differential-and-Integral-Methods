@@ -1,0 +1,223 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 20}
+\author{Aakash Jog}
+\date{\formatdate{6}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Triple Integrals}
+
+\begin{definition}[Solid of the second kind]
+	A solid $E$ in $\mathbb{R}^3$ is called a solid of the second kind if there exist continuous functions $\varphi_1(x,z)$ and $\varphi_2(x,z)$, s.t.
+	\begin{equation*}
+		E_{\textnormal{II}} = \{(x,y,z) | (x,z) \in D, \varphi_1(x,z) \leq y \leq \varphi_2(x,z)\}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y,z)$ is continuous on $E_{\textnormal{II}}$,
+	\begin{equation*}
+		\iiint\limits_{E_{\textnormal{II}}} f(x,y,z) \dif V = \iint\limits_{D} \left( \int\limits_{\varphi_1(x,z)}^{\varphi_2(x,z)} f(x,y,z) \dif y \right) \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Solid of the third kind]
+	A solid $E$ in $\mathbb{R}^3$ is called a solid of the third kind if there exist continuous functions $\varphi_1(y,z)$ and $\varphi_2(y,z)$, s.t.
+	\begin{equation*}
+	E_{\textnormal{III}} = \{(x,y,z) | (y,z) \in D, \varphi_1(y,z) \leq y \leq \varphi_2(y,z)\}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y,z)$ is continuous on $E_{\textnormal{III}}$,
+	\begin{equation*}
+	\iiint\limits_{E_{\textnormal{III}}} f(x,y,z) \dif V = \iint\limits_{D} \left( \int\limits_{\varphi_1(y,z)}^{\varphi_2(y,z)} f(x,y,z) \dif z \right) \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{example}
+	Calculate $\displaystyle \iiint\limits_{E} x z \dif V$ when $E$ is a solid bounded by the planes $x = 0$, $y = 0$, $z = 0$ and $x + y + z = 1$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\iiint\limits_{E_{\textnormal{I}}} x z \dif V &= \iint\limits_{D} \left( \int\limits_{\varphi_1(x,y)}^{\varphi_2(x,y)} x z \dif z \right) \dif A\\
+		&= \iint\limits_{D} x \left. \dfrac{z^2}{2} \right\rvert_{z = 0}^{z = 1 - x - y} \dif A\\
+		&= \dfrac{1}{2} \iint\limits_{D} x (1 - x - y)^2 \dif A\\
+		&= \dfrac{1}{2} \int\limits_{0}^{1} \int\limits_{0}^{1 - x} x (1 - x - y)^2 \dif y \dif x\\
+		&= \dfrac{1}{2} \left. \int\limits_{0}^{1} -x \dfrac{(1 - x - y)^3}{3} \right\rvert_{y = 0}^{y = 1 - x} \dif x \\
+		&= \dfrac{1}{6} \int\limits_{0}^{1} x (1 - x)^3 \dif x\\
+		&= \dfrac{1}{120}
+	\end{align*}
+\end{solution}
+
+\section{Line Integrals of Scalar Functions}
+
+\begin{definition}[Line integral of scalar function]
+	Let a curve from $A$ to $B$ be divided into $n$ parts, s.t. $A = P_0$, $B = P_n$.\\
+	Let $\Delta s_i$ be the length of the curve $P_{i - 1} P_i$.\\
+	Let 
+	\begin{equation*}
+		\Delta T = \max \{\Delta s_i\}
+	\end{equation*}
+	Then, 
+	\begin{equation*}
+		\int\limits_{C} f(x,y) \dif s = \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} f({x_i}^*, {y_i}^*) \Delta s_i
+	\end{equation*}
+	is called a line integral of the first kind or line integral of scalar function.\\
+	This integral does not depend on the direction of the curve.\\
+	Geometrically, the line integral is the area under the curve $z = f(x,y)$ above the line $C$.
+\end{definition}	
+
+\begin{definition}[Smooth curve]
+	Let $C$ be given parametrically as
+	\begin{equation*}
+		\overline{r} (t) = \left( x(t), y(t) \right) \quad t : a \to b
+	\end{equation*}
+	The curve is said to be smooth if 
+	\begin{equation*}
+		\overline{r}'(t) = \left( x'(t), y'(t) \right)
+	\end{equation*}
+	is a continuous function on $[a,b]$, $\overline{r}'(t) \neq \overline{0}$ on $(a,b)$ and $\overline{r}'(t)$ is also continuous on $(a,b)$.
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y)$ is continuous and $C$ is smooth, then
+	\begin{equation*}
+		\int\limits_{C} f(x,y) \dif s = \int\limits_{a}^{b} f(x(t), y(t)) \sqrt{\left( x'(t) \right)^2 + \left( y'(t) \right)^2} \dif t
+	\end{equation*}
+\end{theorem}
+
+\begin{example}
+	Find $\displaystyle \int\limits_{C} (2 + x^2 y) \dif s$ when $C : y = \sqrt{1 - x^2} , -1 \leq x \leq 1$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int\limits_{C} (2 + x^2 y) \dif s &= \int\limits_{0}^{1} (2 + \cos^2 t \sin t) \sqrt{-(\sin t)^2 + (\cos t)^2} \dif t\\
+		&= 2 \pi + \dfrac{2}{3}
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	If the curve $C$ is a piecewise smooth curve, i.e. $C = C_1 \cup \dots \cup \dots C_n$, where each $C_i$ is smooth, and the length of all $C_i \cap C_j$ is zero, then
+	\begin{equation*}
+		\int\limits_{C} f(x,y) \dif s = \int\limits_{C_1} f(x,y) \dif s + \dots + \int\limits_{C_n} f(x,y) \dif s
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Line integral with respect to $x$ and $y$]
+	A line integral of $f(x,y)$ over $C$ with respect to $x$ is
+	\begin{equation*}
+		\int\limits_{C} f(x,y) \dif x = \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} f({x_i}^*, {y_i}^*) \Delta x_i
+	\end{equation*}
+	and with respect to $y$ is
+	\begin{equation*}
+		\int\limits_{C} f(x,y) \dif y = \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} f({x_i}^*, {y_i}^*) \Delta y_i
+	\end{equation*}
+	These integrals depend on the direction of $C$.
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y)$ is continuous on $C$ and $C$ is smooth, then
+	\begin{align*}
+		\int\limits_{C} f(x,y) \dif x &= \int\limits_{a}^{b} f(x(t), y(t)) x'(t) \dif t\\
+		\int\limits_{C} f(x,y) \dif y &= \int\limits_{a}^{b} f(x(t), y(t)) y'(t) \dif t
+	\end{align*}
+\end{theorem}
+
+\begin{example}
+	Calculate by definition $\displaystyle \int\limits_{C} \dif s$, $\displaystyle \int\limits_{C} \dif x$, $\displaystyle \int\limits_{C} \dif y$ for the curve $C$ given by the union of the line segments from $(0,0,0)$ to $(1,1,0)$ and $(1,1,0)$ to $(2,0,0)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\int\limits_{C} \dif s &= \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} \Delta s_i\\
+		&= \text{ length of line segment }\\
+		&= 2 \sqrt{2}
+	\end{align*}
+	\begin{align*}
+		\int\limits_{C} \dif x &= \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} \Delta x_i\\
+		&= \Delta x\\
+		&= 2
+	\end{align*}
+	\begin{align*}
+		\int\limits_{C} \dif y &= \lim\limits_{\Delta T \to 0} \sum_{i = 1}^{n} \Delta x_i\\
+		&= \Delta y\\
+		&= 0
+	\end{align*}
+\end{solution}
+
+\section{Line Integrals of Vector Functions}
+
+\begin{definition}[Line integral of vector function]
+	\begin{align*}
+		W &= \int\limits_{C} \overline{F} \cdot \hat{T} \dif s\\
+		&= \int\limits_{C} \overline{F} \cdot \dif \overline{z}\\
+		&= \int\limits_{C} P \dif x + Q \dif y + R \dif z
+	\end{align*}
+\end{definition}	
+
+\begin{example}
+	Find the work $W$ done by the force $\overline{F}(x,y) = (x, xy)$ over the curve $C : \overline{r}(t) = (2 \cos t, 2 \sin t) , t : \pi \to 2 \pi$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		W &= \int\limits_{C} \overline{F} \cdot \hat{T} \dif s\\
+		&= \int\limits_{\pi}^{2 \pi} \left( 2 \cos t (-2 \sin t) + 2 \cos t \cdot 2 \sin t \cdot 2 \cos t \right) \dif t\\
+		&= \int\limits_{\pi}^{2 \pi} \left( - 2 \sin (2t) + 8 \cos^2 t \sin t \right) \dif t\\
+		&= \left. \cos (2t) - \dfrac{8}{3} \cos^3 t \right\rvert_{\pi}^{2 \pi}\\
+		&= \left( 1 - \dfrac{8}{3} \right) - \left( 1 + \dfrac{8}{3} \right)\\
+		&= -\dfrac{16}{3}
+	\end{align*}
+\end{solution}
+
+\end{document}
