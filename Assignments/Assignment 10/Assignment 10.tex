@@ -1,0 +1,196 @@
+\date{}
+\documentclass[fleqn, a4paper, draft]{amsart}
+\usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
+\usepackage{amsmath, amssymb, commath}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{multicol}
+\usepackage{enumerate}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%opening
+\title{Differential and Integral Methods - Exercise 10}
+\author{Aakash Jog\\
+	ID: 989323563}
+%\date{\formatdate{24}{12}{2014}}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+%\tableofcontents
+
+%\begin{multicols}{2}
+	
+\section{Differentiate the following functions using the fundamental theorem of calculus:}
+
+\subsection{$\displaystyle \int\limits_{0}^{x} \sin (t^2) \dif t$}
+
+\begin{align*}
+	\dod{}{x} \left( \int\limits_{0}^{x} \sin (t^2) \dif t \right) &= \sin (x^2)
+\end{align*}
+
+\subsection{$\displaystyle \int\limits_{x^2}^{x^3} \sqrt{1 + t^2} \dif t$}
+
+\begin{align*}
+	\int\limits_{x^2}^{x^3} \sqrt{1 + t^2} \dif t &= \int\limits_{x^2}^{a} \sqrt{1 + t^2} \dif t + \int\limits_{a}^{x^3} \sqrt{1 + t^2} \dif t\\
+	&= -\int\limits_{a}^{x^2} \sqrt{1 + t^2} \dif t + \int\limits_{x^2}^{x^3} \sqrt{1 + t^2} \dif t\\
+	\dod{}{x} \left( \int\limits_{x^2}^{x^3} \sqrt{1 + t^2} \dif t \right) &= - \sqrt{1 + {x^2}^2} \cdot 2 x + \sqrt{1 + {x^2}^2} \cdot 3 x^2\\
+	&= \sqrt{1 + x^4}(3 x^2 - 2 x)
+\end{align*}
+
+\section{Calculate the volume of the body obtained by rotating the upper half of the circle $y = \sqrt{r^2 - x^2}$ around the $x$-axis.}
+
+\begin{align*}
+	V &= \pi \int\limits_{-r}^{r} (f(x))^2 \dif x\\
+	&= \pi \int\limits_{-r}^{r} (r^2 - x^2) \dif x\\
+	&= \left. \pi r^2 x - \pi \dfrac{x^3}{3} \right\rvert_{-r}^{r}\\
+	&= \pi r^3 - (-\pi r^3) - \left( \pi \dfrac{r^3}{3} - \pi \dfrac{-r^3}{3} \right)\\
+	&= 2 \pi r^3 - \pi \dfrac{2 r^3}{3}\\
+	&= \dfrac{4}{3} \pi r^3
+\end{align*}
+
+\section{Calculate the volume of the body obtained by rotating the upper half of the circle $y = \sqrt{r^2 - x^2}$ around the $y$-axis.}
+
+\begin{align*}
+	y &= \sqrt{r^2 - x^2}\\
+	\therefore x &= \sqrt{r^2 - y^2}\\
+	\therefore V &= \pi \int\limits_{0}^{r} (f(y))^2 \dif y\\
+	&= \pi \int\limits_{0}^{r} (r^2 - y^2) \dif y\\
+	&= \left. \pi r^2 x - \pi \dfrac{y^3}{3} \right\rvert_{0}^{r}\\
+	&= \pi r^3 - \pi \dfrac{r^3}{3}\\
+	&= \pi r^3 - \pi \dfrac{r^3}{3}\\
+	&= \dfrac{2}{3} \pi r^3
+\end{align*}
+
+\section{Calculate the volume of the rotation body, obtained by rotating the area bounded by $f(x) = x^2$, $g(x) = \sqrt{x}$ around the $x$-axis.}
+
+The graphs of $y = f(x)$ and $f = g(x)$ intersect at $(0,0)$ and $(1,1)$.
+
+\begin{align*}
+	V &= \left\lvert \pi \int\limits_{0}^{1} (f(x))^2 \dif x - \pi \int\limits_{0}^{1} (g(x))^2 \dif x \right\rvert\\
+	&= \pi \int\limits_{0}^{1} x \dif x - \pi \int\limits_{0}^{1} x^4 \dif x\\
+	&= \pi \dfrac{1^2}{2} - \pi\dfrac{1^5}{5}\\
+	&= \pi \dfrac{1}{2} - \pi \dfrac{1}{5}\\
+	&= \dfrac{3 \pi}{10}
+\end{align*}
+
+\section{Calculate the improper integral $\displaystyle \int\limits_{-\infty}^{\infty} \dfrac{\dif x}{1 + x^2}$}
+
+\begin{align*}
+	\int\limits_{-\infty}^{\infty} \dfrac{\dif x}{1 + x^2} &= \int\limits_{-\infty}^{0} \dfrac{\dif x}{1 + x^2} + \int\limits_{0}^{\infty} \dfrac{\dif x}{1 + x^2}\\
+	&= \lim\limits_{t \to -\infty} \int\limits_{t}^{0} \dfrac{\dif x}{1 + x^2} + \lim\limits_{u \to \infty} \int\limits_{0}^{u} \dfrac{\dif x}{1 + x^2}\\
+	&= \lim\limits_{t \to -\infty} \left. \tan^{-1} x \right\rvert_{t}^{0} + \lim\limits_{u \to \infty} \left. \tan^{-1} x \right\rvert_{0}^{u}\\
+	&= \lim\limits_{t \to -\infty} -\tan^{-1} t + \lim\limits_{u \to \infty} \tan^{-1} u\\
+	&= \dfrac{\pi}{2} + \dfrac{\pi}{2}\\
+	&= \pi
+\end{align*}
+
+\section{Check convergence of the following integrals:}
+
+\subsection{$\displaystyle \int\limits_{-\infty}^{\infty} \dfrac{\sin x}{x^2} \dif x$}
+
+\begin{align*}
+	\int\limits_{-\infty}^{\infty} \dfrac{\sin x}{x^2} \dif x &= \int\limits_{-\infty}^{-1} \dfrac{\sin x}{x^2} \dif x + \int\limits_{-1}^{0} \dfrac{\sin x}{x^2} \dif x + \int\limits_{0}^{1} \dfrac{\sin x}{x^2} \dif x + \int\limits_{1}^{\infty} \dfrac{\sin x}{x^2} \dif x
+\end{align*}
+
+\begin{align*}
+	\dfrac{\sin x}{x^2} \dif x &\leq \dfrac{1}{x^2}
+\end{align*}
+Therefore, as $\dfrac{1}{x^2}$ converges in $(1, \infty)$ and $(-\infty, -1)$, $\dfrac{\sin x}{x^2}$ converges in $(1, \infty)$ and $(-\infty, -1)$.\\
+However, the limit $\displaystyle \lim\limits_{b \to 0^+} \int\limits_{b}^{1} \dfrac{\sin x}{x^2} \dif x$ does not exist. Therefore the integral diverges.
+
+\subsection{$\displaystyle \int\limits_{0}^{\infty} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x$}
+
+\begin{align*}
+	\int\limits_{0}^{\infty} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x&= \int\limits_{0}^{1} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x + \int\limits_{1}^{\infty} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x
+\end{align*}
+
+\begin{align*}
+	\dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} &\leq \dfrac{1}{\sqrt{x}}\\
+	\lim\limits_{x \to 0^+} \dfrac{\sqrt{x}}{\sqrt{3 x^4 + x^2 + x}} &= 1
+\end{align*}
+Therefore, by the second comparison test, $\displaystyle \int\limits_{0}^{1} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x$ converges.\\
+
+\begin{align*}
+	\dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} &\leq \dfrac{1}{x^2}
+\end{align*}
+Therefore, by the first comparison test, as $\dfrac{1}{x^2}$ converges, $\displaystyle \int\limits_{1}^{\infty} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x$ converges.\\
+Hence, $\displaystyle \int\limits_{0}^{\infty} \dfrac{\dif x}{\sqrt{3 x^4 + x^2 + x}} \dif x$ converges.
+
+\subsection{$\displaystyle \int\limits_{1}^{\infty} \dfrac{e^{-x} \sin 2x}{\sqrt{1 + x^4}}\dif x$}
+
+\begin{align*}
+	\dfrac{e^{-x} \sin 2x}{\sqrt{1 + x^4}}\dif x &\leq \dfrac{1}{x^2}
+\end{align*}
+Therefore, by the first comparison test, as $\dfrac{1}{x^2}$ converges, $\displaystyle \int\limits_{1}^{\infty} \dfrac{e^{-x} \sin 2x}{\sqrt{1 + x^4}}\dif x$ converges.
+
+\subsection{$\displaystyle \int\limits_{0}^{\infty} \dfrac{\arctan x}{\sqrt{x + x^3}} \dif x$}
+
+\begin{align*}
+	\int\limits_{0}^{\infty} \dfrac{\arctan x}{\sqrt{x + x^3}} \dif x&= \int\limits_{0}^{1} \dfrac{\arctan x}{\sqrt{x + x^3}} \dif x + \int\limits_{1}^{\infty} \dfrac{\arctan x}{\sqrt{x + x^3}} \dif x
+\end{align*}
+
+\begin{align*}
+	\dfrac{\arctan x}{\sqrt{x + x^3}} &= \dfrac{\arctan x}{\sqrt{x}\sqrt{1 + x^2}}\\
+	\therefore \dfrac{\dfrac{\arctan x}{\sqrt{x + x^3}}}{\dfrac{\arctan x}{\sqrt{x}}} &= \dfrac{1}{\sqrt{1 + x^2}}\\
+	\lim\limits_{x \to 0^+} \dfrac{1}{\sqrt{1 + x^2}} &= 1\\
+	\dfrac{\arctan x}{\sqrt{x}} &\leq \dfrac{1}{\sqrt{x}}
+\end{align*}
+Therefore, as $\displaystyle \int\limits_{0}^{1} \dfrac{1}{\sqrt{x}} \dif x$ converges, $\displaystyle \int\limits_{0}^{1} \dfrac{\arctan x}{\sqrt{x}} \dif x$ converges. 
+Hence, $\displaystyle \int\limits_{0}^{1} \dfrac{\arctan x}{\sqrt{x + x^3}} \dif x$ converges.
+
+\subsection{$\displaystyle \int\limits_{0}^{1} \dfrac{\arctan x}{x^2} \dif x$}
+
+\begin{align*}
+	\dfrac{\arctan x}{x^2} &\leq \dfrac{1}{x^2}\\
+	\lim\limits_{x \to 0} \dfrac{\dfrac{\arctan x}{x^2}}{\dfrac{1}{x^2}} &= 1
+\end{align*}
+Therefore, $\displaystyle \int\limits_{0}^{1} \dfrac{\arctan x}{x^2}$ and $\displaystyle \int\limits_{0}^{1} \dfrac{1}{x^2}$ converge or diverge simultaneously.\\
+Therefore, as $\displaystyle \int\limits_{0}^{1} \dfrac{1}{x^2} \dif x$ diverges, $\displaystyle \int\limits_{0}^{1} \dfrac{\arctan x}{x^2} \dif x$ also diverges.
+
+\section{$\displaystyle \Gamma(x) = \int\limits_{0}^{\infty} t^{x - 1} e^{-t} \dif t$}
+
+\subsection{}
+
+\begin{align*}
+	\Gamma(1) &= \int\limits_{0}^{\infty} t^0 e^{-t} \dif t\\
+	&= \lim\limits_{a \to \infty} \int\limits_{0}^{a} e^{-t} \dif t\\
+	&= \lim\limits_{a \to \infty} \left. -e^{-t} \right\rvert_{0}^{a}\\
+	&= \lim\limits_{a \to \infty} -e^{-a} - (- e^0)\\
+	&= \lim\limits_{a \to \infty} -e^{-a} + 1\\
+	&= 1
+\end{align*}
+
+%\subsection{}
+%
+%\begin{align*}
+%	\Gamma(x + 1) &= \int\limits_{0}^{\infty} t^x e^{-t} \dif t\\
+%	&= \lim\limits_{a \to \infty} \int\limits_{0}^{a} t^x r^{-t} \dif t\\
+%	&= \lim\limits_{a \to \infty} \left. t^x \int e^{-t} \dif t - \int t^x \ln t \left( \int e^{-t} \dif t \right) \dif t \right\rvert_{0}^{a}\\
+%	&= \lim\limits_{a \to \infty} \left. \right. -t^x e^t - \int
+%\end{align*}
+
+%\end{multicols}
+
+\end{document}
