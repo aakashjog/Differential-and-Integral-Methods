@@ -1,0 +1,196 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 22}
+\author{Aakash Jog}
+\date{\formatdate{13}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{The Fundamental Theorem of Line Integrals}
+
+\begin{theorem}[The Fundamental Theorem of Line Integrals]\label{The Fundamental Theorem of Line Integrals}
+	Let $C$ be a smooth curve in $\mathbb{R}^2$ or $\mathbb{R}^3$ given parametrically by $\overline{r}(t)$, $t : a \to b$. Let $f$ be a continuous function of $(x,y)$ or $(x,y,z)$ respectively, on $C$ and $\nabla f$ be a continuous vector function in a connected domain $D$ which contains $C$. Then
+	\begin{align*}
+		W &= \int\limits_{C} \nabla f \cdot \hat{T} \dif s\\
+		&= f(r(b)) - f(r(a))\\
+		&= f(B) - f(A)
+	\end{align*}
+\end{theorem}
+
+\begin{remark}
+	$\overline{F} = \nabla f$ is called a conservative vector field. The line integral of a vector field does not depend on the path, but only on the endpoints. The work done by it over a closed path is 0.
+\end{remark}
+
+\section{Application of Line Integrals}
+
+\begin{example}
+	If $\overline{r}(t), t : a \to b$ represents the position of a particle with mass $m$ with respect to time $t$ over a path $C$, find the work done between time $a$ and $b$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		W &= \int\limits_{C} \overline{F} \cdot \hat{T} \dif s\\
+		&= \int\limits_{a}^{b} \overline{F} \left( \overline{r}(t) \right) \cdot \left( \overline{r}(t) \right)'\\
+		&= m \int\limits_{a}^{b} \left( \overline{r}(t) \right)'' \cdot \left( \overline{r}(t) \right)' \dif t\\
+		&= \dfrac{m}{2} \int\limits_{a}^{b} \left( \left( \overline{r}(t) \right)' \cdot \left( \overline{r}(t) \right)' \right)' \dif t\\
+		&= \dfrac{m}{2} \int\limits_{a}^{b} \left( \left\lvert \left( \overline{r}(t) \right)' \right\rvert^2 \right)' \dif t\\
+		&= \dfrac{m}{2} \left. \left\lvert \left( \overline{r}(t) \right)' \right\rvert^2 \right\rvert_{a}^{b}\\
+		&= \dfrac{m \left\lvert \overline{v}(b) \right\rvert^2}{2} - \dfrac{m \left\lvert \overline{v}(a) \right\rvert^2}{2}
+	\end{align*}
+\end{solution}
+
+\section{Conservative Vector Field in a Plane}
+
+\begin{definition}[Simple curve]
+	A curve $C$ is called a simple curve if it does not intersect itself.
+\end{definition}
+
+\begin{definition}[Domain]
+	A domain $D \subset \mathbb{R}^2$ is called connected if for any two points from $D$, the is a path $C$ which connects the points and remains in $D$.
+\end{definition}
+
+\begin{definition}[Simple connected domain]
+	A connected domain $D \subset \mathbb{R}^2$ is called simple connected if any simple closed curve from $D$ contains inside itself only points in $D$.
+\end{definition}
+
+\begin{theorem}
+	If
+	\begin{equation*}
+		\overline{F}(x,y) = \left( P(x,y), Q(x,y) \right) = \nabla f(x,y)
+	\end{equation*}
+	is the conservative vector field in a connected domain $D$, where there exist first order partial derivatives of $P$ and $Q$ continuous in $D$, then
+	\begin{align*}
+		P_y(x,y) &= Q_x(x,y) &\forall (x,y) \in D
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	As $\overline{F} = \nabla f$, 
+	\begin{align*}
+		(P, Q) &= (f_x, f_y)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		f_{xy} &= P_y\\
+		f_{yx} &= Q_x\\
+		\therefore P_y &= Q_x
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let
+	\begin{equation*}
+		\overline{F}(x,y) = \left( P(x,y), Q(x,y) \right)
+	\end{equation*}
+	be a vector field in an open, simple connected domain $D$. If there exist first order partial derivatives of $P$ and $Q$ which are continuous in $D$, and
+	\begin{align*}
+		P_y(x,y) &= Q_x(x,y) &\forall (x,y) \in D
+	\end{align*}
+	Then, $\exists f(x,y)$ s.t.
+	\begin{equation*}
+		\overline{F}(x,y) = \nabla f(x,y)
+	\end{equation*}
+	i.e. $\overline{F}$ is a conservative vector field.
+\end{theorem}
+
+\begin{example}
+	If 
+	\begin{equation*}
+		\overline{F}(x,y) = (3 + 2 x y, x^2 - 3 y^2)
+	\end{equation*}
+	a conservative vector field? If yes, find $f(x,y)$, s.t.
+	\begin{equation*}
+		\overline{F}(x,y) = \nabla f(x,y)
+	\end{equation*}
+	and find the work done by the force $\overline{F}(x,y)$ over the curve
+	\begin{align*}
+		\overline{r}(t) &= (e^t \sin t, e^t \cos t) & t : 0 \to \pi
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		P(x,y) &= 3 + 2xy\\
+		\therefore P_y &= 2x\\
+		Q(x,y) &= x^2 - 3 y^2\\
+		\therefore Q_x &= 2x\\
+		\therefore P_y &= Q_x
+	\end{align*}
+	Therefore, $\overline{F}(x,y)$ is a conservative vector field.
+	\begin{align*}
+		f_x &= P\\
+		&= 3 + 2 x y\\
+		\therefore f &= 3x + x^2 y + c(y)\\
+		\therefore f_y &= x^2 + c'(y)\\
+		\intertext{Comapring with $f_y = Q$,}
+		c'(y) &= -3 y^3\\
+		\therefore c(y) &= - y^3 + c\\
+		\therefore f(x,y) &= 3x + x^2 y - y^3 + c
+	\end{align*}
+	By the definition of work,
+	\begin{align*}
+		W &= \int\limits_{C} \overline{F} \cdot \hat{T} \dif s\\
+		&= \int\limits_{a}^{b} \left( P(\overline{r}(t)) x'(t) + Q(\overline{r}(t)) y'(t) \right) \dif t
+	\end{align*}
+	Alternatively, using \nameref{The Fundamental Theorem of Line Integrals},
+	\begin{align*}
+		W &= \int\limits_{C} \overline{F} \cdot \hat{T} \dif s\\
+		&= \int\limits_{C} \nabla d \cdot \hat{T} \dif s\\
+		&= f(\overline{r}(\pi)) - f(\overline{r}(0))\\
+		&= f(0, -e^{\pi}) - f(0, 1)\\
+		&= -(-e^{\pi})^3 - (-1)^3\\
+		&= e^{3 \pi} + 1
+	\end{align*}
+\end{solution}
+
+\begin{definition}[Curve with positive orientation]
+	A simple closed curve $C$ is called a curve with a positive orientation, or with anti-clockwise orientation if the domain $D$ bounded by $C$ always remains on the left when we circulate over $C$ by $\overline{r}(t), t : a \to b$.
+\end{definition}
+
+\end{document}
