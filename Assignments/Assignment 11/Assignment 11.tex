@@ -1,0 +1,239 @@
+\date{}
+\documentclass[fleqn, a4paper, draft, 10pt]{amsart}
+\usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
+\usepackage{amsmath, amssymb, commath}
+\usepackage{gensymb}
+\usepackage{tikz, pgfplots}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{multicol}
+\usepackage{enumerate}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+%opening
+\title{Differential and Integral Methods - Exercise 11}
+\author{Aakash Jog\\
+	ID: 989323563}
+
+\begin{document}
+	
+\maketitle
+\setlength{\mathindent}{0pt}
+
+%\tableofcontents
+
+%\begin{multicols}{2}
+	
+\section{Check whether the following functions are continuous at $(0,0)$:}
+
+\subsection{}
+
+\begin{align*}
+	f(x,y) &= 
+		\begin{cases}
+			\dfrac{x}{3x + 5y} & (x,y) \neq (0,0)\\
+			5 & (x,y) = (0,0)\\
+		\end{cases}\\
+	\therefore \lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{x}{3x + 5y} &= \lim\limits_{x \to 0} \dfrac{x}{3x + 5kx}\\
+	&= \dfrac{1}{3 + 5k}
+\end{align*}
+Therefore, as the limit depends on $k$, the limit does not exist.\\
+Therefore, $f(x,y)$ is not continuous at $(0,0)$.
+
+\subsection{}
+
+\begin{align*}
+	f(x,y) &= 
+		\begin{cases}
+			\dfrac{x^2}{x^2 + y^2} & (x,y) \neq (0,0)\\
+			0 & (x,y) = (0,0)\\
+		\end{cases}\\
+	\therefore \lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{x^2}{x^2 + y^2} &= \lim\limits_{x \to 0} \dfrac{x^2}{x^2 + k^2 x^2}\\
+	&= \dfrac{1}{1 + k^2}
+\end{align*}
+Therefore, as the limit depends on $k$, the limit does not exist.\\
+Therefore, $f(x,y)$ is not continuous at $(0,0)$.
+
+\section{Find the domain of definition of the following functions:}
+
+\subsection{$f(x,y) = \sqrt{\dfrac{1 + x + y}{1 - x - 2y}}$}
+
+\begin{align*}
+	1 - x - 2y &\neq 0\\
+	\therefore x + 2y &\neq 1
+\end{align*}
+
+\begin{align*}
+	1 + x + y &\geq 0 &\&&& 1 - x - 2y &\geq 0\\
+	\intertext{or}
+	1 + x + y &\leq 0 &\&&& 1 - x - 2y &\leq 0\\
+\end{align*}
+Therefore,
+\begin{gather*}
+	D_1 = 1 - x \geq y \geq -1 - x\\
+	D_2 = 1 - x \leq y \leq -1 - x\\
+	D = D_1 \cap D_2
+\end{gather*}
+
+\subsection{$f(x,y) = \dfrac{1}{\cos(x^2 + y^2)}$}
+
+\begin{align*}
+	\cos(x^2 + y^2) &> 0\\
+	\therefore x^2 + y^2 &\in \left( -\dfrac{\pi}{2} + n \pi, \dfrac{\pi}{2} + n \pi \right)
+\end{align*}
+
+\section{Find the following limits:}
+
+\subsection{$\lim\limits_{(x,y) \to \left( \sfrac{\pi}{2}, 0 \right)} \sin x + \left( \ln \dfrac{x + y}{x - y} \right) \dfrac{x}{\sqrt{x^2 + y^2}}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \to \left( \sfrac{\pi}{2}, 0 \right)} \sin x + \left( \ln \dfrac{x + y}{x - y} \right) \dfrac{x}{\sqrt{x^2 + y^2}} &= \sin \dfrac{\pi}{2} + \ln(1) \cdot 1\\
+	&= 1
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y,z) \to (0,0,0)} \dfrac{\sqrt{x^2 + y^2 + x^2 + 1} - 1}{\sqrt{x^2 + y^2 + z^2}}$}
+
+\begin{align*}
+	\lim\limits_{(x,y,z) \to (0,0,0)} \dfrac{\sqrt{x^2 + y^2 + x^2 + 1} - 1}{\sqrt{x^2 + y^2 + z^2}} &= \lim\limits_{(x,y,z) \to (0,0,0)} \dfrac{\left( \sqrt{x^2 + y^2 + x^2 + 1} - 1 \right) \left( \sqrt{x^2 + y^2 + z^2 + 1} + 1 \right)}{\left( \sqrt{x^2 + y^2 + z^2} \right) \left( \sqrt{x^2 + y^2 + z^2 + 1} + 1 \right)}\\
+	&= \lim\limits_{(x,y,z) \to (0,0,0)} \dfrac{\sqrt{x^2 + y^2 + z^2}}{\sqrt{x^2 + y^2 + z^2} + 1}\\
+	&= 0
+\end{align*}
+
+\subsection{$\lim\limits_{x \to \infty, y \to 4} \left( 1 + \dfrac{1}{x} \right)^{\dfrac{x^2}{x + y}}$}
+
+\begin{align*}
+	\lim\limits_{\substack{x \to \infty\\y \to 4}} \left( 1 + \dfrac{1}{x} \right)^{\dfrac{x^2}{x + y}} &= \lim\limits_{\substack{x \to \infty\\y \to 4}} \left( 1 + \dfrac{1}{x} \right)^{x \cdot \dfrac{1}{1 + \sfrac{y}{x}}}\\
+	&= \lim\limits_{\substack{x \to \infty\\y \to 4}} e^{\frac{x^2}{x + y}}\\
+	&= e
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{x - y}{x + y}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{x - y}{x + y} &= \lim\limits_{x \to 0} \dfrac{x - kx}{x + kx}\\
+	&= \dfrac{1 - k}{1 + k}
+\end{align*}
+Therefore, as the limit depends on $k$, the limit does not exist.\\
+Therefore, $f(x,y)$ is not continuous at $(0,0)$.
+
+\subsection{$\lim\limits_{(x,y) \to (2,1)} \dfrac{y \sin (x y - 2)}{3 x y - 6}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \to (2,1)} \dfrac{y \sin (x y - 2)}{3 x y - 6} &= \lim\limits_{(x,y) \to (2,1)} \dfrac{y}{3} \dfrac{\sin (x y - 2)}{x y - 2}\\
+	&= \dfrac{1}{3}
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{x^2 y^2}{x^2 y^2 + (x^2 - y^2)^2}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{x^2 y^2}{x^2 y^2 + (x^2 - y^2)^2} &= \lim\limits_{x \to 0} \dfrac{k^2 x^4}{k^2 x^4 + (x^2(1 - k^2))^2}\\
+	&= \dfrac{k^2}{k^2 + (1 - k^2)^2}
+\end{align*}
+Therefore, as the limit depends on $k$, the limit does not exist.\\
+Therefore, $f(x,y)$ is not continuous at $(0,0)$.
+
+\section{Find the following limits or show that they do not exist:}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{x y}{x^2 + y^2}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{x y}{x^2 + y^2} &= \lim\limits_{x \to 0} \dfrac{k x^2}{x^2(1 + k^2)}\\
+	&= \dfrac{k}{1 + k^2}
+\end{align*}
+Therefore, as the limit depends on $k$, the limit does not exist.\\
+Therefore, $f(x,y)$ is not continuous at $(0,0)$.
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{3xy^2 - 5y^4}{x^2 + 2y^2}$}
+
+\begin{align*}
+	\lim\limits_{(x,y) \stackrel{y = kx}{\to} (0,0)} \dfrac{3xy^2 - 5y^4}{x^2 + 2y^2} &= \lim\limits_{x \to 0} \dfrac{3 k^2 x^3 - 5 k^4 x^4}{x^2 + 2 k^2 x^2}\\
+	&= \lim\limits_{x \to 0} \dfrac{3 k^2 x - 5 k^4 x^2}{1 + 2 k^2}\\
+	&= 0
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{e^{xy} - 1}{x^2 + y^2}$}
+
+Let 
+\begin{align*}
+	x &= r \cos t\\
+	y &= r \sin t
+\end{align*}
+Therefore, 
+\begin{align*}
+	\lim\limits_{(x,y) \to (0,0)} \dfrac{e^{xy} - 1}{x^2 + y^2} &= \lim\limits_{r \to 0} \dfrac{e^{r^2 \sin t \cos t} - 1}{r^2}\\
+	&= \lim\limits_{r \to 0} \dfrac{e^{r^2 \sin t \cos t} \cdot 2 r \sin t \cos t}{2r}\\
+	&= \sin t \cos t
+\end{align*}
+Therefore, as the limit depends on $t$, the limit does not exist.\\
+
+\subsection{$\lim\limits_{x \to \infty, y \to \infty} \dfrac{2x + 3y}{x^2 - x y + y^2}$}
+
+Let
+\begin{align*}
+	x &= r \cos t\\
+	y &= r \sin t
+\end{align*}
+Therefore,
+\begin{align*}
+	\lim\limits_{\substack{x \to \infty\\ y \to \infty}} \dfrac{2x + 3y}{x^2 - x y + y^2} &= \lim\limits_{r \to \infty} \dfrac{2 r \cos t + 3 r \sin t}{r^2 \cos^2 t - r^2 \sin t \cos t + r^2 \sin^2 t}\\
+	&= \lim\limits_{r \to \infty} \dfrac{2 \cos t + 3 \sin t}{r - r \sin t \cos t}\\
+	&= \lim\limits_{r \to \infty} \dfrac{1}{r} \cdot \dfrac{2 \cos t + 3 \sin t}{1 - \sin t \cos t}\\
+	&= 0
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{x y^3}{x^2 + y^6}$}
+
+Let
+\begin{align*}
+	x &= r \cos t\\
+	y &= r \sin t
+\end{align*}
+Therefore,
+\begin{align*}
+	\lim\limits_{(x,y) \to (0,0)} \dfrac{x y^3}{x^2 + y^6} &= \lim\limits_{r \to 0} \dfrac{r^4 \cos t \sin^3 t}{r^2 \cos^2 t + r^6 \sin^6 t}\\
+	&= \lim\limits_{r \to 0} \dfrac{r^2 \cos t \sin^3 t}{\cos^2 t + r^4 \sin^6 t}\\
+	&= 0
+\end{align*}
+
+\subsection{$\lim\limits_{(x,y) \to (0,0)} \dfrac{3y^4 + x^2 y^2 + 3x^2}{x^2 + y^4}$}
+
+Let
+\begin{align*}
+x &= r \cos t\\
+y &= r \sin t
+\end{align*}
+Therefore,
+\begin{align*}
+	\lim\limits_{(x,y) \to (0,0)} \dfrac{3y^4 + x^2 y^2 + 3x^2}{x^2 + y^4} &= \lim\limits_{r \to 0} \dfrac{3 r^4 \sin^4 t + r^4 \sin^2 t \cos^2 t + 3 r^2 \cos^2 t}{r^2 \cos^2 t + r^4 \sin^4 t}\\
+	&= \lim\limits_{r \to 0} \dfrac{3 r^2 \sin^4 t + r^2 \sin^2 t \cos^2 t + 3 \cos^2 t}{\cos^2 t + r^2 \sin^4 t}\\
+	&= \dfrac{3 \cos^2 t}{\cos^2 t}\\
+	&= 3
+\end{align*}
+
+%\end{multicols}
+
+\end{document}
