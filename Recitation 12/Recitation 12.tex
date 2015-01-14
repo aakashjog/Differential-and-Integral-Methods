@@ -1,0 +1,136 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{graphicx, epstopdf}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 12}
+\author{Aakash Jog}
+\date{\formatdate{14}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Functions of Two Variables}
+
+\subsection{Differentiability}
+
+\begin{example}
+	Check the differentiability of $f(x,y)$ in $\mathbb{R}^2$.
+	\begin{equation*}
+		f(x,y) =
+			\begin{cases}
+				\dfrac{x^3 + y^4}{x^2 + y^2} &;\quad (x,y) \neq (0,0)\\
+				0 &;\quad (x,y) = (0,0)\\
+			\end{cases}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	If $(x,y) \neq (0,0)$, $f_x(x,y)$ and $f_y(x,y)$ are continuous. Therefore, $f$ is differentiable in $\mathbb{R}^2 - \{(0,0)\}$.\\
+	$f$ is differentiable at $(0,0)$ if $f_x$ and $f_y$ are continuous at $(0,0)$.
+	\begin{align*}
+		f_x(0,0) &= \lim\limits_{h \to 0} \dfrac{f(h,0) - f(0,0)}{h - 0}\\
+		&= \lim\limits_{h \to 0} \dfrac{\dfrac{h^3}{h^2} - 0}{h}\\
+		&= 1
+	\end{align*}
+	\begin{align*}
+		f_y(0,0) &= \lim\limits_{h \to 0} \dfrac{f(0,h) - f(0,0)}{h - 0}\\
+		&= \lim\limits_{h \to 0} \dfrac{\dfrac{h^4}{h^2} - 0}{h}\\
+		&= 0
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{\substack{x = 0\\ y \to 0}} f_x(x,y) &= 0\\
+		\therefore \lim\limits_{\substack{x = 0\\ y \to 0}} f_x(x,y) &\neq f_x(0,0)
+	\end{align*}
+	Therefore, $f(x)$ is not continuous at $(0,0)$.\\
+	Therefore, it needs to be checked by definition.
+	\begin{align*}
+		\varepsilon(\Delta x, \Delta y) &= f(x,y) - f(0,0) - f_x(0,0) \Delta x - f_y(0,0) \Delta y\\
+		&= \dfrac{x^3 + y^4}{x^2 + y^2} - 1 \cdot \Delta x - 0\cdot \Delta y\\
+		&= \dfrac{x^3 + y^4}{x^2 + y^2} - x\\
+		&= \dfrac{x^3 + y^4 - x(x^2 + y^2)}{x^2 + y^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{\substack{x \to 0\\ y \to 0}} \dfrac{\varepsilon(x,y)}{\sqrt{x^2 + y^2}} &= \lim\limits_{\substack{x \to 0\\ y \to 0}} \dfrac{\dfrac{x^3 + y^4 - x^3 + xy^2}{x^2 + y^2}}{\sqrt{x^2 + y^2}}\\
+		&= \lim\limits_{\substack{x \to 0\\ y \to 0}} \dfrac{y^4 - xy^2}{\left( x^2 + y^2 \right)^{\sfrac{3}{2}}}
+	\end{align*}
+	Over the path $y = x$, $x \to 0$, the limit is $-\dfrac{1}{2^{\sfrac{3}{2}}}$, not $0$. Therefore, $f$ is not differentiable at $(0,0)$.
+\end{solution}
+
+\subsection{Tangent Plane}
+
+\begin{example}
+	Find the tangent plane to $F(x,y,z) = x y z - 8$ at $(-2, 2, -2)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		F_x &= y z\\
+		F_y &= x z\\
+		F_z &= x y
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		F_x(-2, 2, -2) &= -4\\
+		F_y(-2, 2, -2) &= 4\\
+		F_z(-2, 2, -2) &= -4
+	\end{align*}
+	Therefore, the tangent plane is
+	\begin{align*}
+		-4(x + 2) + 4(y - 2) - 4(z + 2) &= 0
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	At which points will the tangent plane to $x^2 + y^2 = 4z$ be parallel to the plane $x - 2y - z = 5$?
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		F(x,y,z) = x^2 + y^2 - 4z
+	\end{align*}
+	Then the tangent plane to $F(x,y,z) = 0$ is given by
+	\begin{align*}
+		2x_0 (x - x_0) + 2y_0 (y - y_0) - 4 (z - z_0) &= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		(2 x_0, 2 y_0, -4) &= t (1, -2, 1)
+	\end{align*}
+	Solving,
+	\begin{align*}
+		x_0 &= 2\\
+		y_0 &= -4\\
+		\therefore z_0 &= 5
+	\end{align*}
+	Therefore, the planes are parallel at $(2, -4, 5)$.
+\end{solution}
+
+\end{document}
