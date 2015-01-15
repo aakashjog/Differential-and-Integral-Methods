@@ -1,0 +1,257 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{todonotes, marginnote}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 23}
+\author{Aakash Jog}
+\date{\formatdate{15}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Green's Theorem}
+
+\begin{theorem}[Green's Theorem]\label{Green's Theorem}
+	Let $C$ ne a piecewise smooth, simple, and closed curve in $\mathbb{R}^2$ with positive orientation. Let $D$ be a domain bounded by $C$. If there exist continuous first order partial derivatives of $P(x,y)$ and $Q(x,y)$ in an open domain which contains $D$, then
+	\begin{equation*}
+		W = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s = \int\limits_{C} P \dif x + Q \dif y = \iint\limits_{D} (Q_x - P_y) \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{remark}
+	\nameref{Green's Theorem} is also true for domains with holes.
+\end{remark}
+
+\begin{example}
+	Find the work done by the force 
+	\begin{equation*}
+		\overline{F}(x,y) = (x^4, xy)
+	\end{equation*}
+	over the path 
+	\begin{equation*}
+		C = C_1 \cup C_2 \cup C_3
+	\end{equation*}
+	\begin{tikzpicture}[scale = 2]
+		\begin{scope}[stealth-stealth, lightgray]
+			\draw (-1,0) -- (2,0);
+			\draw (0,-1) -- (0,2);
+		\end{scope}
+		
+		\begin{scope}[-stealth, thick]
+			\draw (0,0) -- (1,0) node [midway, below] {$C_1$};
+			\draw (1,0) -- (0,1) node [midway, above right] {$C_2$};
+			\draw (0,1) -- (0,0) node [midway, left] {$C_3$};
+		\end{scope}
+		
+		\node [below left] at (0,0) {$0$};
+		\node [below] at (1,0) {$1$};
+		\node [left] at (0,1) {$1$};
+	\end{tikzpicture}
+\end{example}
+
+\begin{solution}
+	By \nameref{Green's Theorem},
+	\begin{align*}
+				W &= \int\limits_{C} P \dif x + Q \dif y \\
+				&= \iint\limits_{D} (Q_x - P_y) \dif A\\
+				&= \iint\limits_{D} (y - 0) \dif A\\
+				&= \int\limits_{0}^{1} \int\limits_{0}^{1 - x} y \dif y \dif x\\
+				&= \dfrac{1}{6}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Calculate $\displaystyle \int\limits_{C} \overline{F} \cdot \hat{T} \dif s$ when
+	\begin{equation*}
+		\overline{F} = \left( -\dfrac{y}{x^2 + y^2} , \dfrac{x}{x^2 + y^2} \right)
+	\end{equation*}
+	and $C$ is a simple, closed, piecewise smooth curve with positive orientation which does not pass through $(0,0)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		P &= \dfrac{y}{x^2 + y^2}\\
+		Q &= \dfrac{x}{x^2 + y^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		P_y &= -\dfrac{(x^2 + y^2) - y \cdot 2y}{(x^2 + y^2)^2}\\
+		&= \dfrac{y^2 - x^2}{(x^2 + y^2)^2}\\
+		Q_x &= \dfrac{(x^2 + y^2) - x \cdot 2x}{(x^2 + y^2)^2}
+	\end{align*}
+	If $(0,0) \notin D$, \nameref{Green's Theorem} is applicable.\\
+	Therefore,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \cdot \hat{T} \dif s &= \iint\limits_{D} (Q_x - P_y) \dif A\\
+		&= 0
+	\end{align*}
+	If $(0,0) \in D$, \nameref{Green's Theorem} is not applicable as $P_y$ and $Q_x$ are not continuous in $D$.\\
+	Let $C_1$ be a circle of radius $a$, with the same orientation as $C$. Let $\widetilde{C} = C \cup (-C_1)$. \nameref{Green's Theorem} can be applied on the domain $D \setminus D_1$ which is enclosed by $\widetilde{C}$.
+	\begin{align*}
+		\int\limits_{C \cup (-C_1)} P \dif x + Q \dif y &= \iint\limits_{D \setminus D_1} (Q_x - P_y) \dif A\\
+		&= 0\\
+		\int\limits_{C} P \dif x + Q \dif y + \int\limits_{-C_1} P \dif x + Q \dif y &= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int\limits_{C} P \dif x + Q \dif y &= \int\limits_{C_1} P \dif x + Q \dif y\\
+		&= \int\limits_{0}^{2 \pi} \left( P\left( x(t), y(t) \right) x'(t) + Q\left( x(t), y(t) \right) \right)\\
+		&= \int\limits_{0}^{2 \pi} (\sin^2 t + \cos^2 t) \dif t\\
+		&= 2 \pi
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Calculate $\displaystyle \int\limits_{C} -2e^{2x - y} \cos y \dif x + \left( e^{2x - y} (\sin y + \cos y) + 2xy \right) \dif y$ when $C$ is the half ellipse $\left\lbrace \dfrac{x^2}{4} + y^2 = 1, y \geq 0 \right\rbrace$ oriented from the point $(2,0)$ to the point $(-2,0)$.
+\end{example}
+
+\begin{solution}
+	~\\
+	\begin{tikzpicture}
+		\begin{scope}[stealth-stealth, lightgray]
+			\draw (-3,0) -- (3,0);
+			\draw (0,-1) -- (0,2);
+		\end{scope}
+		
+		\draw [thick, -stealth] (2,0) arc (0:90:2 and 1) node[above, near end] {$C$};
+		\draw [thick] (0,1) arc (90:180:2 and 1);
+		
+		\draw [-stealth] (-2,0) -- (0,0) node [near end, below] {$C_1$};
+		\draw (0,0) -- (2,0);
+	\end{tikzpicture}\\
+	Let $C_1$ be the line segment as shown.
+	\begin{align*}
+		P &= -2e^{2x - y} \cos y\\
+		Q &= e^{2x - y} (\sin y + \cos y) + 2xy
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		P_y &= 2e^{2x - y} \cos y + 2e^{2x - y} \sin y \\
+		&= 2 e^{2x - y} (\cos y + \sin y)\\
+		Q_x &= 2e^{2x - y} (\sin x + \cos y) + 2y
+	\end{align*}
+	The domain is of the first kind.
+	\begin{align*}
+		\int\limits_{C} P \dif x + Q \dif y &= \int\limits_{C} P \dif x + Q \dif y + \int\limits_{C_1} P \dif x + Q \dif y - \int\limits_{C_1} P \dif x + Q \dif y\\
+		&= \int\limits_{C \cup C_1} P \dif x + Q \dif y - \int\limits_{C_1} P \dif x + Q \dif y\\
+		&= \iint\limits_{D} (Q_x - P_y) \dif A - \int\limits_{C_1} P \dif x + Q \dif y
+	\end{align*}
+\end{solution}
+
+\section{Surface Integrals of Scalar Functions}
+
+\begin{theorem}
+	Let $S$ be a surface given by $z = g(x,y)$, $(x,y) \in D$. Then the surface integral of a scalar function $f(x,y,z)$ over $S$ is equal to
+	\begin{equation*}
+		\iint\limits_{S} f(x,y,z) \dif S = \iint\limits_{S} f \left( x,y,g(x,y) \right) \sqrt{1 + \left( g_x(x,y) \right)^2 + \left( g_y(x,y) \right)^2} \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{example}
+	Calculate $\displaystyle \iint\limits_{S} (x,y,z) \dif S$ when $S$ is $z = 1 - x - y$ above the domain
+	\begin{equation*}
+		D = \{(x,y) | 0 \leq x \leq 1, 0 \leq y \leq 1 - x\}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\iint\limits_{S} (xy + z) \dif S &= \iint\limits_{D} (xy + z) \sqrt{1 + 1 + 1} \dif A\\
+		&= \sqrt{3} \int\limits_{0}^{1} \int\limits_{0}^{1 - x} \left( (x - 1) y + (1 - x) \right) \dif y \dif x\\
+		&= \dfrac{5 \sqrt{3}}{24}
+	\end{align*}
+\end{solution}
+
+\section{Surface Integrals of Vector Functions}
+
+\begin{definition}[Positive and negatively oriented surfaces]
+	Let $S$ be a surface given by $z = g(x,y)$, $(x,y) \in D$. Then the surface is called positively oriented if, on $S$, the normal $\overline{n} = (n_1, n_2, n_3)$ is given with $n_3 > 0$, and negatively oriented if $n_3 < 0$.\\
+	If $S$ is closed, then the surface is called positively oriented if the normal is outwards, and negatively oriented if the normal is inwards.
+\end{definition}
+
+\begin{definition}
+	If 
+	\begin{equation*}
+		\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)
+	\end{equation*}
+	is a vector function defined on $S$ with the normal $\hat{n}$ then the surface integral of the vector function is
+	\begin{equation*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} = \int\limits_{S} \overline{F}(x,y,z) \cdot \hat{n}(x,y,z) \dif S
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Let $z = g(x,y)$, $(x,y) \in D$ and $S$ be positively oriented. Then
+	\begin{equation*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} = \iint\limits_{S} (-P g_x - Q g_y + R) \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{example}
+	Find $\displaystyle \iint\limits_{S} \overline{F} \cdot \dif \overline{S}$ when $\overline{F} = (x,y,z)$ and $S$ is a lateral surface of a solid bounded by the elliptical paraboloid $z = 2 - x^2 - y^2$ and the plane $z = 1$.
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		S_1 &: z = 2 - x^2 - y^2\\
+		S_2 &: z = 1
+	\end{align*}
+	Therefore, $S = S_1 \cup S_2$.\\
+	The normals to $S_1$ and $S_2$ are directed outwards with respect to the solid enclosed by $S_1$ and $S_2$.\footnote{If the orientation of a surface is not given, it can be assumed to be positive.}
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} &= \iint\limits_{S_1} \overline{F} \cdot \dif \overline{S} + \iint\limits_{S_2} \overline{F} \cdot \dif \overline{S}\\
+		&= \iint\limits_{D} \left( -P(g_1)_x - Q(g_1)_y \quad + R \right) \dif A\\
+		&\quad + \iint\limits_{D} \left( -P(g_2)_x - Q(g_2)_y + R \right) \dif A\\
+		&= \iint\limits_{D} \left( -y (-2x) - x(-2y) + 2 - x^2 - y^2 \right) \dif A\\
+		&\quad + \iint\limits_{D} \left( y(0) + x(0) - 1 \right) \dif A\\
+		&= \iint\limits_{D} (4xy + 2 - x^2 - y^2) \dif A - \iint\limits_{D} \dif A\\
+		&= \dfrac{\pi}{2}
+	\end{align*}
+\end{solution}
+
+\end{document}
