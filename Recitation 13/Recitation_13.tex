@@ -1,0 +1,57 @@
+\documentclass[fleqn, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{commath, esdiff}
+\usepackage{datetime}
+\usepackage{graphicx, epstopdf}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{enumerate}
+\usepackage{tikz}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 13}
+\author{Aakash Jog}
+\date{\formatdate{18}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Extrema of Functions of Two Variables}
+
+\begin{example}
+	Find local extrema for $f(x,y) = (x - y) e^{xy}$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f_x(x,y) &= e^{xy} + (x - y) e^{xy} \cdot y\\
+		f_y(x,y) &= -e^{xy} + (x- y) e^{xy} \cdot x
+	\end{align*}
+	Solving for $f_x = 0$ and $f_y = 0$, the critical points are $\left( \dfrac{1}{\sqrt{2}}, -\dfrac{1}{\sqrt{2}} \right)$, $\left( -\dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right)$.
+	\begin{align*}
+		\Delta \left( \dfrac{1}{\sqrt{2}}, -\dfrac{1}{\sqrt{2}} \right) < 0\\
+		\Delta \left( -\dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right) < 0
+	\end{align*}
+	Therefore, both points are not local extrema but saddle points.
+\end{solution}
+
+\end{document}
