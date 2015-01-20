@@ -1,0 +1,106 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{todonotes, marginnote}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\newcommand{\divergence}{\mathrm{div\,}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 24}
+\author{Aakash Jog}
+\date{\formatdate{20}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Vector Fields}
+
+\subsection{Curl}
+
+\begin{definition}
+	Let
+	\begin{equation*}
+		\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)
+	\end{equation*}
+	be a vector field in $\mathbb{R}^3$ and let there exist first order partial derivatives of $P$, $Q$, $R$. Then $\curl \overline{F}$ is a vector field in $\mathbb{R}^3$ which is defined as
+	\begin{equation*}
+		\curl \overline{F} = (R_y - Q_z, P_z - R_x, Q_x - P_y) = \nabla \times \overline{F}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $\overline{F} = (P, Q, R)$ is a vector field defined of $\mathbb{R}$ with continuous first order partial derivatives of $P$, $Q$, $R$ and $\curl \overline{F} = \overline{0}$, then $\overline{F}$ is a conservative vector field. 
+\end{theorem}
+
+\subsection{Divergence}
+
+\begin{definition}
+	Let $\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)$ be a vector field in $\mathbb{R}^3$ and let there exist $P_x$, $Q_y$, $R_z$. Then the divergence of $\overline{F}$ is
+	\begin{equation*}
+		\divergence \overline{F} = P_x + Q_y + R_z = \nabla \cdot \overline{F}
+	\end{equation*}
+\end{definition}
+
+\section{Stoke's and Gauss' Theorem}
+
+\begin{definition}[Curve with positive orientation]
+	Let $S$ be a surface with normal $\hat{n}$ and let $C$ be a curve which bounds $S$. Then $C$ is a curve with positive orientation with respect to $S$ if, as we walk on $C$ in this direction and with our head in the direction of $\hat{n}$, the surface $S$ is always on our left.
+\end{definition}
+
+\begin{theorem}[Stoke's Theorem]
+	Let $S$ be a piecewise smooth surface with normal $\hat{n}$ and let $S$ be bounded by a curve $C$ which is piecewise smooth, simple, closed and with positive orientation with respect to $S$. Let $\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)$ be a vector field such that there exist continuous first order partial derivatives of $P$, $Q$, $R$ in an open domain of $\mathbb{R}^3$ which contains $S$. Then 
+	\begin{equation*}
+		\int\limits_{C} \overline{F} \cdot \hat{T} \dif s = \iint\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S
+	\end{equation*}
+	\label{Stoke's Theorem}
+\end{theorem}
+
+\begin{remark}
+	\nameref{Stoke's Theorem} is a generalization of Green's Theorem.
+\end{remark}
+
+\end{document}
