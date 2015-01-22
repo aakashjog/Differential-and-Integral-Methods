@@ -1,0 +1,121 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, esdiff}
+\usepackage[table]{xcolor}
+\usepackage{todonotes, marginnote}
+\usepackage{commath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+\usepackage{datetime}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{xfrac}
+\usepackage{siunitx}
+
+\usepackage{enumerate, enumitem}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\newcommand{\divergence}{\mathrm{div\,}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+%opening
+\title{Lecture 25}
+\author{Aakash Jog}
+\date{\formatdate{22}{1}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+
+\section{Vector Form of Green's Theorem}
+
+\begin{theorem}[Green's Theorem]
+	\begin{equation*}
+		\int\limits_{C} \overline{F} \cdot \hat{n} \dif s = \iint\limits_{D} \divergence \overline{F} \dif A
+	\end{equation*}
+	\label{Green's Theorem}
+\end{theorem}
+
+\section{Gauss Theorem}
+
+\begin{theorem}[Gauss Theorem]
+	Let $E$ be a solid bounded by a surface $S$ with positive orientation. Let $\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)$ be a vector field in $\mathbb{R}^3$, s.t. there exist continuous first order partial derivatives of $P$, $Q$, $R$ in some open domain which contain $E$. Then
+	\begin{equation*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S = \iiint\limits_{E} \divergence \overline{F} \dif V
+	\end{equation*}
+	\label{Gauss Theorem}
+\end{theorem}
+
+\begin{remark}
+	\nameref{Gauss Theorem} is an analogy of \nameref{Green's Theorem}
+\end{remark}
+
+\begin{example}
+	Calculate the flux of $\overline{F} = (x y, x e^z, 2 + z)$ through the surface $S$ which is a boundary of a solid $E$ bounded by two paraboloids
+	\begin{align*}
+		z &= 12 - 2x^2 - 2y^2\\
+		z &= x^2 + y^2
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		g_1(x,y) &= 12 - 2x^2 - 2y^2\\
+		g_2(x,y) &= x^2 + y^2
+	\end{align*}
+	The intersection of $g_1(x,y)$ and $g_2(x,y)$ is $x^2 + y^2 = 4$.
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S &= \iiint\limits_{E} \divergence \overline{F} \dif V\\
+		&= \iiint\limits_{E} (y + 0 + 1) \dif V\\
+		&= \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \int\limits_{x^2 + y^2}^{12 - 2x^2 - 2y^2} (y + 1) \dif z \dif y \dif x\\
+		&= \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} (y + 1) (12 - 3x^2 - 3y^2) \dif y \dif x\\
+		&= \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \left( y(12 - 3x^2 - 3y^2) + (12 - 3x^2 - 3y^2) \right) \dif y \dif x\\
+		\intertext{$y(12 - 3x^2 - 3y^2)$ is odd and $(12 - 3x^2 - 3y^2)$ is even.}
+		\therefore \iint\limits_{S} \overline{F} \cdot \hat{n} \dif S &= \int\limits_{-2}^{2} 2 \int\limits_{0}^{\sqrt{4 - x^2}} (12 - 3x^2 - 3y^2) \dif y \dif x\\
+		&= 6 \int\limits_{-2}^{2} \int\limits_{0}^{\sqrt{4 - x^2}} (4 - x^2 - y^2) \dif y \dif x\\
+		&= 6 \int\limits_{-2}^{2} \left. \left( (4 - x^2)y - \dfrac{y^3}{3} \right) \right|_{y = 0}^{y = \sqrt{4 - x^2}} \dif x\\
+		&= 6 \int\limits_{-2}^{2} (4 - x^2) \left( \sqrt{4 - x^2} - \dfrac{1}{3} (4 - x^2) \sqrt{4 - x^2} \right) \dif x\\
+	\end{align*}
+	Let
+	\begin{align*}
+		x &= 2 \sin \theta\\
+		\therefore \dif x &= 2 \cos \theta \dif \theta
+	\end{align*}
+	Therefore, solving,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S &= 24 \pi
+	\end{align*}
+\end{solution}
+
+\end{document}
